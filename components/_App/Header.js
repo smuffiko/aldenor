@@ -1,7 +1,14 @@
+import Router from "next/router"
 import Link from "next/link"
+import NProgress from "nprogress"
 import { Menu, Container, Icon } from "semantic-ui-react"
 
 const Header = () => {
+
+  Router.events.on("routeChangeStart", ()=> NProgress.start())
+  Router.events.on("routeChangeComplete", ()=> NProgress.done())
+  Router.events.on("routeChangeError", ()=> NProgress.done())
+
   return (
     <>
       <Menu
@@ -21,7 +28,7 @@ const Header = () => {
               Sign Up
             </Menu.Item>
           </Link>
-          <Link href="/" passHref>
+          <Link href="/signin" passHref>
             <Menu.Item>
               <Icon name="sign in"/>
               Sign In

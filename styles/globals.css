@@ -1,5 +1,9 @@
 @import 'semantic-ui-css/semantic.css';
 
+:root {
+  --footerBg: #b8f850;
+  --progressBar: #b8f850;
+}
 
 html,
 body {
@@ -28,5 +32,5 @@ a {
   bottom:0;
   width:100%;
   padding: 1rem;
-  background:rgb(255, 174, 0);
+  background: var(--footerBg);
 }
