@@ -6,14 +6,16 @@ import Header from "./Header"
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <> 
       <Head>
         <HeadContent />
         <title>Aldenor - Founders of Aldenor</title>
       </Head>
-      <Header />
-      <Container>{children}</Container>
-      <Footer />
+      <div id="container">
+        <div id="header"><Header /></div>
+        <div id="body"><Container>{children}</Container></div>
+        <div id="footer"><Footer /></div>
+      </div>
     </>
   )
 }
