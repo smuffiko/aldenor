@@ -1,5 +1,7 @@
 @import 'semantic-ui-css/semantic.css';
-
+/*
+ *  Color settings 
+ */
 :root {
   --footerBg: #b8f850;
   --progressBar: #b8f850;
