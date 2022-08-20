@@ -1,9 +1,9 @@
-import connectDb from "../../utils/conectDb"
+import connectDB from "../../utils/connectDB"
 import User from "../../models/User"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-connectDb()
+connectDB()
 
 export default async function ApiSignup(req, res) {
   switch(req.method) {
@@ -74,7 +74,7 @@ const handlePostRequest = async(req, res) => {
 
 const handlePutRequest = async(req, res) => {
   const { confirm, _id } = req.body
-  const user = await User.findOne({_id}).select("+password")
+  const user = await User.findOne({_id})
   const match = await bcrypt.compare(user.email + user.updatedAt, confirm)
   if(match) {
     if(user.role === "unUser") {
