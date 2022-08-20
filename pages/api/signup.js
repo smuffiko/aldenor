@@ -1,5 +1,6 @@
 import connectDb from "../../utils/conectDb"
 import User from "../../models/User"
+import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
 connectDb()
@@ -8,6 +9,9 @@ export default async function ApiSignup(req, res) {
   switch(req.method) {
     case "POST":
       await handlePostRequest(req, res)
+      break
+    case "PUT": 
+      await handlePutRequest(req, res)
       break
     default:
       res.status(405).send(`Method ${req.method} not allowed!`)
@@ -66,4 +70,19 @@ const handlePostRequest = async(req, res) => {
     emailHash
   }
   return res.status(201).json(data)
+}
+
+const handlePutRequest = async(req, res) => {
+  const { confirm, _id } = req.body
+  const user = await User.findOne({_id}).select("+password")
+  const match = await bcrypt.compare(user.email + user.updatedAt, confirm)
+  if(match) {
+    if(user.role === "unUser") {
+      await User.findOneAndUpdate({_id}, { $set: { role: "user" } })
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
+      return res.status(200).json(token)
+    } else return res.status(400).send("User email already confirmed") // todo text change
+  } else {
+    return res.status(401).send("Wrong URL data") // todo? change text
+  }
 }

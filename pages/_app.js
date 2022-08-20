@@ -16,3 +16,9 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+export const getServerSideProps = async()=> {
+
+
+  return { pageProps: { } }
+}
