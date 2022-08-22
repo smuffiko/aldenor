@@ -5,14 +5,19 @@ import Footer from "./Footer"
 import HeadContent from "./HeadContent"
 import Header from "./Header"
 import Cookie from "./Cookie"
-import { isBrowser } from "react-device-detect"
+import { isDesktop, isMobile, isSmartTV, isWearable, isConsole} from "react-device-detect"
 
 
 const Layout = ({ children, user }) => {
-  const [browser, setBrowser] = React.useState()
+  const [desktop, setDesktop] = React.useState()
+  const [unsupported, setUnsupported] = React.useState()
   React.useEffect(()=>{
-    setBrowser(isBrowser)
-  },[setBrowser])
+    setDesktop(isDesktop)
+  },[setDesktop])
+  React.useEffect(()=>{
+    setUnsupported(isMobile || isSmartTV || isWearable || isConsole)
+  },[setUnsupported])
+
   return (
     <> 
       <Head>
@@ -20,13 +25,14 @@ const Layout = ({ children, user }) => {
         <title>Aldenor - Founders of Aldenor</title>
       </Head>
       <div id="container">
-        {browser ? (
+        {desktop && (
           <>
             <div id="header"><Header user={user} /></div>
             <div id="body"><Container>{children}</Container></div>
             <div id="footer"><Footer /></div>
           </>
-        ) : (
+        )} 
+        {unsupported && (
           <Message
             icon="x"
             error
@@ -35,7 +41,7 @@ const Layout = ({ children, user }) => {
           />
         )}
       </div>
-      {browser && <Cookie />}
+      {desktop && <Cookie />}
     </>
   )
 }
