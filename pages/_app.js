@@ -29,8 +29,9 @@ MyApp.getInitialProps = async({ ctx })=> {
   }
 
   // isMobile = redirect to not supported device (todo later)
-  if(isMobile && ctx.pathname!=="/400")
+  if(isMobile && ctx.pathname!=="/400") {
     redirectUser(ctx, `${baseUrl}/400`)
+  }
   
   const pageProps = {}
   const { token } = parseCookies(ctx)
