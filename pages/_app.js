@@ -4,17 +4,27 @@ import Layout from "../components/_App/Layout"
 import Cookie from '../components/_App/Cookie'
 import { parseCookies, destroyCookie } from "nookies"
 import { redirectUser } from "../utils/auth"
-import { isMobile } from "react-device-detect"
-import baseUrl from "../utils/baseUrl"
+import { BrowserView, MobileView } from "react-device-detect"
+import { Message } from "semantic-ui-react"
 
 function MyApp({ Component, pageProps }) {
   
   return (
     <>
-      <Layout {...pageProps}>
-        <Component {...pageProps} />
-      </Layout>
-      <Cookie />
+      <BrowserView>
+        <Layout {...pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+        <Cookie />
+      </BrowserView>
+      <MobileView>
+        <Message
+          icon="x"
+          error
+          header="Oops!"
+          content="Sorry, your device is not currently supported."
+        />
+      </MobileView>
     </>
   )
 }
@@ -26,11 +36,6 @@ MyApp.getInitialProps = async({ ctx })=> {
     if(process.env.NODE_ENV === "production"
       && host !== "aldenor.vercel.app"
     ) redirectUser(ctx, "https://aldenor.vercel.app")
-  }
-
-  // isMobile = redirect to not supported device (todo later)
-  if(isMobile && ctx.pathname!=="/400") {
-    redirectUser(ctx, `${baseUrl}/400`)
   }
   
   const pageProps = {}

@@ -2,7 +2,6 @@ import Router from "next/router"
 import Link from "next/link"
 import NProgress from "nprogress"
 import { Menu, Container, Icon } from "semantic-ui-react"
-import { isMobile } from "react-device-detect"
 
 const Header = ({ user }) => {
 
@@ -36,7 +35,6 @@ const Header = ({ user }) => {
               Sign In
             </Menu.Item>
           </Link>
-          {isMobile && <>Mobile!</>}
         </Container>
       </Menu>
     </>
