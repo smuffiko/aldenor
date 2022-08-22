@@ -5,7 +5,7 @@ import Cookie from '../components/_App/Cookie'
 import { parseCookies, destroyCookie } from "nookies"
 import { redirectUser } from "../utils/auth"
 import { isMobile } from "react-device-detect"
-import { baseUrl } from "../utils/baseUrl"
+import baseUrl from "../utils/baseUrl"
 
 function MyApp({ Component, pageProps }) {
   
@@ -29,7 +29,7 @@ MyApp.getInitialProps = async({ ctx })=> {
   }
 
   // isMobile = redirect to not supported device (todo later)
-  if(isMobile)
+  if(isMobile && ctx.pathname!=="/400")
     redirectUser(ctx, `${baseUrl}/400`)
   
   const pageProps = {}
