@@ -1,12 +1,14 @@
+import React from "react"
 import Head from "next/head"
 import { Container, Message } from "semantic-ui-react"
 import Footer from "./Footer"
 import HeadContent from "./HeadContent"
 import Header from "./Header"
 import Cookie from "./Cookie"
-import { BrowserView, MobileView } from "react-device-detect"
+import { BrowserView, MobileView, isMobile } from "react-device-detect"
 
-const Layout = ({ children, user }) => {
+const Layout = ({ children, user, mobile }) => {
+
   return (
     <> 
       <Head>
@@ -14,23 +16,33 @@ const Layout = ({ children, user }) => {
         <title>Aldenor - Founders of Aldenor</title>
       </Head>
       <div id="container">
-        <MobileView>
+        {mobile ? (
           <Message
             icon="x"
             error
             header="Oops!"
             content="Sorry, your device is not currently supported."
           />
-        </MobileView>
-        <BrowserView>
-          <div id="header"><Header user={user} /></div>
-          <div id="body"><Container>{children}</Container></div>
-          <div id="footer"><Footer /></div>
-        </BrowserView>
+        ) : (
+          <>
+            <div id="header"><Header user={user} /></div>
+            <div id="body"><Container>{children}</Container></div>
+            <div id="footer"><Footer /></div>
+          </>
+        )}
       </div>
       <Cookie />
     </>
   )
+}
+
+export const getServerSideProps = async()=> {
+  const UA = context.req.headers['user-agent'];
+  const mobile = Boolean(UA.match(
+    /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+  ))
+
+  return { props: { mobile: mobile }}
 }
  
 export default Layout
