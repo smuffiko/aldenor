@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema(
       default: "unUser",
       enum: ["ban", "unUser", "user", "mod", "admin", "root"]
     },
+    emailHash: {
+      type: String,
+      required: false
+    }
   },
   { timestamps: true }
 )

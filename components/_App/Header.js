@@ -3,12 +3,13 @@ import Link from "next/link"
 import NProgress from "nprogress"
 import { Menu, Container, Icon } from "semantic-ui-react"
 
-const Header = () => {
+const Header = ({ user }) => {
 
   Router.events.on("routeChangeStart", ()=> NProgress.start())
   Router.events.on("routeChangeComplete", ()=> NProgress.done())
   Router.events.on("routeChangeError", ()=> NProgress.done())
 
+  console.log("user token ", user)
   return (
     <>
       <Menu

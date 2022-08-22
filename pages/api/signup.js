@@ -61,27 +61,24 @@ const handlePostRequest = async(req, res) => {
   }).save()
   // email hash for confirm account
   const emailHash = await bcrypt.hash(newUser.email + newUser.updatedAt, 5)
-  // get data and send to client
+  // save email hash to DB
   const { _id } = newUser
+  await User.findOneAndUpdate({ _id }, { $set: { emailHash } } )
+  // get data and send to client
   const data = {
     login: login.toLowerCase(),
     email: email.toLowerCase(),
-    _id,
     emailHash
   }
   return res.status(201).json(data)
 }
 
 const handlePutRequest = async(req, res) => {
-  const { confirm, _id } = req.body
-  const user = await User.findOne({_id})
-  const match = await bcrypt.compare(user.email + user.updatedAt, confirm)
-  if(match) {
-    if(user.role === "unUser") {
-      await User.findOneAndUpdate({_id}, { $set: { role: "user" } })
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
-      return res.status(200).json(token)
-    } else return res.status(400).send("User email already confirmed") // todo text change
+  const { confirm } = req.body
+  const user = await User.findOneAndUpdate({ emailHash: confirm }, { $set: { role: "user" }, $unset: { emailHash: "" }})
+  if(user) {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
+    return res.status(200).json(token)
   } else {
     return res.status(401).send("Wrong URL data") // todo? change text
   }

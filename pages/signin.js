@@ -115,10 +115,10 @@ const SignIn = ({ loginUser }) => {
  
 export default SignIn
 
-export const getServerSideProps = async ({ query: { confirm, _id} }) => {
-  if(!confirm || !_id) return { props: {} }
+export const getServerSideProps = async ({ query: { confirm } }) => {
+  if(!confirm) return { props: {} }
   const url = `${baseUrl}/api/signup`
-  const payload = { confirm: decodeURIComponent(confirm), _id: decodeURIComponent(_id) }
+  const payload = { confirm: decodeURIComponent(confirm) }
   let token = null
   await fetch(url, {
     method: "PUT",

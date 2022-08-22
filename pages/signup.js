@@ -54,9 +54,9 @@ const SignUp = () => {
   }
 
   const sendEmail = async(data) => {
-    const { login, email, _id, emailHash } = data
+    const { login, email, emailHash } = data
     const url = `${baseUrl}/api/email`
-    const a = `${baseUrl}/signin?_id=${encodeURIComponent(_id)}&confirm=${encodeURIComponent(emailHash)}`
+    const a = `${baseUrl}/signin?confirm=${encodeURIComponent(emailHash)}`
     const html = `<h1>Welcome to Founders of Aldenor, ${login}!</h1><p>Please confirm your email here:</p><p><a href='${a}'>${a}</a></p>`
     const payload = {
       to: email,
