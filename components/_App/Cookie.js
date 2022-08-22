@@ -3,7 +3,7 @@ import CookieConsent, { getCookieConsentValue } from "react-cookie-consent"
 import { Icon, Container, Header } from "semantic-ui-react"
 
 const Cookie = () => {
-  const [cookieAccept, setCookieAccept] = React.useState(false)
+  const [cookieAccept, setCookieAccept] = React.useState(true)
 
   React.useEffect(()=>{
     setCookieAccept(getCookieConsentValue("cookieAccept"))

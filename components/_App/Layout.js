@@ -35,7 +35,7 @@ const Layout = ({ children, user }) => {
           />
         )}
       </div>
-      <Cookie />
+      {browser && <Cookie />}
     </>
   )
 }
