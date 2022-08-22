@@ -36,8 +36,8 @@ const Layout = ({ children, user, mobile }) => {
   )
 }
 
-export const getServerSideProps = async()=> {
-  const UA = context.req.headers['user-agent'];
+export const getServerSideProps = async(ctx)=> {
+  const UA = ctx.req.headers['user-agent']
   const mobile = Boolean(UA.match(
     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
   ))
