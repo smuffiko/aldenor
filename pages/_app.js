@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import "../styles/nprogress.css"
 import Layout from "../components/_App/Layout"
-import Cookie from '../components/_App/Cookie'
 import { parseCookies, destroyCookie } from "nookies"
 import { redirectUser } from "../utils/auth"
 import { BrowserView, MobileView } from "react-device-detect"
@@ -11,20 +10,9 @@ function MyApp({ Component, pageProps }) {
   
   return (
     <>
-      <BrowserView>
-        <Layout {...pageProps}>
-          <Component {...pageProps} />
-        </Layout>
-        <Cookie />
-      </BrowserView>
-      <MobileView>
-        <Message
-          icon="x"
-          error
-          header="Oops!"
-          content="Sorry, your device is not currently supported."
-        />
-      </MobileView>
+      <Layout {...pageProps}>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }

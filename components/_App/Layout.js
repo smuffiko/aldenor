@@ -1,8 +1,10 @@
 import Head from "next/head"
-import { Container } from "semantic-ui-react"
+import { Container, Message } from "semantic-ui-react"
 import Footer from "./Footer"
 import HeadContent from "./HeadContent"
 import Header from "./Header"
+import Cookie from "./Cookie"
+import { BrowserView, MobileView } from "react-device-detect"
 
 const Layout = ({ children, user }) => {
   return (
@@ -12,10 +14,21 @@ const Layout = ({ children, user }) => {
         <title>Aldenor - Founders of Aldenor</title>
       </Head>
       <div id="container">
-        <div id="header"><Header user={user} /></div>
-        <div id="body"><Container>{children}</Container></div>
-        <div id="footer"><Footer /></div>
+        <MobileView>
+          <Message
+            icon="x"
+            error
+            header="Oops!"
+            content="Sorry, your device is not currently supported."
+          />
+        </MobileView>
+        <BrowserView>
+          <div id="header"><Header user={user} /></div>
+          <div id="body"><Container>{children}</Container></div>
+          <div id="footer"><Footer /></div>
+        </BrowserView>
       </div>
+      <Cookie />
     </>
   )
 }
