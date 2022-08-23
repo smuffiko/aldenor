@@ -35,6 +35,54 @@ const Header = ({ user }) => {
               Sign In
             </Menu.Item>
           </Link>
+          <Link href="/game" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Game
+            </Menu.Item>
+          </Link>
+          <Link href="/settings" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Settings
+            </Menu.Item>
+          </Link>
+          <Link href="/ticket" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Ticket
+            </Menu.Item>
+          </Link>
+          <Link href="/shop" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Shop
+            </Menu.Item>
+          </Link>
+          <Link href="/adminTools" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Admin Tools
+            </Menu.Item>
+          </Link>
+          <Link href="/gameManag" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Game Management
+            </Menu.Item>
+          </Link>
+          <Link href="/staffManag" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Staff Management
+            </Menu.Item>
+          </Link>
+          <Link href="/" passHref>
+            <Menu.Item>
+              <Icon name="sign in"/>
+              Logout
+            </Menu.Item>
+          </Link>
         </Container>
       </Menu>
     </>

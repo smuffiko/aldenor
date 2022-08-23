@@ -81,7 +81,7 @@ MyApp.getInitialProps = async({ ctx })=> {
 
       // ban everyone except admin for admin tools
       if(
-        ctx.pathname==="/adminTols"
+        ctx.pathname==="/adminTools"
         && user.role!=="admin"
       ) redirectUser(ctx,"/401")
 
@@ -90,6 +90,12 @@ MyApp.getInitialProps = async({ ctx })=> {
         (ctx.pathname==="/game"
         || ctx.pathname==="/shop")
         && user.role==="ban"
+      ) redirectUser(ctx,"/401")
+
+      // unUser cant visit shop too
+      if(
+        ctx.pathname==="/shop"
+        && user.role==="unUser"
       ) redirectUser(ctx,"/401")
 
     }).catch(error => { 
