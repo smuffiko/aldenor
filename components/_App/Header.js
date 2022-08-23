@@ -2,6 +2,7 @@ import Router from "next/router"
 import Link from "next/link"
 import NProgress from "nprogress"
 import { Menu, Container, Icon } from "semantic-ui-react"
+import { handleLogout } from "../../utils/auth"
 
 const Header = ({ user }) => {
   Router.events.on("routeChangeStart", ()=> NProgress.start())
@@ -17,10 +18,6 @@ const Header = ({ user }) => {
   const isRoot = user && user.role==="root"
   
   const isActive = route => route === Router.pathname
-
-  const handleLogout = () => {
-
-  }
 
   return (
     <>
@@ -106,12 +103,10 @@ const Header = ({ user }) => {
                 </Link>
               </>
             )}
-            <Link href="/" passHref>
-              <Menu.Item header onClick={handleLogout}>
-                    <Icon name="log out" />
-                Logout
-              </Menu.Item>
-            </Link>
+            <Menu.Item header onClick={handleLogout}>
+                  <Icon name="log out" />
+              Logout
+            </Menu.Item>
           </>)}
         </Container>
       </Menu>
