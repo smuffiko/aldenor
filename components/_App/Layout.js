@@ -11,9 +11,11 @@ import { isDesktop, isMobile, isSmartTV, isWearable, isConsole} from "react-devi
 const Layout = ({ children, user }) => {
   const [desktop, setDesktop] = React.useState()
   const [unsupported, setUnsupported] = React.useState()
+
   React.useEffect(()=>{
     setDesktop(isDesktop)
   },[setDesktop])
+
   React.useEffect(()=>{
     setUnsupported(isMobile || isSmartTV || isWearable || isConsole)
   },[setUnsupported])

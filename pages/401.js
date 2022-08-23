@@ -1,16 +1,16 @@
 import { Container, Message } from "semantic-ui-react"
 
-const NotFound = () => {
+const NotAuthorized = () => {
   return (<>
     <Container>
       <Message
         icon="x"
         error
-        header="404 Error"
-        content="Page not found"
+        header="401 Error"
+        content="You are not authorized to visit this page."
       />
     </Container>
   </>)
 }
  
-export default NotFound
+export default NotAuthorized
