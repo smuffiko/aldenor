@@ -4,6 +4,10 @@ const { String, Number, ObjectId } = mongoose.Schema.Types
 
 const CharacterSchema = new mongoose.Schema(
   {
+    owner: {
+      type: ObjectId,
+      ref: "User"
+    },
     name: {
       type: String,
       required: true,
