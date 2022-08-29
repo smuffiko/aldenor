@@ -53,11 +53,35 @@ const handlePostRequest = async(req, res) => {
   /* signing up successfull */
   // hash password
   const hash = await bcrypt.hash(password, 13)
+  // create default characters
+  const characters = [
+    {
+      _id: null,
+      available: true
+    },    
+    {
+      _id: null,
+      available: true
+    },
+    {
+      _id: null,
+      available: true
+    },
+    {
+      _id: null,
+      available: false
+    },
+    {
+      _id: null,
+      available: false
+    }
+  ]
   // create user
   const newUser = await new User({
     login: login.toLowerCase(),
     email: email.toLowerCase(),
-    password: hash
+    password: hash,
+    characters
   }).save()
   // email hash for confirm account
   const emailHash = await bcrypt.hash(newUser.email + newUser.updatedAt, 5)

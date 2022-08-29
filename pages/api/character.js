@@ -1,4 +1,4 @@
-import User from "../../models/User"
+import Character from "../../models/Character"
 import jwt from "jsonwebtoken"
 import connectDB from "../../utils/connectDB"
 
@@ -23,14 +23,10 @@ const handleGetRequest = async (req, res) => {
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  const user = await User.findOne({ _id: userId })
-    .populate({
-      path: "characters",
-      model: "Character"
-    }) // todo maybe it is ok? need to make char first and try it
-  if (user) {
-    res.status(200).json(user)
+  const characters = await Character.find({ owner: userId })
+  if (characters) {
+    res.status(200).json(characters)
   } else {
-    res.status(404).send("User not found.")
+    res.status(404).send("You don't have any character yet.")
   }
 }
