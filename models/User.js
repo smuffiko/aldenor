@@ -25,63 +25,16 @@ const UserSchema = new mongoose.Schema(
       default: "unUser",
       enum: ["ban", "unUser", "user", "mod", "admin", "root"]
     },
-    characters: {
-      slot1: {
-        character: {
-          type: ObjectId,
-          ref: "Character",
-          default: null
-        },
-        available: {
-          type: Boolean,
-          default: true
-        }
+    characters: [{
+      _id: {
+        type: ObjectId,
+        ref: "Character"
       },
-      slot2: {
-        character: {
-          type: ObjectId,
-          ref: "Character",
-          default: null
-        },
-        available: {
-          type: Boolean,
-          default: true
-        }
-      },
-      slot3: {
-        character: {
-          type: ObjectId,
-          ref: "Character",
-          default: null
-        },
-        available: {
-          type: Boolean,
-          default: true
-        }
-      },
-      slot4: {
-        character: {
-          type: ObjectId,
-          ref: "Character",
-          default: null
-        },
-        available: {
-          type: Boolean,
-          default: false
-        }
-      },
-      slot5: {
-        character: {
-          type: ObjectId,
-          ref: "Character",
-          default: null
-        },
-        available: {
-          type: Boolean,
-          default: false
-        }
+      available: {
+        type: Boolean,
+        required: true
       }
-    },
+    }],
     emailHash: {
       type: String,
       required: false

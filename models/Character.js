@@ -123,11 +123,25 @@ const CharacterSchema = new mongoose.Schema(
           required: true
         }
       },
+      combatEnergy: {
+        current: {
+          type: Number,
+          required: true
+        },
+        max: {
+          type: Number,
+          required: true
+        },
+        regen: {
+          type: Number,
+          required: true
+        }
+      },
       strength: {
         type: Number,
         required: true
       },
-      accuracy: {
+      agility: {
         type: Number,
         required: true
       },
@@ -201,8 +215,34 @@ const CharacterSchema = new mongoose.Schema(
           type: Number
         }
       }
-    ]
-    // reputation
+    ],
+    reputation: {
+      tradesville: {
+        type: Number,
+        required: true,
+        default: 0
+      },
+      gravestor: {
+        type: Number,
+        required: true,
+        default: 0
+      },
+      wadle: {
+        type: Number,
+        required: true,
+        default: 0
+      },
+      moonshire: {
+        type: Number,
+        required: true,
+        default: 0
+      },
+      destenor: {
+        type: Number,
+        required: true,
+        default: 0
+      }
+    }
     // talents
   }
 )
