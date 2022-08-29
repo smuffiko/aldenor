@@ -3,7 +3,7 @@ import Characters from "../components/Game/Characters"
 
 const Game = ({ user }) => {
   const [inGame, setInGame] = React.useState(false)
-  const [character, setCharacter] = React.useState()
+  const [character, setCharacter] = React.useState(null)
 
   return (
     <>
@@ -13,7 +13,13 @@ const Game = ({ user }) => {
       </>
     ) : (
       <>
-        <Characters user={user} setCharacter={setCharacter} />
+        {(character>0 && character<=5) ? (
+          <>  
+            Creating new char at slot {character}
+          </>
+          ):(
+          <Characters user={user} setCharacter={setCharacter} />  
+        )}
       </>
     )}
     </>
