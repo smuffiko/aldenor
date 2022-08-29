@@ -64,8 +64,11 @@ const handlePostRequest = async(req, res) => {
   // save email hash to DB
   const { _id } = newUser
   await User.findOneAndUpdate({ _id }, { $set: { emailHash } } )
+  // get token
+  const token = jwt.sign({ userId: _id }, process.env.JWT_SECRET, { expiresIn: "7d" })
   // get data and send to client
   const data = {
+    token,
     login: login.toLowerCase(),
     email: email.toLowerCase(),
     emailHash

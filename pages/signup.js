@@ -1,7 +1,8 @@
 import React from "react"
 import Link from "next/link"
 import baseUrl from "../utils/baseUrl"
-import { Message, Form, Icon, Segment, Button } from "semantic-ui-react"
+import { Message, Form, Icon, Segment, Button, Popup } from "semantic-ui-react"
+import { handleLogin } from "../utils/auth"
 
 const INITIAL_USER = {
   login: "",
@@ -49,6 +50,7 @@ const SignUp = () => {
     }).then(async data => {
       await sendEmail(data)
       setSuccess(true)
+      setTimeout(()=>handleLogin(data.token),7000)
     }).catch(error => setError(error.message)
     ).finally(() => setLoading(false))
   }
@@ -56,7 +58,7 @@ const SignUp = () => {
   const sendEmail = async(data) => {
     const { login, email, emailHash } = data
     const url = `${baseUrl}/api/email`
-    const a = `${baseUrl}/signin?confirm=${encodeURIComponent(emailHash)}`
+    const a = `${baseUrl}/confirm?hash=${encodeURIComponent(emailHash)}`
     const html = `<h1>Welcome to Founders of Aldenor, ${login}!</h1><p>Please confirm your email here:</p><p><a href='${a}'>${a}</a></p>`
     const payload = {
       to: email,
@@ -93,51 +95,63 @@ const SignUp = () => {
           <Icon name="check" />
           <Message.Content>
             <Message.Header>Success!</Message.Header>
-            Signing up successfull! Now please confirm your email.
+            Signing up successfull! Don't forget to confirm your email. You will be redirected soon.
           </Message.Content>
         </Message>
         <Segment attached>
-          <Form.Input
-            fluid
-            icon="user"
-            iconPosition="left"
-            label="Login"
-            required={true}
-            name="login"
-            value={user.login}
-            onChange={handleChange}
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              label="Login"
+              required={true}
+              name="login"
+              value={user.login}
+              onChange={handleChange}
+            />}
+            content='Your login name. Only you should know that. Login name must be between 5 and 30 chars long with only english alphabet characters and numbers.'
           />
-          <Form.Input
-            fluid
-            icon="lock"
-            iconPosition="left"
-            label="Password"
-            required={true}
-            name="password"
-            type="password"
-            value={user.password}
-            onChange={handleChange}
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              label="Password"
+              required={true}
+              name="password"
+              type="password"
+              value={user.password}
+              onChange={handleChange}
+            />}
+            content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
           />
-          <Form.Input
-            fluid
-            icon="lock"
-            iconPosition="left"
-            label="Password again"
-            required={true}
-            name="password2"
-            type="password"
-            value={user.password2}
-            onChange={handleChange}
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              label="Password again"
+              required={true}
+              name="password2"
+              type="password"
+              value={user.password2}
+              onChange={handleChange}
+            />}
+            content='In case of any mistake please write again your new password.'
           />
-          <Form.Input
-            fluid
-            icon="envelope"
-            iconPosition="left"
-            label="Email"
-            required={true}
-            name="email"
-            value={user.email}
-            onChange={handleChange}
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="envelope"
+              iconPosition="left"
+              label="Email"
+              required={true}
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+            />}
+            content="Write there your email address. We will send you activation link. Without it you can't play this game."
           />
           <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
           <Button

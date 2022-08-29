@@ -100,14 +100,11 @@ MyApp.getInitialProps = async({ ctx })=> {
 
     }).catch(error => { 
       // 1) Throw out invalid token
-      destroyCookie(null, "token")
+      destroyCookie(ctx, 'token')
       // 2) Redirect to sign in
       redirectUser(ctx, "/signin")
     })
   }
-
-  // nmemam api
-
   return { pageProps, user: pageProps.user }
 }
 

@@ -9,15 +9,11 @@ const INITIAL_USER = {
   password: ""
 }
 
-const SignIn = ({ loginUser }) => {
+const SignIn = () => {
   const [user, setUser] = React.useState(INITIAL_USER)
   const [error, setError] = React.useState("")
   const [disabled, setDisabled] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
-
-  React.useEffect(() => {
-    if(loginUser) handleLogin(loginUser)
-  },[])
 
   React.useEffect(() => {
     const isUser = Object.values(user).every(el => Boolean(el))
@@ -114,28 +110,3 @@ const SignIn = ({ loginUser }) => {
 }
  
 export default SignIn
-
-export const getServerSideProps = async ({ query: { confirm } }) => {
-  if(!confirm) return { props: {} }
-  const url = `${baseUrl}/api/signup`
-  const payload = { confirm: decodeURIComponent(confirm) }
-  let token = null
-  await fetch(url, {
-    method: "PUT",
-    headers: {
-      "Content-type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  }).then(async response=> {
-    if(!response.ok) {
-      const er = await response.text()
-      throw new Error(er)
-    }
-    return await response.text()
-  }).then(data => {
-    token = data
-  }).catch(error=>{
-    console.log(error.message)
-  })
-  return { props: { loginUser: token } }
-}
