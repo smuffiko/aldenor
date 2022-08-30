@@ -25,16 +25,18 @@ const UserSchema = new mongoose.Schema(
       default: "unUser",
       enum: ["ban", "unUser", "user", "mod", "admin", "root"]
     },
-    characters: [{
-      _id: {
-        type: ObjectId,
-        ref: "Character"
-      },
-      available: {
-        type: Boolean,
-        required: true
+    characters: [
+      {
+        character: {
+          type: ObjectId,
+          ref: "Character"
+        },
+        available: {
+          type: Boolean,
+          required: true
+        }
       }
-    }],
+    ],
     emailHash: {
       type: String,
       required: false

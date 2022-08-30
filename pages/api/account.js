@@ -24,10 +24,6 @@ const handleGetRequest = async (req, res) => {
     process.env.JWT_SECRET
   )
   const user = await User.findOne({ _id: userId })
-    .populate({
-      path: "characters",
-      model: "Character"
-    }) // todo maybe it is ok? need to make char first and try it
   if (user) {
     res.status(200).json(user)
   } else {

@@ -16,7 +16,7 @@ const INITIAL_CHARACTER = {
   skin: 0
 }
 
-const CreateCharacter = ({ slot, setChar, setInGame }) => {
+const CreateCharacter = ({ slot, setSlot, setChar }) => {
   const [character, setCharacter] = React.useState(INITIAL_CHARACTER)
   const [disabled, setDisabled] = React.useState(true)
   const [loading, setLoading] = React.useState(false)
@@ -69,8 +69,7 @@ const CreateCharacter = ({ slot, setChar, setInGame }) => {
       }
       return await response.json()      
     }).then(data => {
-      setChar(data._id)
-      setInGame(true)
+      setChar(data)
     }).catch(error => {
       setError(error.message)
     }).finally(()=>{
@@ -84,7 +83,7 @@ const CreateCharacter = ({ slot, setChar, setInGame }) => {
         color='olive'
         icon='arrow left'
         label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
-        onClick={()=>setChar(null)}
+        onClick={()=>setSlot(null)}
         type="button"
       />
       <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>

@@ -27,11 +27,23 @@ const handleGetRequest = async (req, res) => {
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  const characters = await Character.find({ owner: userId })
-  if (characters) {
-    res.status(200).json(characters)
-  } else {
-    res.status(404).send("You don't have any character yet.")
+  const { _id } = req.query
+  if(_id) { // get one character by id
+    const character = await Character.findOne({ owner: userId, _id })
+    if(character)
+      return res.status(200).json(character)
+    else
+      return res.status(404).send("Character not found.")
+  } else { // get all characters
+    const user = await User.findOne({ _id: userId }).populate({
+      path: "characters.character",
+      model: "Character"
+    })
+    const characters = user.characters
+    if (characters)
+      return res.status(200).json(characters)
+    else
+      return res.status(404).send("You don't have any character yet.")
   }
 }
 

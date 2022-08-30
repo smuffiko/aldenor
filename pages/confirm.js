@@ -4,8 +4,6 @@ import { handleLogin, redirectUser } from "../utils/auth"
 import { Message, Icon } from "semantic-ui-react"
 
 const Confirm = ({ confirmToken }) => {
-  console.log("t",confirmToken)
-
   React.useEffect(() => {
     if(confirmToken) {
       if(confirmToken===-1) 
