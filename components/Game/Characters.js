@@ -38,20 +38,22 @@ const Characters = ({ setSlot, setChar }) => {
     return (
     <div>
         <Card.Group itemsPerRow="5" stackable>
-          {characters.map((character, i) => {
+          {characters.map((c, i) => {
             i++
             return (
-            character.available ? (
-              <Card key={i} className={styles.card} onClick={()=>character.character ? setChar(character.character) : createNew(i)}>
-                {character.character!== null ? (
+            c.available ? (
+              <Card key={i} className={styles.card} onClick={()=>c.character ? setChar(c.character) : createNew(i)}>
+                {c.character!== null ? (
                   <>
                     <div className={styles.charTop}>-- char img --</div>
                     <div className={styles.charMid}>
                       <List>
-                        <List.Item>Name: {character.character.name}</List.Item>
-                        <List.Item>Lvl: {character.character.lvl}</List.Item>
-                        <List.Item>Money: {character.character.money.gold}g {character.character.money.silver}s {character.character.money.copper}c</List.Item>
-                        <List.Item>Coords: [{character.character.coords.current.x},{character.character.coords.current.y},{character.character.coords.current.z}]</List.Item>
+                        <List.Item>Name: {c.character.name}</List.Item>
+                        <List.Item>Race: {c.character.race}</List.Item>
+                        <List.Item>Class: {c.character.class}</List.Item>
+                        <List.Item>Lvl: {c.character.lvl}</List.Item>
+                        <List.Item>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
+                        <List.Item>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
                       </List>
                     </div>
                     <div className={styles.charBottom}><Header as="h3">Play!</Header></div>  
