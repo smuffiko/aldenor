@@ -35,7 +35,6 @@ const Characters = ({ setSlot, setChar }) => {
   }
 
   const mapCharacters = () => {
-    console.log("cs",characters)
     return (
     <div>
         <Card.Group itemsPerRow="5" stackable>
@@ -43,7 +42,7 @@ const Characters = ({ setSlot, setChar }) => {
             i++
             return (
             character.available ? (
-              <Card key={i} className={styles.card} onClick={()=>character.character ? setChar(character) : createNew(i)}>
+              <Card key={i} className={styles.card} onClick={()=>character.character ? setChar(character.character) : createNew(i)}>
                 {character.character!== null ? (
                   <>
                     <div className={styles.charTop}>-- char img --</div>

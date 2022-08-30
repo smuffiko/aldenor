@@ -22,7 +22,7 @@ const Game = () => {
 
   const setGame = async (char) => {
     setError("")
-    const url = `${baseUrl}/api/character?_id=${char.character._id}`
+    const url = `${baseUrl}/api/character?_id=${char._id}`
     const token = cookie.get("token")
     await fetch(url,{
       method: "GET",
