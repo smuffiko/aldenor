@@ -56,23 +56,23 @@ const handlePostRequest = async(req, res) => {
   // create default characters
   const characters = [
     {
-      _id: null,
+      character: null,
       available: true
     },    
     {
-      _id: null,
+      character: null,
       available: true
     },
     {
-      _id: null,
+      character: null,
       available: true
     },
     {
-      _id: null,
+      character: null,
       available: false
     },
     {
-      _id: null,
+      character: null,
       available: false
     }
   ]

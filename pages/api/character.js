@@ -78,7 +78,7 @@ const handlePostRequest = async (req, res) => {
     race
   }).save()
   // add character id to user slot
-  await User.findOneAndUpdate({ _id: userId }, { $set: { [`characters.${index}._id`]: newCharacter._id } } )
+  await User.findOneAndUpdate({ _id: userId }, { $set: { [`characters.${index}.character`]: newCharacter._id } } )
 
   return res.status(200).json(newCharacter)
 }

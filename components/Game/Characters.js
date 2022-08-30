@@ -2,7 +2,7 @@ import styles from "../../styles/Game.Characters.module.css"
 import React from "react"
 import Router from "next/router"
 import cookie from "js-cookie"
-import { Card, Icon, Header } from "semantic-ui-react"
+import { Card, Icon, Header, List } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
 
 const Characters = ({ setSlot, setChar }) => {
@@ -35,6 +35,7 @@ const Characters = ({ setSlot, setChar }) => {
   }
 
   const mapCharacters = () => {
+    console.log("cs",characters)
     return (
     <div>
         <Card.Group itemsPerRow="5" stackable>
@@ -42,12 +43,19 @@ const Characters = ({ setSlot, setChar }) => {
             i++
             return (
             character.available ? (
-              <Card key={i} className={styles.card} onClick={()=>character._id ? setChar(character) : createNew(i)}>
-                {character._id!== null ? (
+              <Card key={i} className={styles.card} onClick={()=>character.character ? setChar(character) : createNew(i)}>
+                {character.character!== null ? (
                   <>
                     <div className={styles.charTop}>-- char img --</div>
-                    <div className={styles.charMid}>-- some character info --</div>
-                    <div className={styles.charBottom}>-- Play! --</div>  
+                    <div className={styles.charMid}>
+                      <List>
+                        <List.Item>Name: {character.character.name}</List.Item>
+                        <List.Item>Lvl: {character.character.lvl}</List.Item>
+                        <List.Item>Money: {character.character.money.gold}g {character.character.money.silver}s {character.character.money.copper}c</List.Item>
+                        <List.Item>Coords: [{character.character.coords.current.x},{character.character.coords.current.y},{character.character.coords.current.z}]</List.Item>
+                      </List>
+                    </div>
+                    <div className={styles.charBottom}><Header as="h3">Play!</Header></div>  
                   </>
                 ):(
                   <>
