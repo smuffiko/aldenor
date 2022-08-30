@@ -14,26 +14,8 @@ const CharacterSchema = new mongoose.Schema(
       unique: true
     },
     skin: {
-      head: {
-        type: Number,
-        enum: [1,2,3,4],
-        default: 1
-      },
-      body: {
-        type: Number,
-        enum: [1,2,3,4],
-        default: 1
-      },
-      hands: {
-        type: Number,
-        enum: [1,2,3,4],
-        default: 1
-      },
-      legs: {
-        type: Number,
-        enum: [1,2,3,4],
-        default: 1
-      }
+      type: Number,
+      default: 0
     },
     race: {
       type: String,
@@ -49,31 +31,38 @@ const CharacterSchema = new mongoose.Schema(
     gear: {
       head: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       },
       shoulders: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       },
       chest: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       },
       legs: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       },
       shoes: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       },
       mainHand: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       },
       offHand: {
         type: ObjectId,
-        ref: "Item"
+        ref: "Item",
+        default: null
       }
     },
     lvl: {
@@ -98,56 +87,67 @@ const CharacterSchema = new mongoose.Schema(
       HP: {
         current: {
           type: Number,
-          required: true
+          required: true,
+          default: 10
         },
         max: {
           type: Number,
-          required: true
+          required: true,
+          default: 10
         },
         regen: {
           type: Number,
-          required: true
+          required: true,
+          default: 5
         }
       },
       energy: {
         current: {
           type: Number,
-          required: true
+          required: true,
+          default: 10
         },
         max: {
           type: Number,
-          required: true
+          required: true,
+          default: 10
         },
         regen: {
           type: Number,
-          required: true
+          required: true,
+          default: 5
         }
       },
-      combatEnergy: {
+      combatEnergy: { // mana, ammo
         current: {
-          type: Number,
-          required: true
+          type: Number
         },
         max: {
-          type: Number,
-          required: true
+          type: Number
         },
         regen: {
-          type: Number,
-          required: true
+          type: Number
         }
+      },
+      stamina: {
+        type: Number,
+        required: true,
+        default: 10
       },
       strength: {
         type: Number,
-        required: true
+        required: true,
+        default: 10
       },
       agility: {
         type: Number,
-        required: true
+        required: true,
+        default: 10
       },
       wisdom: {
         type: Number,
-        required: true
+        required: true,
+        default: 10
       },
       armor: {
         type: Number,

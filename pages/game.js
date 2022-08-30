@@ -1,5 +1,6 @@
 import React from "react"
 import Characters from "../components/Game/Characters"
+import CreateCharacter from "../components/Game/CreateCharacter"
 
 const Game = ({ user }) => {
   const [inGame, setInGame] = React.useState(false)
@@ -14,9 +15,7 @@ const Game = ({ user }) => {
     ) : (
       <>
         {(character>0 && character<=5) ? (
-          <>  
-            Creating new char at slot {character}
-          </>
+          <CreateCharacter slot={character} setChar={setCharacter} setInGame={setInGame}/>
           ):(
           <Characters user={user} setCharacter={setCharacter} />  
         )}
