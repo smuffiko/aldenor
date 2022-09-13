@@ -47,6 +47,7 @@ export default function Home() {
       <img src={imagesPath2[frame2]} style={{paddingLeft:"6em"}} />
       <img src={imagesPath3[frame3]} style={{paddingLeft:"6em"}} />
       <br />
+      3rd won! - 5 6 7 8, speed 150ms
     </>
   )
 }

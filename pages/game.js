@@ -37,6 +37,7 @@ const Game = () => {
         await setGame(data.character)
         .then(()=>setInGame(true))
       }).catch(error => {
+        unsetCharToken()
         setError(error.message)
       })
     }
@@ -84,11 +85,6 @@ const Game = () => {
     <>
     {!firstRound && (
       <>
-        <Message 
-          error
-          hidden={!error}
-          content={error}
-        />
         {inGame ? (
           <Play character={play} setInGame={setInGame} />
         ) : (
