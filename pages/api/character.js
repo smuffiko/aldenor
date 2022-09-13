@@ -13,6 +13,9 @@ export default async function ApiAccount(req, res) {
     case "POST":
       await handlePostRequest(req, res)
       break
+    case "DELETE":
+      await handleDeleteRequest(req, res)
+      break
     default:
       res.status(405).send(`Method ${req.method} not allowed!`)
       break
@@ -87,4 +90,28 @@ const handlePostRequest = async (req, res) => {
   const charToken = jwt.sign({ charId: newCharacter._id }, process.env.JWT_SECRET,{ expiresIn: "1d"})
 
   return res.status(200).json({ newCharacter, charToken })
+}
+
+const handleDeleteRequest = async (req, res) => {
+  if (!("authorization" in req.headers)) {
+    return res.status(401).send("No authorization token.")
+  }
+  const { userId } = jwt.verify(
+    req.headers.authorization,
+    process.env.JWT_SECRET
+  )
+  
+  const { charToken } = req.query
+  const { charId } = jwt.verify(
+    charToken,
+    process.env.JWT_SECRET
+  )
+
+  const user = await User.findOneAndUpdate(
+    { _id: userId, "characters.character": charId },
+    { $set: { "characters.$.character": null } }  
+  )
+  console.log(user)
+
+  return res.status(201).send("Character killed successfully.")
 }

@@ -69,7 +69,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
       }
       return await response.json()      
     }).then(data => {
-      setChar(data)
+      setChar(data.newCharacter)
     }).catch(error => {
       setError(error.message)
     }).finally(()=>{

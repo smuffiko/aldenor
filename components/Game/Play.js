@@ -1,5 +1,6 @@
-import { Button, Icon } from "semantic-ui-react"
+import { Button } from "semantic-ui-react"
 import { unsetCharToken } from "../../utils/character"
+import DeleteCharacter from "./DeleteCharacter"
 
 const Play = ({ character, setInGame }) => {
   const logoutChar = () => {
@@ -15,6 +16,7 @@ const Play = ({ character, setInGame }) => {
         onClick={()=>logoutChar()}
         type="button"
       />
+      <DeleteCharacter setInGame={setInGame} />
       You are playing with character: {character.name}
     </>)
 }
