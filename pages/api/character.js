@@ -30,20 +30,23 @@ const handleGetRequest = async (req, res) => {
   const { _id } = req.query
   if(_id) { // get one character by id
     const character = await Character.findOne({ owner: userId, _id })
+    // set char token
+    const charToken = jwt.sign({ charId: _id }, process.env.JWT_SECRET,{ expiresIn: "1d"})
     if(character)
-      return res.status(200).json(character)
+      return res.status(200).json({ character, charToken })
     else
       return res.status(404).send("Character not found.")
-  } else { // get all characters
-    const user = await User.findOne({ _id: userId }).populate({
-      path: "characters.character",
-      model: "Character"
-    })
-    const characters = user.characters
-    if (characters)
-      return res.status(200).json(characters)
+  } else { // get one character by token
+    const { charToken } = req.query
+    const { charId } = jwt.verify(
+      charToken,
+      process.env.JWT_SECRET
+    )
+    const character = await Character.findOne({ owner: userId, _id: charId })
+    if(character)
+      return res.status(200).json({ character })
     else
-      return res.status(404).send("You don't have any character yet.")
+      return res.status(404).send("Character not found.")
   }
 }
 
@@ -80,5 +83,8 @@ const handlePostRequest = async (req, res) => {
   // add character id to user slot
   await User.findOneAndUpdate({ _id: userId }, { $set: { [`characters.${index}.character`]: newCharacter._id } } )
 
-  return res.status(200).json(newCharacter)
+  // set character token
+  const charToken = jwt.sign({ charId: newCharacter._id }, process.env.JWT_SECRET,{ expiresIn: "1d"})
+
+  return res.status(200).json({ newCharacter, charToken })
 }

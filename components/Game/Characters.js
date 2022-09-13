@@ -10,7 +10,7 @@ const Characters = ({ setSlot, setChar }) => {
   const [error, setError] = React.useState("")
   
   React.useEffect(async()=>{
-    const url = `${baseUrl}/api/character`
+    const url = `${baseUrl}/api/characters`
     const token = cookie.get("token")
     await fetch(url,{
       method: "GET",

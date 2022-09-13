@@ -4,13 +4,44 @@ import Characters from "../components/Game/Characters"
 import CreateCharacter from "../components/Game/CreateCharacter"
 import Play from "../components/Game/Play"
 import baseUrl from "../utils/baseUrl"
+import { setCharToken, unsetCharToken } from "../utils/character"
+import { Message } from "semantic-ui-react"
 
 const Game = () => {
   const [inGame, setInGame] = React.useState(false)
   const [character, setCharacter] = React.useState(null)
+  const [firstRound, setFirstRound] = React.useState(true)
   const [slot, setSlot] = React.useState(null)
   const [play, setPlay] = React.useState(null)
   const [error, setError] = React.useState("")
+
+  React.useEffect(async ()=>{
+    const charToken = cookie.get("charId")
+    if(charToken) {
+      setError("")
+      const url = `${baseUrl}/api/character?charToken=${charToken}`
+      const token = cookie.get("token")
+      await fetch(url,{
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": token
+        }
+      }).then(async response => {
+        if(!response.ok) {
+          const er = await response.text()
+          throw new Error(er)
+        }
+        return await response.json()      
+      }).then(async data => {
+        await setGame(data.character)
+        .then(()=>setInGame(true))
+      }).catch(error => {
+        setError(error.message)
+      })
+    }
+    if(firstRound) setFirstRound(!firstRound)
+  },[])
 
   React.useEffect(async ()=> {
     if(character) {
@@ -19,6 +50,10 @@ const Game = () => {
       setSlot(null)
     }
   },[character])
+
+  React.useEffect(()=>{
+    if(!inGame) setCharacter(null)
+  },[inGame])
 
   const setGame = async (char) => {
     setError("")
@@ -37,7 +72,8 @@ const Game = () => {
       }
       return await response.json()      
     }).then(data => {
-      setPlay(data)
+      setCharToken(data.charToken)
+      setPlay(data.character)
     }).catch(error => {
       setError(error.message)
       // todo show error
@@ -46,14 +82,23 @@ const Game = () => {
 
   return (
     <>
-    {inGame ? (
-      <Play character={play} />
-    ) : (
+    {!firstRound && (
       <>
-        {(slot>0 && slot<=5) ? (
-          <CreateCharacter slot={slot} setSlot={setSlot} setChar={setCharacter} />
-          ):(
-          <Characters setSlot={setSlot} setChar={setCharacter} />  
+        <Message 
+          error
+          hidden={!error}
+          content={error}
+        />
+        {inGame ? (
+          <Play character={play} setInGame={setInGame} />
+        ) : (
+          <>
+            {(slot>0 && slot<=5) ? (
+              <CreateCharacter slot={slot} setSlot={setSlot} setChar={setCharacter} />
+              ):(
+              <Characters setSlot={setSlot} setChar={setCharacter} />  
+            )}
+          </>
         )}
       </>
     )}
