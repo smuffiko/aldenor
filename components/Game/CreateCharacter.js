@@ -1,17 +1,46 @@
 import React from "react"
-import { Form, Button, Icon, Message } from "semantic-ui-react"
+import { Form, Button, Icon, Message, Image } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
 
 const RACES = [
-  "human",
-  "elf",
-  "dwarf",
-  "halfling"
+  "Human",
+  "Elf",
+  "Dwarf",
+  "Halfling"
+]
+
+const GENDER = [
+  "Male",
+  "Female"
+]
+
+const SKIN = [
+  [ // human
+    "Desert",
+    "Mountaineer", 
+    "Plains"
+  ],
+  [ // elf
+    "Forest",
+    "Mountain",
+    "Plains"
+  ],
+  [ // dwarf
+    "Dark",
+    "Deep",
+    "Rock"
+  ],
+  [ // halfling
+    "Hills",
+    "Meadows",
+    "Town"
+  ]
 ]
 
 const INITIAL_CHARACTER = {
   name: "",
+  gender: 0,
   race: 0,
   skin: 0
 }
@@ -21,29 +50,37 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
   const [disabled, setDisabled] = React.useState(true)
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState("")
+  const [charPreview, setCharPreview] = React.useState("/img/Characters/Human/Mountaineer/Export_male/male_1.png")
 
   React.useEffect(()=>{
     if(Boolean(character.name)) setDisabled(false)
       else setDisabled(true)
+    setCharPreview(`/img/Characters/${RACES[character.race]}/${SKIN[character.race][character.skin]}/Export_${GENDER[character.gender].toLowerCase()}/${GENDER[character.gender].toLowerCase()}_1.png`)
   },[character])
 
   const handleChange = event => {
     const { name, value } = event.target
     setCharacter(prevState => ({...prevState, [name]:value}))
   }
-
   const changeSkin = changeTo => {
-    let newSkin = character.skin + changeTo
-    if(newSkin<0) newSkin = 4
-    if(newSkin>4) newSkin = 0
-    setCharacter(prevState => ({...prevState, skin: newSkin}))
+    setCharacter(prevState => ({ ...prevState, skin: (
+      ( (prevState.skin + changeTo) % 3 ) < 0 ?
+      2 :
+      ( (prevState.skin + changeTo) % 3 ) 
+    ) }))
   }
 
   const changeRace = changeTo => {
-    let newRace = character.race + changeTo
-    if(newRace<0) newRace = 3
-    if(newRace>3) newRace = 0
-    setCharacter(prevState => ({...prevState, race: newRace}))
+    setCharacter(prevState => {
+      const newRace = ( ( (prevState.race + changeTo) % RACES.length ) < 0 ?
+        RACES.length - 1 :
+        ( (prevState.race + changeTo) % RACES.length ) )
+      return { ...prevState, race: newRace }
+    })
+  }
+
+  const changeGender = () => {
+    setCharacter(prevState => ({...prevState, gender: Number(!prevState.gender)}))
   }
 
   const handleSubmit = async event => {
@@ -104,6 +141,13 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
           value={character.name}
           onChange={handleChange}
         />
+        <Image src={charPreview}/>
+        <Form.Field>
+            <span>Gender: {GENDER[character.gender]}</span>
+          <Button icon type="button" onClick={()=>changeGender()}>
+            <Icon name="exchange"/>
+          </Button>
+        </Form.Field>
         <Form.Field>
           <Button icon type="button" onClick={()=>changeRace(-1)}>
             <Icon name="arrow left"/>
@@ -117,7 +161,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
           <Button icon type="button" onClick={()=>changeSkin(-1)}>
             <Icon name="arrow left"/>
           </Button>
-            <span>Skin: {character.skin}</span>
+            <span>Skin: {SKIN[character.race][character.skin]}</span>
           <Button icon type="button" onClick={()=>changeSkin(1)}>
             <Icon name="arrow right"/>
           </Button>
