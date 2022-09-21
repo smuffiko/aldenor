@@ -6,11 +6,21 @@ import HeadContent from "./HeadContent"
 import Header from "./Header"
 import Cookie from "./Cookie"
 import { isDesktop, isMobile, isSmartTV, isWearable, isConsole} from "react-device-detect"
+import LeftTop from "./LeftTop"
+import RightTop from "./RightTop"
+import LeftBottom from "./LeftBottom"
+import RightBottom from "./RightBottom"
 
 
 const Layout = ({ children, user }) => {
   const [desktop, setDesktop] = React.useState()
   const [unsupported, setUnsupported] = React.useState()
+
+  /**
+  * 0 = basic
+  * 1 = test Tesak's layout
+  */
+  const testLayout = 0
 
   React.useEffect(()=>{
     setDesktop(isDesktop)
@@ -29,9 +39,21 @@ const Layout = ({ children, user }) => {
       <div id="container">
         {desktop && (
           <>
-            <div id="header"><Header user={user} /></div>
-            <div id="body"><Container>{children}</Container></div>
-            <div id="footer"><Footer /></div>
+            {testLayout === 1 ? (
+              <>
+                <div className="leftTop"><LeftTop /></div>
+                <div className="rightTop"><RightTop /></div>
+                <div className="body">body</div>
+                <div className="leftBottom"><LeftBottom /></div>
+                <div className="rightBottom"><RightBottom /></div>
+              </>
+            ) : testLayout === 0 && (
+              <>
+                <div id="header"><Header user={user} /></div>
+                <div id="body"><Container>{children}</Container></div>
+                <div id="footer"><Footer /></div>
+              </>
+            )}
           </>
         )} 
         {unsupported && (
