@@ -58,7 +58,7 @@ const handlePostRequest = async (req, res) => {
     return res.status(401).send("No authorization token.")
   }
   // get payload and user id from token
-  const { slot, skin, name, race } = req.body
+  const { slot, skin, name, race, gender } = req.body
   const index = slot-1
   const { userId } = jwt.verify(
     req.headers.authorization,
@@ -81,7 +81,8 @@ const handlePostRequest = async (req, res) => {
     owner: userId,
     name,
     skin,
-    race
+    race,
+    gender
   }).save()
   // add character id to user slot
   await User.findOneAndUpdate({ _id: userId }, { $set: { [`characters.${index}.character`]: newCharacter._id } } )

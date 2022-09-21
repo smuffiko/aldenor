@@ -13,14 +13,36 @@ const CharacterSchema = new mongoose.Schema(
       required: true,
       unique: true
     },
-    skin: {
+    gender: {
       type: Number,
-      default: 0
+      required: true,
+      enum: [0,1] // 0 = male, 1 = female
+    },
+    skin: {
+      type: String,
+      enum: [
+        // human
+        "Desert",
+        "Mountaineer", 
+        "Plains",
+        // elf
+        "Forest",
+        "Mountain",
+        "Plains",
+        // dwarf
+        "Dark",
+        "Deep",
+        "Rock",
+        // halfling
+        "Hills",
+        "Meadows",
+        "Town"
+      ]
     },
     race: {
       type: String,
       required: true,
-      enum: ["human","elf","dwarf","halfling"]
+      enum: ["Human","Elf","Dwarf","Halfling"]
     },
     class: {
       type: String,

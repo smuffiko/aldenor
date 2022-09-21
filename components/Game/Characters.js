@@ -2,8 +2,9 @@ import styles from "../../styles/Game.Characters.module.css"
 import React from "react"
 import Router from "next/router"
 import cookie from "js-cookie"
-import { Card, Icon, Header, List } from "semantic-ui-react"
+import { Card, Icon, Header, List, Image } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
+import { RACES, GENDER, SKIN } from "../../utils/characters"
 
 const Characters = ({ setSlot, setChar }) => {
   const [characters, setCharacters] = React.useState([])
@@ -45,10 +46,13 @@ const Characters = ({ setSlot, setChar }) => {
               <Card key={i} className={styles.card} onClick={()=>c.character ? setChar(c.character) : createNew(i)}>
                 {c.character!== null ? (
                   <>
-                    <div className={styles.charTop}>-- char img --</div>
+                    <div className={styles.charTop}>
+                      <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
+                    </div>
                     <div className={styles.charMid}>
                       <List>
                         <List.Item>Name: {c.character.name}</List.Item>
+                        <List.Item>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
                         <List.Item>Race: {c.character.race}</List.Item>
                         <List.Item>Class: {c.character.class}</List.Item>
                         <List.Item>Lvl: {c.character.lvl}</List.Item>

@@ -2,41 +2,7 @@ import React from "react"
 import { Form, Button, Icon, Message, Image } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
-
-const RACES = [
-  "Human",
-  "Elf",
-  "Dwarf",
-  "Halfling"
-]
-
-const GENDER = [
-  "Male",
-  "Female"
-]
-
-const SKIN = [
-  [ // human
-    "Desert",
-    "Mountaineer", 
-    "Plains"
-  ],
-  [ // elf
-    "Forest",
-    "Mountain",
-    "Plains"
-  ],
-  [ // dwarf
-    "Dark",
-    "Deep",
-    "Rock"
-  ],
-  [ // halfling
-    "Hills",
-    "Meadows",
-    "Town"
-  ]
-]
+import { RACES, GENDER, SKIN } from "../../utils/characters"
 
 const INITIAL_CHARACTER = {
   name: "",
@@ -90,7 +56,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     setDisabled(true)
 
     const url = `${baseUrl}/api/character`
-    const payload = { slot, skin: character.skin, name: character.name, race: RACES[character.race] }
+    const payload = { slot, skin: SKIN[character.race][character.skin], name: character.name, race: RACES[character.race], gender: character.gender }
     const token = cookie.get("token")
     await fetch(url, {
       method: "POST",
