@@ -4,20 +4,23 @@ import { Button, Form, Image } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
 import cookie from "js-cookie"
 
+const NULL_CHECKED = {
+  left: false,
+  top: false,
+  right: false,
+  bottom: false
+}
+
 const FieldUpdating = ({ field, setFieldUpdating }) => {
   const [preview, setPreview] = React.useState(field)
   const [dbFields, setDbFields] = React.useState([])
-  const [checked, setChecked] = React.useState({
-    left: false,
-    top: false,
-    right: false,
-    bottom: false
-  })
+  const [checked, setChecked] = React.useState(NULL_CHECKED)
   const [loading, setLoading] = React.useState(false)
 
   React.useEffect(()=>{
     getDbFields()
   },[])
+
   const getDbFields = async() => {
     const url = `${baseUrl}/api/fields`
     const token = cookie.get("token")
@@ -43,16 +46,19 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
   const handleChange = ( event, { value } ) => { // changing checked left/top/right/bottom if anyone choose different image from select
     event.preventDefault()
     const newPreview = JSON.parse(value)
-    setPreview(newPreview)  
-    dbFields.find(dbField=>(
-      dbField.left.find(f=>{f===newPreview._id ? setChecked(prev=>({...prev, left: true})) : setChecked(prev=>({...prev, left: false}))}) ||
-      dbField.top.find(fa=>{fa===newPreview._id ? setChecked(prev=>({...prev, top: true})) : setChecked(prev=>({...prev, top: false}))}) ||
-      dbField.right.find(fb=>{fb===newPreview._id ? setChecked(prev=>({...prev, right: true})) : setChecked(prev=>({...prev, right: false}))}) ||
-      dbField.bottom.find(fc=>{fc===newPreview._id ? setChecked(prev=>({...prev, bottom: true})) : setChecked(prev=>({...prev, bottom: false}))})
-    ))
+    setPreview(newPreview) 
+    setChecked(NULL_CHECKED)
+    dbFields.find(f=>{
+      if(f._id===field._id) {
+        f.left.map(ff=>ff===newPreview._id ? setChecked(prev=>({...prev, left: true})) : null)
+        f.top.map(ff=>ff===newPreview._id ? setChecked(prev=>({...prev, top: true})) : null)
+        f.right.map(ff=>ff===newPreview._id ? setChecked(prev=>({...prev, right: true})) : null)
+        f.bottom.map(ff=>ff===newPreview._id ? setChecked(prev=>({...prev, bottom: true})) : null)
+      }
+    })
   }
 
-  const handleChecked = async (direction, value) => { // changing checkbox
+  const handleChecked = async (direction, value) => { // changing checkbox -> update field in db
     setLoading(true)
     const url = `${baseUrl}/api/field`
     const token = cookie.get("token")
@@ -75,10 +81,9 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
         throw new Error(er)
       }
       return await response.json()      
-    }).then(data => {
+    }).then(async data => {
       setChecked(prevState=> ({ ...prevState, [direction]: value })) // change checkbox value
-      setDbFields(prevState=> data.f1._id === prevState._id ? data.f1 : prevState)
-      setDbFields(prevState=> data.f2._id === prevState._id ? data.f2 : prevState)
+      await getDbFields()
     }).catch(error => {
       console.log(error.message) // todo
     }).finally(()=>{
