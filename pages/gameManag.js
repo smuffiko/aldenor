@@ -65,6 +65,7 @@ const GameManag = () => {
         ) : (
           <>
             <Header>Files:</Header>
+            <Button content="Update files" onClick={()=>searchFiles()}/>
             {mapFiles()}
           </>
         )
