@@ -5,7 +5,7 @@ import connectDB from "../../utils/connectDB"
 
 connectDB()
 
-export default async function ApiAccount(req, res) {
+export default async function ApiCharacter(req, res) {
   switch (req.method) {
     case "GET":
       await handleGetRequest(req, res)
@@ -112,7 +112,6 @@ const handleDeleteRequest = async (req, res) => {
     { _id: userId, "characters.character": charId },
     { $set: { "characters.$.character": null } }  
   )
-  console.log(user)
 
   return res.status(201).send("Character killed successfully.")
 }

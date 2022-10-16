@@ -16,7 +16,6 @@ export default async function ApiLogin(req, res) {
 
 const handlePostRequest = async (req, res) => {
   const { x, y } = req.body 
-  console.log(`generating map...! x = ${x}, y = ${y}`)
   const mapFields = MapField.find()
   let newMap = new Array( y )
   for(var i = 0; i < y; i++) {

@@ -22,7 +22,7 @@ const GenerateMap = () => {
       return await response.json()
     }).then(data => {
       setMap(data)
-    }).catch(error=>console.log(error.message))
+    }).catch(error=>console.log(error.message)) // todo
   }
 
   const mapMap = ()=> {

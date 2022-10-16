@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const { String, Number, ObjectId } = mongoose.Schema.Types
+const { String, Boolean, Number, ObjectId } = mongoose.Schema.Types
 
 const MapFieldSchema = new mongoose.Schema(
   {
@@ -11,6 +11,10 @@ const MapFieldSchema = new mongoose.Schema(
     rotation: {
       type: Number,
       default: 0
+    },
+    flip: {
+      type: Boolean,
+      default: false
     },
     left: [{
       type: ObjectId

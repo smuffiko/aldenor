@@ -53,7 +53,7 @@ export const getServerSideProps = async ({ query: { hash } }) => {
   }).then(data => {
     token = data
   }).catch(error=>{
-    console.log(error.message)
+    console.log(error.message) // todo
   })
   return { props: { confirmToken: token } }
 }

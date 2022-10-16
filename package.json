@@ -12,6 +12,7 @@
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "fs": "^0.0.1-security",
+    "glob": "^8.0.3",
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",

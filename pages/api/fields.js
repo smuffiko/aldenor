@@ -1,11 +1,12 @@
-import Character from "../../models/Character"
+import MapField from "../../models/MapField"
 import User from "../../models/User"
 import jwt from "jsonwebtoken"
 import connectDB from "../../utils/connectDB"
+import glob from "glob"
 
 connectDB()
 
-export default async function ApiCharacters(req, res) {
+export default async function ApiFields(req, res) {
   switch (req.method) {
     case "GET":
       await handleGetRequest(req, res)
@@ -24,14 +25,12 @@ const handleGetRequest = async (req, res) => {
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  // get all characters
-  const user = await User.findOne({ _id: userId }).populate({
-    path: "characters.character",
-    model: "Character"
-  })
-  const characters = user.characters
-  if (characters)
-    return res.status(200).json(characters)
-  else
-    return res.status(404).send("You don't have any character yet.")
+  const user = await User.findOne({ _id: userId })
+  if (user.role!=="root") {
+    res.status(401).send("Not authorized.")
+  } else {
+    const fields = await MapField.find().sort({ imageSrc: 1, flip: 1, rotation: 1 })
+    let files = glob.sync(`public/img/Map/**/*.png`)
+    res.status(200).json({ fields, files})
+  }
 }
