@@ -2,7 +2,7 @@ import MapField from "../../models/MapField"
 import User from "../../models/User"
 import jwt from "jsonwebtoken"
 import connectDB from "../../utils/connectDB"
-import glob from "glob"
+import readDir from "fs-readdir-recursive"
 
 connectDB()
 
@@ -30,7 +30,9 @@ const handleGetRequest = async (req, res) => {
     res.status(401).send("Not authorized.")
   } else {
     const fields = await MapField.find().sort({ imageSrc: 1, flip: 1, rotation: 1 })
-    let files = glob.sync(`public/img/Map/**/*.png`)
-    res.status(200).json({ fields, files})
+
+    const files = readDir("public/img/Map/")
+    const newF = files.filter(f=>f.endsWith(".png")).map(f=>`public\\img\\Map\\${f}`)
+    res.status(200).json({ fields, files: newF })
   }
 }

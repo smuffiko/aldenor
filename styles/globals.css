@@ -99,3 +99,8 @@ a {
 .table_3 {
   background-color: rgb(55, 0, 255);
 }
+
+.loading {
+  pointer-events: none;
+  opacity: 0.5;
+}

@@ -144,7 +144,7 @@ const File = ({ setUpdating, file }) => {
   }
 
   const mapFields = () => fields.map(f=>
-    <div key={JSON.stringify(f)}>
+    <div key={JSON.stringify(f)} className={loading?"loading":""}>
       <Image
         className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}`}
         src={file}
@@ -220,7 +220,7 @@ const File = ({ setUpdating, file }) => {
               type="button"
             />
             <Header>File {file}</Header>
-            { !loading && mapFields() }
+            { mapFields() }
           </>
         )
       }
