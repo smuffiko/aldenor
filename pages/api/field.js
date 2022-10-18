@@ -83,14 +83,17 @@ const handlePutRequest = async (req, res) => {
       : direction === "left" ? "right"
       : "left"
     if(value) {
-      await MapField.findOneAndUpdate(
-        { _id: field },
-        { $push: { [direction]: newField }}
-      )
-      await MapField.findOneAndUpdate(
-        { _id: newField },
-        { $push: { [revDirection]: field }}
-      )
+      const found = await MapField.findOne({ _id: field, [direction]: newField })
+      if(!found) {
+        await MapField.findOneAndUpdate(
+          { _id: field },
+          { $push: { [direction]: newField }}
+        )
+        await MapField.findOneAndUpdate(
+          { _id: newField },
+          { $push: { [revDirection]: field }}
+        )
+      }
     } else {
       await MapField.findOneAndUpdate(
         { _id: field },

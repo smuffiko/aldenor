@@ -38,6 +38,7 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
       return await response.json()      
     }).then(data => {
       setDbFields(data.fields)
+      setCheckedField(field, data.fields)
     }).catch(error => {
       console.log(error.message) // todo
     })
@@ -47,8 +48,15 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
     event.preventDefault()
     const newPreview = JSON.parse(value)
     setPreview(newPreview) 
+    setCheckedField(newPreview,false)
+  }
+
+  const setCheckedField = (newPreview, dataFields ) => {
+    let fields = []
+    if(dataFields) fields = dataFields
+      else fields = dbFields
     setChecked(NULL_CHECKED)
-    dbFields.find(f=>{
+    fields.find(f=>{
       if(f._id===field._id) {
         f.left.map(ff=>ff===newPreview._id ? setChecked(prev=>({...prev, left: true})) : null)
         f.top.map(ff=>ff===newPreview._id ? setChecked(prev=>({...prev, top: true})) : null)
@@ -83,6 +91,13 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
       return await response.json()      
     }).then(async data => {
       setChecked(prevState=> ({ ...prevState, [direction]: value })) // change checkbox value
+      if(field._id === preview._id) {
+        const revDirection = direction === "top" ? "bottom"
+          : direction === "bottom" ? "top"
+          : direction === "left" ? "right"
+          : "left"
+        setChecked(prevState=> ({ ...prevState, [revDirection]: value })) // change checkbox value rev direction if adding self image
+      }
       await getDbFields()
     }).catch(error => {
       console.log(error.message) // todo
@@ -120,16 +135,16 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
               selection
               fluid
               placeholder="Select image for preview"
-              value={JSON.stringify({ 
+              value={JSON.stringify({
+                _id: preview._id,
                 imageSrc: preview.imageSrc,
                 rotation: preview.rotation,
-                flip: preview.flip,
-                _id: preview._id
+                flip: preview.flip
               })} 
               onChange={handleChange}
               options={dbFields.map(f=>({
                 key: `${f._id}`,
-                value: JSON.stringify({ imageSrc: f.imageSrc, rotation: f.rotation, flip: f.flip, _id: f._id }),
+                value: JSON.stringify({ _id: f._id, imageSrc: f.imageSrc, rotation: f.rotation, flip: f.flip }),
                 text: `${f.imageSrc} - ${f.flip?"flipped":"basic"} ${f.rotation}°`,
                 image: { src: f.imageSrc, className: `${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}` }
               }))}
