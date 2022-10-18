@@ -1,4 +1,9 @@
 import mongoose from "mongoose"
+require("../models/Character")
+require("../models/Item")
+require("../models/Map")
+require("../models/MapField")
+require("../models/PublicFile")
 require("../models/User")
 
 const connection = {}

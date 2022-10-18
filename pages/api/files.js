@@ -1,8 +1,8 @@
-import MapField from "../../models/MapField"
 import User from "../../models/User"
 import PublicFile from "../../models/PublicFile"
 import jwt from "jsonwebtoken"
 import connectDB from "../../utils/connectDB"
+import readDir from "fs-readdir-recursive"
 
 connectDB()
 
@@ -29,9 +29,18 @@ const handleGetRequest = async (req, res) => {
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
-    const fields = await MapField.find().sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields
-    const files = await PublicFile.find().sort({ src: 1 })  // find all public Files
-    const filesArrayOfString = files.map(file=> file["src"])  // convert array of object to array of strings (src only)
-    res.status(200).json({ fields, files: filesArrayOfString })
+    const { dir } = req.query
+    const files = readDir(`public/${dir}`)
+    const newF = files.filter(f=>f.endsWith(".png")).map(f=>`public\\${dir}\\${f}`)
+
+    // find new images at localhost, add its src to DB
+    newF.map(async file=>{
+      let find = await PublicFile.findOne({ src: file })
+      if(!find) await new PublicFile({ src: file }).save()
+    })
+
+    // todo -> check all images in DB, if it is not in localhost -> delete from DB recursively
+
+    res.status(200).json({ files: newF })
   }
 }

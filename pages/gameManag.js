@@ -22,20 +22,39 @@ const GameManag = () => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "authorization": token
+        "Authorization": token
       }
     }).then(async response => {
-        if(!response.ok) {
-          const er = await response.text()
-          throw new Error(er)
-        }
-        return await response.json()      
-      }).then(data => {
-        setFiles(data.files)
-        setFields(data.fields)
-      }).catch(error => {
-        console.log(error.message) // todo
-      })
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.json()      
+    }).then(data => {
+      setFiles(data.files)
+      setFields(data.fields)
+    }).catch(error => {
+      console.log(error.message) // todo
+    })
+  }
+
+  const searchNewFiles = async()=> {
+    const token = cookie.get("token")
+    const dir = "img\\Map"
+    await fetch (`${baseUrl}/api/files?dir=${dir}`,{
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": token
+      }
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+    }).catch(error => {
+      console.log(error.message) // todo
+    })
   }
 
   const updateField = src => {
@@ -64,6 +83,7 @@ const GameManag = () => {
           </>
         ) : (
           <>
+            {baseUrl==="http://localhost:3000" && (<Button content="Update files" onClick={()=>searchNewFiles()} />)}
             <Header>Files:</Header>
             <Button content="Update files" onClick={()=>searchFiles()}/>
             {mapFiles()}
