@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 connectDB()
 
-export default async function ApiLogin(req, res) {
+export default async function ApiSignin(req, res) {
   switch(req.method) {
     case "POST":
       await handlePostRequest(req, res)

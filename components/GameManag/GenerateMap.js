@@ -1,5 +1,6 @@
 import React from "react"
-import { Button, Table } from "semantic-ui-react"
+import styles from "../../styles/GameManag.Fields.module.css"
+import { Button, Table, Image } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
 
 const GenerateMap = () => {
@@ -7,7 +8,7 @@ const GenerateMap = () => {
 
   const generateNewMap = async () => {
     const url = `${baseUrl}/api/map`
-    const payload = { x: 25, y: 20 }
+    const payload = { x: 20, y: 15 }
     await fetch(url,{
       method: "POST",
       headers: {
@@ -27,27 +28,25 @@ const GenerateMap = () => {
 
   const mapMap = ()=> {
     return (
-      <Table>
-        <Table.Body>
+      <div className="mapTable">
         {
           map.map(field => {
             return (
-              <Table.Row key={Math.random()}>
+              <div className="mapRow" key={Math.random()}>
                 {
-                  field.map(val => {
+                  field.map(f => {
                     return (
-                      <Table.Cell className={`table_${val}`} key={Math.random()}>
-                        {val}
-                      </Table.Cell>
+                      <div className="mapCol" key={Math.random()}>
+                        <Image className={`mapField ${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}`} src={f.imageSrc} />
+                      </div>
                     )
                   })
                 }
-              </Table.Row>
+              </div>
             )
           })
         }
-        </Table.Body>
-      </Table>
+      </div>
     )
   }
 

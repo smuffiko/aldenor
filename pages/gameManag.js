@@ -4,6 +4,7 @@ import cookie from "js-cookie"
 import baseUrl from "../utils/baseUrl"
 import { Button, Header, Image } from "semantic-ui-react"
 import File from "../components/GameManag/File"
+import GenerateMap from "../components/GameManag/GenerateMap"
 
 const GameManag = () => {
   const [files, setFiles] = React.useState([]) // git files
@@ -85,8 +86,8 @@ const GameManag = () => {
           <>
             {baseUrl==="http://localhost:3000" && (<Button content="Update files" onClick={()=>searchNewFiles()} />)}
             <Header>Files:</Header>
-            <Button content="Update files" onClick={()=>searchFiles()}/>
             {mapFiles()}
+            <GenerateMap />
           </>
         )
       }

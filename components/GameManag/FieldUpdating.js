@@ -17,14 +17,15 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
   const [checked, setChecked] = React.useState(NULL_CHECKED)
   const [loading, setLoading] = React.useState(false)
 
-  React.useEffect(()=>{
-    getDbFields()
+  React.useEffect(async ()=>{
+    const dbF = await getDbFields()
+    setCheckedField(field, dbF)
   },[])
 
   const getDbFields = async() => {
     const url = `${baseUrl}/api/fields`
     const token = cookie.get("token")
-    await fetch(url,{
+    const dbF = await fetch(url,{
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -38,17 +39,18 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
       return await response.json()      
     }).then(data => {
       setDbFields(data.fields)
-      setCheckedField(field, data.fields)
+      return data.fields
     }).catch(error => {
       console.log(error.message) // todo
     })
+    return dbF
   }
   
   const handleChange = ( event, { value } ) => { // changing checked left/top/right/bottom if anyone choose different image from select
     event.preventDefault()
     const newPreview = JSON.parse(value)
     setPreview(newPreview) 
-    setCheckedField(newPreview,false)
+    setCheckedField(newPreview, false)
   }
 
   const setCheckedField = (newPreview, dataFields ) => {
@@ -92,6 +94,7 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
     }).then(async data => {
       setChecked(prevState=> ({ ...prevState, [direction]: value })) // change checkbox value
       if(field._id === preview._id) {
+        console.log("wtf")
         const revDirection = direction === "top" ? "bottom"
           : direction === "bottom" ? "top"
           : direction === "left" ? "right"

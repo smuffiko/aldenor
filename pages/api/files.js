@@ -6,7 +6,7 @@ import readDir from "fs-readdir-recursive"
 
 connectDB()
 
-export default async function ApiFields(req, res) {
+export default async function ApiFiles(req, res) {
   switch (req.method) {
     case "GET":
       await handleGetRequest(req, res)
