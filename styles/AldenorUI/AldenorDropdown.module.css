@@ -1,0 +1,32 @@
+.item {
+  padding: 0 !important;
+}
+.dropdown div {
+  margin: 0 !important;
+}
+.dropdownTitle {
+  width: 120px;
+  height: 60px;
+  padding: 5px 10px;
+  margin: 0;
+}
+.hidden {
+  position: absolute;
+  visibility: hidden;
+}
+.visible {
+  position: absolute;
+  visibility: visible;
+}
+.panel1 {
+  background-image: url("/img/UI/Panel/Panel_1.png");
+}
+.panel2 {
+  background-image: url("/img/UI/Panel/Panel_2.png");
+}
+.panel3 {
+  background-image: url("/img/UI/Panel/Panel_3.png");
+}
+.panel4 {
+  background-image: url("/img/UI/Panel/Panel_4.png");
+}

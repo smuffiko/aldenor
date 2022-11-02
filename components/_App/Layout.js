@@ -10,6 +10,7 @@ import LeftTop from "./LeftTop"
 import RightTop from "./RightTop"
 import LeftBottom from "./LeftBottom"
 import RightBottom from "./RightBottom"
+import uiStyles from "../../styles/AldenorUI/AldenorUI.module.css"
 
 
 const Layout = ({ children, user }) => {
@@ -20,7 +21,7 @@ const Layout = ({ children, user }) => {
   * 0 = basic
   * 1 = test Tesak's layout
   */
-  const testLayout = 0
+  const testLayout = 1
 
   React.useEffect(()=>{
     setDesktop(isDesktop)
@@ -41,11 +42,11 @@ const Layout = ({ children, user }) => {
           <>
             {testLayout === 1 ? (
               <>
-                <div className="leftTop"><LeftTop /></div>
-                <div className="rightTop"><RightTop /></div>
-                <div className="body">body</div>
-                <div className="leftBottom"><LeftBottom /></div>
-                <div className="rightBottom"><RightBottom /></div>
+                <div className={uiStyles.leftTop}><LeftTop /></div>
+                <div className={uiStyles.rightTop}><RightTop /></div>
+                <div className={uiStyles.body}>body</div>
+                <div className={uiStyles.leftBottom}><LeftBottom /></div>
+                <div className={uiStyles.rightBottom}><RightBottom /></div>
               </>
             ) : testLayout === 0 && (
               <>
