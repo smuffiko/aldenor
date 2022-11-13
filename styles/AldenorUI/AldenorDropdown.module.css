@@ -17,6 +17,7 @@
 .visible {
   position: absolute;
   visibility: visible;
+  padding: 0 !important;
 }
 .panel1, .panel2, .panel3, .panel4 {
   padding: 0;
