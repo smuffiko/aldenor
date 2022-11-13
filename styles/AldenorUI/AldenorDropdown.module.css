@@ -20,7 +20,7 @@
   padding: 0 !important;
 }
 .panel1, .panel2, .panel3, .panel4 {
-  padding: 0;
+  padding: 0 !important;
 }
 .panel1 {
   background-image: url("/img/UI/Panel/Panel_1.png");
