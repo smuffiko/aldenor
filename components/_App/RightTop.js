@@ -44,7 +44,8 @@ const RightTop = () => {
         b4: Math.floor(Math.random()*4+1),
         c4: Math.floor(Math.random()*4+1)
       }
-      cookies.set("menu",JSON.stringify({ panel, button }))
+      const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000)
+      cookies.set("menu",JSON.stringify({ panel, button }), { expires: tenMinutes })
       setPanelBg(panel)
       setButtonBg(button)
     } else {
