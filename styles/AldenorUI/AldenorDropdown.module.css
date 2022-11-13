@@ -4,7 +4,7 @@
 .dropdown div {
   margin: 0 !important;
 }
-.dropdownTitle {
+.dropdownItem {
   width: 120px;
   height: 60px;
   padding: 5px 10px;
@@ -17,6 +17,9 @@
 .visible {
   position: absolute;
   visibility: visible;
+}
+.panel1, .panel2, .panel3, .panel4 {
+  padding: 0;
 }
 .panel1 {
   background-image: url("/img/UI/Panel/Panel_1.png");
