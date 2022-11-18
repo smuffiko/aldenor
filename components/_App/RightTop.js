@@ -99,7 +99,7 @@ const RightTop = ({ user }) => {
           </List.Item>
         )}
         <List.Item className={`${styles[`panel${panelBg.shop}`]} ${styles.item}`}>
-          <div className={styles.dropdownItem}><AldenorButton onClick={()=>Router.push("/shop")} button={buttonBg.shop}>Shop nef</AldenorButton></div>
+          <div className={styles.dropdownItem}><AldenorButton onClick={()=>Router.push("/gameShop")} button={buttonBg.shop}>Shop</AldenorButton></div>
         </List.Item>
         {(user.role === "admin" || user.role === "root") && (
           <List.Item
