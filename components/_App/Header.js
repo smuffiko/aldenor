@@ -47,23 +47,21 @@ const Header = ({ user }) => {
               </Menu.Item>
             </Link>
           </>) : (  // logged user
-          <>  
-            {!(isBan||isRoot) && (  // everyone logged except banned user and root can see /game
-              <Link href="/game" passHref>
-                <Menu.Item header active={isActive("/game")}>
-                  <Icon name="game"/>
-                  Game
-                </Menu.Item>
-              </Link>
-            )}
-            {!(isBan||isUnUser) && (  // everyone logged except banned user and unconfirmed user can see /shop
-              <Link href="/shop" passHref>
+          <>
+            {/* everyone logged can log to the game via character (even banned user, they can make ticket with their nickname) */}  
+            <Link href="/characters" passHref>
+              <Menu.Item header active={isActive("/characters")}>
+                <Icon name="game"/>
+                Play
+              </Menu.Item>
+            </Link>
+            {/* everyone can see shop */}
+            <Link href="/shop" passHref>
               <Menu.Item header active={isActive("/shop")}>
                 <Icon name="cart"/>
                 Shop
               </Menu.Item>
-              </Link>
-            )}
+            </Link>
             {/* everyone can see settings */}
             <Link href="/settings" passHref>
               <Menu.Item header active={isActive("/settings")}>
@@ -71,40 +69,9 @@ const Header = ({ user }) => {
                 Settings
               </Menu.Item>
             </Link>
-            {!isRoot && ( // everyone logged except root can see tickets
-              <Link href="/ticket" passHref>
-              <Menu.Item header active={isActive("/ticket")}>
-                <Icon name="help"/>
-                Ticket
-              </Menu.Item>
-              </Link>
-            )}
-            {isAdmin && ( // only admin can see admin tools
-              <Link href="/adminTools" passHref>
-                <Menu.Item header active={isActive("/adminTools")}>
-                  <Icon name="settings"/>
-                  Admin Tools
-                </Menu.Item>
-              </Link>
-            )}
-            {isRoot && ( // only root can see game & staff management
-              <>
-                <Link href="/gameManag" passHref>
-                  <Menu.Item header active={isActive("/gameManag")}>
-                    <Icon name="settings"/>
-                    Game Management
-                  </Menu.Item>
-                </Link>
-                <Link href="/staffManag" passHref>
-                  <Menu.Item header active={isActive("/staffManag")}>
-                    <Icon name="settings"/>
-                    Staff Management
-                  </Menu.Item>
-                </Link>
-              </>
-            )}
+            {/* everyone logged in can log out, ofc */}
             <Menu.Item header onClick={handleLogout}>
-                  <Icon name="log out" />
+              <Icon name="log out" />
               Logout
             </Menu.Item>
           </>)}

@@ -1,22 +1,8 @@
-import { Button } from "semantic-ui-react"
-import { unsetCharToken } from "../../utils/character"
-import DeleteCharacter from "./DeleteCharacter"
+import Router from "next/router"
 
-const Play = ({ character, setInGame }) => {
-  const logoutChar = () => {
-    setInGame(false)
-    unsetCharToken()
-  }
+const Play = ({ character }) => {
   return (
     <>
-      <Button
-        color='olive'
-        icon='arrow left'
-        label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
-        onClick={()=>logoutChar()}
-        type="button"
-      />
-      <DeleteCharacter setInGame={setInGame} />
       You are playing with character: {character.name}
     </>)
 }

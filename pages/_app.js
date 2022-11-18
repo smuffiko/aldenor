@@ -30,13 +30,13 @@ MyApp.getInitialProps = async({ ctx })=> {
   if(!token) {
     // not logged user - ban these paths
     if(
-      ctx.pathname==="/settings"
-      || ctx.pathname==="/logout"
-      || ctx.pathname==="/ticket"
+      ctx.pathname==="/adminTools"
+      || ctx.pathname==="/characters"
       || ctx.pathname==="/game"
-      || ctx.pathname==="/shop"
-      || ctx.pathname==="/adminTools"
       || ctx.pathname==="/gameManag"
+      || ctx.pathname==="/gameShop"
+      || ctx.pathname==="/settings"
+      || ctx.pathname==="/shop"
       || ctx.pathname==="/staffManag"
     )
       redirectUser(ctx,"/401")
@@ -58,44 +58,35 @@ MyApp.getInitialProps = async({ ctx })=> {
     }).then(async user => {
       pageProps.user = user
 
-      // logged user but at page signup or signin
+      // logged user but at pages confirm, signup or signin
       if(
-        ctx.pathname==="/signup"
+        ctx.pathname==="/confirm"
+        || ctx.pathname==="/signup"
         || ctx.pathname==="/signin"
       ) redirectUser(ctx,"/401")
 
-      // root is not allowed to visit ticket, game and admin tools
+      // unUser or banned cant go shop
       if(
-        (ctx.pathname==="/ticket"
-        || ctx.pathname==="/game"
-        || ctx.pathname==="/adminTools")
-        && user.role==="root"
-      ) redirectUser(ctx,"/401")
+        (
+          ctx.pathname==="/shop"
+          || ctx.pathname==="/gameShop"
+        ) && (
+          user.role === "unUser"
+          || user.role === "ban"
+        )
+      )
 
-      // ban everyone except root for game & staff management
-      if(
-        (ctx.pathname==="/gameManag"
-        || ctx.pathname==="/staffManag")
-        && user.role!=="root"
-      ) redirectUser(ctx,"/401")
-
-      // ban everyone except admin for admin tools
+      // only admin can go to adminTools
       if(
         ctx.pathname==="/adminTools"
         && user.role!=="admin"
       ) redirectUser(ctx,"/401")
 
-      // banned user cant visit game and shop
+      // only root can go to gameManag and staffManag
       if(
-        (ctx.pathname==="/game"
-        || ctx.pathname==="/shop")
-        && user.role==="ban"
-      ) redirectUser(ctx,"/401")
-
-      // unUser cant visit shop too
-      if(
-        ctx.pathname==="/shop"
-        && user.role==="unUser"
+        ( ctx.pathname==="/gameManag"
+        || ctx.pathname==="/staffManag")
+        && user.role!=="root"
       ) redirectUser(ctx,"/401")
 
     }).catch(error => { 
