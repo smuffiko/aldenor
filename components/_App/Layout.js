@@ -73,10 +73,10 @@ const Layout = ({ children, user }) => {
                 {character!== undefined && (
                   <>
                   <div className={styles.rightTop}><RightTop user={user} /></div>
-                  <div className={styles.body}>{children}</div>
+                  <div className={styles.body}><div className={styles.children}>{children}</div></div>
                   { router.pathname === "/game" && (
                     <>
-                      <div className={styles.leftTop}><LeftTop /></div>
+                      <div className={styles.leftTop}><LeftTop user={user} /></div>
                       <div className={styles.leftBottom}><LeftBottom /></div>
                       <div className={styles.rightBottom}><RightBottom /></div>
                     </>

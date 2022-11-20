@@ -88,12 +88,11 @@ const RightTop = ({ user }) => {
   }
   return (
     <>
-      <List horizontal className={styles.dropdown}>
+      <List horizontal className={styles.rightTopMenu}>
         { router.pathname !== "/game" && (
           <List.Item className={`${styles[`panel${panelBg.back}`]} ${styles.menuItem}`}>
-            {console.log("pathname " + router.pathname)}
             <div
-              className={styles.dropdownItem}
+              className={styles.rightTopListItem}
               onClick={()=>Router.push("/game")}
             >
               <AldenorButton button={buttonBg.back}>Back</AldenorButton>
@@ -102,7 +101,7 @@ const RightTop = ({ user }) => {
         )}
         <List.Item className={`${styles[`panel${panelBg.shop}`]} ${styles.menuItem}`}>
           <div
-            className={styles.dropdownItem}
+            className={styles.rightTopListItem}
             onClick={()=>Router.push("/gameShop")}
           >
             <AldenorButton button={buttonBg.shop}>Shop</AldenorButton>
@@ -115,7 +114,7 @@ const RightTop = ({ user }) => {
             onMouseOver={()=>openMenu("devs")}
             >
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
               >
                 <AldenorButton button={buttonBg.tools}>Tools</AldenorButton>
               </div>
@@ -123,7 +122,7 @@ const RightTop = ({ user }) => {
               {user.role === "admin" && (
                 <List.Item className={styles[`panel${panelBg.adminTools}`]}>
                   <div
-                    className={styles.dropdownItem}
+                    className={styles.rightTopListItem}
                     onClick={()=>Router.push("/adminTools")}
                   >
                     <AldenorButton button={buttonBg.adminTools}>Admin Tools</AldenorButton>
@@ -134,7 +133,7 @@ const RightTop = ({ user }) => {
                 <>
                   <List.Item className={styles[`panel${panelBg.gameManag}`]}>
                     <div
-                      className={styles.dropdownItem}
+                      className={styles.rightTopListItem}
                       onClick={()=>Router.push("/gameManag")}
                     >
                       <AldenorButton button={buttonBg.gameManag}>Game Manag</AldenorButton>
@@ -142,7 +141,7 @@ const RightTop = ({ user }) => {
                   </List.Item>
                   <List.Item className={styles[`panel${panelBg.staffManag}`]}>
                     <div
-                      className={styles.dropdownItem}
+                      className={styles.rightTopListItem}
                       onClick={()=>Router.push("/staffManag")}
                     >
                       <AldenorButton button={buttonBg.staffManag}>Staff Manag</AldenorButton>
@@ -158,32 +157,32 @@ const RightTop = ({ user }) => {
           className={`${styles[`panel${panelBg.gameMenu}`]} ${styles.menuItem}`}
           onMouseOver={()=>openMenu("game")}
           >
-          <div className={styles.dropdownItem}><AldenorButton button={buttonBg.gameMenu}>Game nef</AldenorButton></div>
+          <div className={styles.rightTopListItem}><AldenorButton button={buttonBg.gameMenu}>Game nef</AldenorButton></div>
           <List className={open.game ? styles.visible : styles.hidden}>
             <List.Item className={styles[`panel${panelBg.guild}`]}>
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
               >
                 <AldenorButton button={buttonBg.guild}>Guild</AldenorButton>
               </div>
             </List.Item>
             <List.Item className={styles[`panel${panelBg.party}`]}>
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
               >
                 <AldenorButton button={buttonBg.party}>Party</AldenorButton>
               </div>
             </List.Item>
             <List.Item className={styles[`panel${panelBg.achievments}`]}>
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
               >
                 <AldenorButton button={buttonBg.achievments}>Achievments</AldenorButton>
               </div>
             </List.Item>
             <List.Item className={styles[`panel${panelBg.camp}`]}>
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
               >
                 <AldenorButton button={buttonBg.camp}>Camp</AldenorButton>
               </div>
@@ -196,14 +195,14 @@ const RightTop = ({ user }) => {
           onMouseOver={()=>openMenu("others")}
           >
           <div
-            className={styles.dropdownItem}
+            className={styles.rightTopListItem}
           >
             <AldenorButton button={buttonBg.others}>Others</AldenorButton>
           </div>
           <List className={open.others ? styles.visible : styles.hidden}>
             <List.Item className={styles[`panel${panelBg.ticket}`]}>
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
                 onClick={()=>Router.push("/ticket")}
               >
                 <AldenorButton button={buttonBg.ticket}>Ticket</AldenorButton>
@@ -211,7 +210,7 @@ const RightTop = ({ user }) => {
             </List.Item>
             <List.Item className={styles[`panel${panelBg.characters}`]}>
               <div
-                className={styles.dropdownItem}
+                className={styles.rightTopListItem}
                 onClick={()=>logoutChar()}
               >
                 <AldenorButton button={buttonBg.characters}>Characters</AldenorButton>

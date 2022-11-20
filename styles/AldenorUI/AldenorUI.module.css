@@ -9,6 +9,9 @@
   height: 100vh;
   background-color: rgb(133, 133, 255);
 }
+.children {
+  padding: 60px 240px;
+}
 
 /*
  * UI main frames
@@ -17,9 +20,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 300px;
-  height: 100px;
-  background-color: #b8f850;
   z-index: 10;
 }
 .leftBottom {
@@ -109,20 +109,77 @@
 }
 
 /*
- * Custom menu settings
+ * Right top menu
  */
 .menuItem {
   padding: 0 !important;
 }
-.dropdown div {
+.rightTopMenu div {
   margin: 0 !important;
 }
-.dropdownItem {
+.rightTopListItem {
   width: 120px;
   height: 60px;
   padding: 5px 10px;
   margin: 0;
 }
+
+/*
+ * Left top menu
+ */
+
+.leftTopMenu {
+  position: relative;
+}
+.charInv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+.char {
+  display: block;
+  width: 120px;
+  height: 60px;
+  background-image: url("/img/UI/Panel/Panel_4.png");
+}
+.inv {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.bars {
+  position: absolute;
+  top: 0;
+  left: 120px;
+  display: block;
+  width: 120px;
+  height: 60px;
+  background-image: url("/img/UI/Panel/Panel_4.png");
+  font-size: 10px;
+  text-align: center;
+  line-height: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.hp {
+  height: 10px;
+  margin: 5px 10px;
+  background-color: rgb(255, 74, 74);
+}
+.energy {
+  height: 10px;
+  margin: 10px;
+  background-color: rgb(83, 255, 83);
+}
+.exp {
+  height: 10px;
+  margin: 5px 10px;
+  background-color: rgb(47, 61, 255);
+}
+
+/*
+ * Other settings 
+ */
 .hidden {
   position: absolute;
   visibility: hidden;
