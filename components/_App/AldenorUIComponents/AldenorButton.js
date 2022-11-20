@@ -1,4 +1,4 @@
-import styles from "../../../styles/AldenorUI/AldenorButton.module.css"
+import styles from "../../../styles/AldenorUI/AldenorUI.module.css"
 
 const AldenorButton = ({ children, onClick, style, button }) => {
   return (

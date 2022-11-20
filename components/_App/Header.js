@@ -10,12 +10,6 @@ const Header = ({ user }) => {
   Router.events.on("routeChangeError", ()=> NProgress.done())
 
   const isLogged = Boolean(user)
-  const isBan = user && user.role==="ban"
-  const isUnUser = user && user.role==="unUser"
-  const isUser = user && user.role==="user" // in case i will
-  const isMod = user && user.role==="mod"   // need it anytime
-  const isAdmin = user && user.role==="admin"
-  const isRoot = user && user.role==="root"
   
   const isActive = route => route === Router.pathname
 

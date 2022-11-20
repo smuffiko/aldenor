@@ -1,10 +1,10 @@
 import React from "react"
 import Router, { useRouter } from "next/router"
 import { List } from "semantic-ui-react"
-import styles from "../../styles/AldenorUI/AldenorDropdown.module.css"
+import styles from "../../../styles/AldenorUI/AldenorUI.module.css"
 import cookies from "js-cookie"
-import AldenorButton from "./AldenorUIComponents/AldenorButton"
-import { unsetCharToken } from "../../utils/character"
+import AldenorButton from "../AldenorUIComponents/AldenorButton"
+import { unsetCharToken } from "../../../utils/character"
 
 const NULL_PANEL_BG = {
   back: 1,
@@ -90,7 +90,7 @@ const RightTop = ({ user }) => {
     <>
       <List horizontal className={styles.dropdown}>
         { router.pathname !== "/game" && (
-          <List.Item className={`${styles[`panel${panelBg.back}`]} ${styles.item}`}>
+          <List.Item className={`${styles[`panel${panelBg.back}`]} ${styles.menuItem}`}>
             {console.log("pathname " + router.pathname)}
             <div
               className={styles.dropdownItem}
@@ -100,7 +100,7 @@ const RightTop = ({ user }) => {
             </div>
           </List.Item>
         )}
-        <List.Item className={`${styles[`panel${panelBg.shop}`]} ${styles.item}`}>
+        <List.Item className={`${styles[`panel${panelBg.shop}`]} ${styles.menuItem}`}>
           <div
             className={styles.dropdownItem}
             onClick={()=>Router.push("/gameShop")}
@@ -111,7 +111,7 @@ const RightTop = ({ user }) => {
         {(user.role === "admin" || user.role === "root") && (
           <List.Item
             onMouseLeave={()=>close("devs")}
-            className={`${styles[`panel${panelBg.tools}`]} ${styles.item}`}
+            className={`${styles[`panel${panelBg.tools}`]} ${styles.menuItem}`}
             onMouseOver={()=>openMenu("devs")}
             >
               <div
@@ -155,7 +155,7 @@ const RightTop = ({ user }) => {
         )}
         <List.Item 
           onMouseLeave={()=>close("game")}
-          className={`${styles[`panel${panelBg.gameMenu}`]} ${styles.item}`}
+          className={`${styles[`panel${panelBg.gameMenu}`]} ${styles.menuItem}`}
           onMouseOver={()=>openMenu("game")}
           >
           <div className={styles.dropdownItem}><AldenorButton button={buttonBg.gameMenu}>Game nef</AldenorButton></div>
@@ -192,7 +192,7 @@ const RightTop = ({ user }) => {
         </List.Item>
         <List.Item 
           onMouseLeave={()=>close("others")}
-          className={`${styles[`panel${panelBg.others}`]} ${styles.item}`}
+          className={`${styles[`panel${panelBg.others}`]} ${styles.menuItem}`}
           onMouseOver={()=>openMenu("others")}
           >
           <div

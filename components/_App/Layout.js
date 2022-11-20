@@ -8,11 +8,11 @@ import HeadContent from "./HeadContent"
 import Header from "./Header"
 import Cookie from "./Cookie"
 import { isDesktop, isMobile, isSmartTV, isWearable, isConsole} from "react-device-detect"
-import LeftTop from "./LeftTop"
-import RightTop from "./RightTop"
-import LeftBottom from "./LeftBottom"
-import RightBottom from "./RightBottom"
-import uiStyles from "../../styles/AldenorUI/AldenorUI.module.css"
+import LeftTop from "./Corners/LeftTop"
+import RightTop from "./Corners/RightTop"
+import LeftBottom from "./Corners/LeftBottom"
+import RightBottom from "./Corners/RightBottom"
+import styles from "../../styles/AldenorUI/AldenorUI.module.css"
 
 const PATHS = {
   main: [
@@ -72,13 +72,13 @@ const Layout = ({ children, user }) => {
               <>
                 {character!== undefined && (
                   <>
-                  <div className={uiStyles.rightTop}><RightTop user={user} /></div>
-                  <div className={uiStyles.body}>{children}</div>
+                  <div className={styles.rightTop}><RightTop user={user} /></div>
+                  <div className={styles.body}>{children}</div>
                   { router.pathname === "/game" && (
                     <>
-                      <div className={uiStyles.leftTop}><LeftTop /></div>
-                      <div className={uiStyles.leftBottom}><LeftBottom /></div>
-                      <div className={uiStyles.rightBottom}><RightBottom /></div>
+                      <div className={styles.leftTop}><LeftTop /></div>
+                      <div className={styles.leftBottom}><LeftBottom /></div>
+                      <div className={styles.rightBottom}><RightBottom /></div>
                     </>
                   )}
                 </>
