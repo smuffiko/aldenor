@@ -73,7 +73,8 @@ const handlePostRequest = async (req, res) => {
   if(!name.match(/^[a-zA-Z0-9]+$/))
     return res.status(422).send("Name can contain only english alphabet characters and numbers.")
   // does name exists
-  if(await Character.findOne({ name }))
+  const regex = new RegExp(["^", name, "$"].join(""), "i")
+  if(await Character.findOne({ name: regex }))
     return res.status(422).send("This name already exists.")
 
   // create new character and save to db

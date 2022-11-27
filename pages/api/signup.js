@@ -35,7 +35,7 @@ const handlePostRequest = async(req, res) => {
   
   /* validate email */
   // does email exists
-  if(await User.findOne({ email }))
+  if(await User.findOne({ email: email.toLowerCase() }))
     message.push(`This email already exists.`)
   
   /* validate password */
