@@ -19,7 +19,7 @@ export default async function ApiSignin(req, res) {
 const handlePostRequest = async(req, res) => {  
   const { login, password } = req.body
 
-  const user = await User.findOne({ login }).select("+password")
+  const user = await User.findOne({ login: login.toLowerCase() }).select("+password")
   if (!user) {
     return res.status(404).send("This user does not exist.")
   }

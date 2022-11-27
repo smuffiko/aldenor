@@ -30,7 +30,7 @@ const handlePostRequest = async(req, res) => {
   if(!login.match(/^[a-zA-Z0-9]+$/))
     message.push(`Login can contain only english alphabet characters and numbers.`)
   // does login exists
-  if(await User.findOne({ login }))
+  if(await User.findOne({ login: login.toLowerCase() }))
     message.push(`This login already exists.`)
   
   /* validate email */
