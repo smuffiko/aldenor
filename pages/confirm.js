@@ -10,6 +10,7 @@ const Confirm = ({ confirmToken }) => {
         setTimeout(()=>redirectUser(null,"/"),0)
       else setTimeout(()=>handleLogin(confirmToken),5000)
     }
+    console.log(confirmToken)
   },[])
 
   return (

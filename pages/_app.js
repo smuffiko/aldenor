@@ -58,11 +58,12 @@ MyApp.getInitialProps = async({ ctx })=> {
     }).then(async user => {
       pageProps.user = user
 
-      // logged user but at pages confirm, signup or signin
+      // logged user but at pages confirm, signup, signin or lostPw
       if(
         ctx.pathname==="/confirm"
         || ctx.pathname==="/signup"
         || ctx.pathname==="/signin"
+        || ctx.pathname==="/lostPw"
       ) redirectUser(ctx,"/401")
 
       // unUser or banned cant go shop

@@ -103,7 +103,7 @@ const SignIn = () => {
     
       <Message attached="bottom" color="grey">
         <Icon name="help" />
-        Are you new? Sign up <Link href="/signup">here</Link> instead.
+        Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link>
       </Message>
     </>
   )
