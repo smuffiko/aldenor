@@ -35,7 +35,7 @@ export default function Home() {
     "/img/UI/FillBars/EnergyBar/FB_EP_M1.png",
     "/img/UI/FillBars/EnergyBar/FB_EP_E1.png",
     "/img/UI/FillBars/EnergyBar/FB_EP_E2.png",
-    "/img/UI/FillBars/EnergyBar/FB_EP_E3.png",
+    "/img/UI/FillBars/EnergyBar/FB_EP_E3.png"
   ]
   const hpBarImages = [
     "/img/UI/FillBars/HpBar/FB_HP_S1.png",
@@ -44,7 +44,7 @@ export default function Home() {
     "/img/UI/FillBars/HpBar/FB_HP_M1.png",
     "/img/UI/FillBars/HpBar/FB_HP_E1.png",
     "/img/UI/FillBars/HpBar/FB_HP_E2.png",
-    "/img/UI/FillBars/HpBar/FB_HP_E3.png",
+    "/img/UI/FillBars/HpBar/FB_HP_E3.png"
   ]
   const expBarImages = [
     "/img/UI/FillBars/ExpBar/FB_EXP_S1.png",
@@ -53,18 +53,7 @@ export default function Home() {
     "/img/UI/FillBars/ExpBar/FB_EXP_M1.png",
     "/img/UI/FillBars/ExpBar/FB_EXP_E1.png",
     "/img/UI/FillBars/ExpBar/FB_EXP_E2.png",
-    "/img/UI/FillBars/ExpBar/FB_EXP_E3.png",
-  ]
-  const bgBarImages = [
-    "/img/UI/FillBars/Background/FB_B_S1.png",
-    "/img/UI/FillBars/Background/FB_B_S2.png",
-    "/img/UI/FillBars/Background/FB_B_S3.png",
-    "/img/UI/FillBars/Background/FB_B_S4.png",
-    "/img/UI/FillBars/Background/FB_B_M1.png",
-    "/img/UI/FillBars/Background/FB_B_E1.png",
-    "/img/UI/FillBars/Background/FB_B_E2.png",
-    "/img/UI/FillBars/Background/FB_B_E3.png",
-    "/img/UI/FillBars/Background/FB_B_E4.png",
+    "/img/UI/FillBars/ExpBar/FB_EXP_E3.png"
   ]
 
   const [bar, setBar] = React.useState(20)

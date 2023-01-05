@@ -97,6 +97,11 @@ const CharacterSchema = new mongoose.Schema(
       required: true,
       default: 0
     },
+    maxExp: {
+      type: Number,
+      required: true,
+      default: 5
+    },
     paragonLvl: {
       type: Number,
       required: false

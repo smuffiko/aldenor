@@ -139,9 +139,12 @@
 }
 .char {
   display: block;
-  width: 120px;
-  height: 60px;
+  width: 60px;
+  height: 80px;
   background-image: url("/img/UI/Panel/Panel_4.png");
+}
+.char img {
+  top: 8px;
 }
 .inv {
   display: block;
@@ -151,30 +154,18 @@
 .bars {
   position: absolute;
   top: 0;
-  left: 120px;
+  left: 60px;
   display: block;
   width: 120px;
   height: 60px;
   background-image: url("/img/UI/Panel/Panel_4.png");
   font-size: 10px;
-  text-align: center;
   line-height: 10px;
   font-family: 'Courier New', Courier, monospace;
 }
-.hp {
-  height: 10px;
+.fillBar {
+  height: 15px;
   margin: 5px 10px;
-  background-color: rgb(255, 74, 74);
-}
-.energy {
-  height: 10px;
-  margin: 10px;
-  background-color: rgb(83, 255, 83);
-}
-.exp {
-  height: 10px;
-  margin: 5px 10px;
-  background-color: rgb(47, 61, 255);
 }
 
 /*
