@@ -1,4 +1,5 @@
 import React from "react"
+import styles from "../styles/AldenorUI/FillBars.module.css"
 
 export default function Home() {
   const imagesPath1 = [
@@ -66,7 +67,7 @@ export default function Home() {
     "/img/UI/FillBars/Background/FB_B_E4.png",
   ]
 
-  const [bar, setBar] = React.useState(0)
+  const [bar, setBar] = React.useState(20)
 
   React.useEffect(() => {
     const handleAnimation = () => {
@@ -78,7 +79,7 @@ export default function Home() {
     const barAnimation = () => {
       setBar(prev=>prev+1 > 100 ? 0 : prev+1)
     }
-    const barInterval = setInterval(barAnimation, 200)
+    const barInterval = setInterval(barAnimation, 100)
     return () => { clearInterval(interval); clearInterval(barInterval) }
   }, [])
  
@@ -98,16 +99,14 @@ export default function Home() {
         {bar === 0 ? "DEAD" : (
           <>
             {bar} % HP
-            <div>
-              <img src={bgBarImages[0]} />
-              <img src={hpBarImages[0]} style={{backgroundImage:`url(${bgBarImages[1]})`}}/>
-              {bar > 1 && <img src={hpBarImages[1]} style={{backgroundImage:`url(${bgBarImages[2]})`}}/>}
-              {bar > 2 && <img src={hpBarImages[2]} style={{backgroundImage:`url(${bgBarImages[3]})`}}/>}
-              {bar > 6 && [...Array(bar-6)].map((e, i) => <img key={i} src={hpBarImages[3]} style={{backgroundImage:`url(${bgBarImages[4]})`}}/>)}
-              {bar > 3 && <img src={hpBarImages[4]} style={{backgroundImage:`url(${bgBarImages[5]})`}}/>}
-              {bar > 4 && <img src={hpBarImages[5]} style={{backgroundImage:`url(${bgBarImages[6]})`}}/>}
-              {bar > 5 && <img src={hpBarImages[6]} style={{backgroundImage:`url(${bgBarImages[7]})`}}/>}
-              <img src={bgBarImages[8]} />
+            <div className={styles.fillBarBg} style={{position:"relative"}}>
+              <img src={hpBarImages[0]} />
+              {bar > 1 && <img src={hpBarImages[1]} />}
+              {bar > 2 && <img src={hpBarImages[2]} />}
+              {bar > 6 && [...Array(bar-6)].map((e, i) => <img key={i} src={hpBarImages[3]} />)}
+              {bar > 3 && <img src={hpBarImages[4]} />}
+              {bar > 4 && <img src={hpBarImages[5]} />}
+              {bar > 5 && <img src={hpBarImages[6]} />}
             </div>
           </>
         )
@@ -119,16 +118,14 @@ export default function Home() {
         {bar === 0 ? "WITHOUT ENERGY" : (
           <>
             {bar} % Energy
-            <div>
-              <img src={bgBarImages[0]} />
-              <img src={energyBarImages[0]} style={{backgroundImage:`url(${bgBarImages[1]})`}}/>
-              {bar > 1 && <img src={energyBarImages[1]} style={{backgroundImage:`url(${bgBarImages[2]})`}}/>}
-              {bar > 2 && <img src={energyBarImages[2]} style={{backgroundImage:`url(${bgBarImages[3]})`}}/>}
-              {bar > 6 && [...Array(bar-6)].map((e, i) => <img key={i} src={energyBarImages[3]} style={{backgroundImage:`url(${bgBarImages[4]})`}}/>)}
-              {bar > 3 && <img src={energyBarImages[4]} style={{backgroundImage:`url(${bgBarImages[5]})`}}/>}
-              {bar > 4 && <img src={energyBarImages[5]} style={{backgroundImage:`url(${bgBarImages[6]})`}}/>}
-              {bar > 5 && <img src={energyBarImages[6]} style={{backgroundImage:`url(${bgBarImages[7]})`}}/>}
-              <img src={bgBarImages[8]} />
+            <div className={styles.fillBarBg} style={{position:"relative"}}>
+              <img src={energyBarImages[0]} />
+              {bar > 1 && <img src={energyBarImages[1]} />}
+              {bar > 2 && <img src={energyBarImages[2]} />}
+              {bar > 6 && [...Array(bar-6)].map((e, i) => <img key={i} src={energyBarImages[3]} />)}
+              {bar > 3 && <img src={energyBarImages[4]} />}
+              {bar > 4 && <img src={energyBarImages[5]} />}
+              {bar > 5 && <img src={energyBarImages[6]} />}
             </div>
           </>
         )
@@ -140,16 +137,14 @@ export default function Home() {
         {bar === 0 ? "NO EXP" : (
           <>
             {bar} % Exp
-            <div>
-              <img src={bgBarImages[0]} />
-              <img src={expBarImages[0]} style={{backgroundImage:`url(${bgBarImages[1]})`}}/>
-              {bar > 1 && <img src={expBarImages[1]} style={{backgroundImage:`url(${bgBarImages[2]})`}}/>}
-              {bar > 2 && <img src={expBarImages[2]} style={{backgroundImage:`url(${bgBarImages[3]})`}}/>}
-              {bar > 6 && [...Array(bar-6)].map((e, i) => <img key={i} src={expBarImages[3]} style={{backgroundImage:`url(${bgBarImages[4]})`}}/>)}
-              {bar > 3 && <img src={expBarImages[4]} style={{backgroundImage:`url(${bgBarImages[5]})`}}/>}
-              {bar > 4 && <img src={expBarImages[5]} style={{backgroundImage:`url(${bgBarImages[6]})`}}/>}
-              {bar > 5 && <img src={expBarImages[6]} style={{backgroundImage:`url(${bgBarImages[7]})`}}/>}
-              <img src={bgBarImages[8]} />
+            <div className={styles.fillBarBg} style={{position:"relative"}}>
+              <img src={expBarImages[0]} />
+              {bar > 1 && <img src={expBarImages[1]} />}
+              {bar > 2 && <img src={expBarImages[2]} />}
+              {bar > 6 && [...Array(bar-6)].map((e, i) => <img key={i} src={expBarImages[3]} />)}
+              {bar > 3 && <img src={expBarImages[4]} />}
+              {bar > 4 && <img src={expBarImages[5]} />}
+              {bar > 5 && <img src={expBarImages[6]} />}
             </div>
           </>
         )

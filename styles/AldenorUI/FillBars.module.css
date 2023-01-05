@@ -1,0 +1,7 @@
+.fillBarBg {
+  line-height: 10px;
+  width: 100px;
+  height: 10px;
+  padding: 0 1px;
+  background-image: url("/img/UI/FillBars/Background/FB_B.png");
+}
