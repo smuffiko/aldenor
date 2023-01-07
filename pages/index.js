@@ -139,6 +139,13 @@ export default function Home() {
         )
         }
       </div>
+      <br />
+      <div style={{backgroundImage: "url('/img/UI/Panel/Panel_1.png", width:"60px", height:"60px", textAlign:"center"}}>
+        <br />
+        <img src="/img/UI/Coins/Coin_B.png" />
+        <img src="/img/UI/Coins/Coin_S.png" />
+        <img src="/img/UI/Coins/Coin_G.png" />
+      </div>
     </>
   )
 }
