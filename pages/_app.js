@@ -75,7 +75,7 @@ MyApp.getInitialProps = async({ ctx })=> {
           user.role === "unUser"
           || user.role === "ban"
         )
-      )
+      ) redirectUser(ctx,"/401")
 
       // only admin can go to adminTools
       if(

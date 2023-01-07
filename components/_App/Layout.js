@@ -68,6 +68,12 @@ const Layout = ({ children, user }) => {
       <div id="container">
         {desktop && (
           <>
+          {user ? user.role==="unUser" && (
+            <>
+              {console.log(user)}
+              <div className={styles.unUserBanner}><span>Please confirm your email!</span></div>
+            </>
+          ) : ""}
             { PATHS.game.find(path=> path === router.pathname) ? (
               <>
                 {character!== undefined && (
