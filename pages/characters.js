@@ -52,7 +52,7 @@ const Game = () => {
 
   return (
     <>
-      {(slot>0 && slot<=5) ? (
+      {(slot>0) ? (
         <CreateCharacter slot={slot} setSlot={setSlot} setChar={setCharacter} />
         ):(
         <Characters setSlot={setSlot} setChar={setCharacter} />  

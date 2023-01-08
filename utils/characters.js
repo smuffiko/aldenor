@@ -32,3 +32,5 @@ export const SKIN = [
     "Town"
   ]
 ]
+
+// can i use it somewhere? todo

@@ -1,12 +1,17 @@
 import mongoose from "mongoose"
 
-const { String, Number, ObjectId } = mongoose.Schema.Types
+const { String, Number, ObjectId, Boolean } = mongoose.Schema.Types
 
 const CharacterSchema = new mongoose.Schema(
   {
     owner: {
       type: ObjectId,
       ref: "User"
+    },
+    active: {
+      type: Boolean,
+      required: true,
+      default: true
     },
     role: {
       type: String,

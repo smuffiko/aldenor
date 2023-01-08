@@ -4,7 +4,6 @@ import Router from "next/router"
 import cookie from "js-cookie"
 import { Card, Icon, Header, List, Image } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
-import { RACES, GENDER, SKIN } from "../../utils/characters"
 
 const Characters = ({ setSlot, setChar }) => {
   const [characters, setCharacters] = React.useState([])
@@ -38,7 +37,7 @@ const Characters = ({ setSlot, setChar }) => {
   const mapCharacters = () => {
     return (
     <div>
-        <Card.Group itemsPerRow="5" stackable>
+        <Card.Group itemsPerRow={characters.length > 5 ? characters.length : "5"} stackable>
           {characters.map((c, i) => {
             i++
             return (

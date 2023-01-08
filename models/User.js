@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
       default: "unUser",
-      enum: ["ban", "unUser"]
+      enum: ["ban", "unUser", "user"]
     },
     characters: [
       {
