@@ -94,7 +94,6 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
     }).then(async data => {
       setChecked(prevState=> ({ ...prevState, [direction]: value })) // change checkbox value
       if(field._id === preview._id) {
-        console.log("wtf")
         const revDirection = direction === "top" ? "bottom"
           : direction === "bottom" ? "top"
           : direction === "left" ? "right"

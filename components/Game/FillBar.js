@@ -1,4 +1,4 @@
-import styles from "../../../styles/AldenorUI/FillBars.module.css"
+import styles from "../../styles/AldenorUI/FillBars.module.css"
 
 const FillBar = ({ img, current, max }) => {
   const percent = Math.round(100*current/max)

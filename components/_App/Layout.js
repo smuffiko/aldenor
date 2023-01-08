@@ -39,17 +39,19 @@ const PATHS = {
   ]
 }
 
-const Layout = ({ children, user }) => {
+const Layout = ({ children, user, character }) => {
   const [desktop, setDesktop] = React.useState()
   const [unsupported, setUnsupported] = React.useState()
   const router = useRouter()
-  const character = cookies.get("charId")
+//  const character = cookies.get("charId")
 
+  /* this should works after update _app.js
   React.useEffect(()=>{
     if( PATHS.game.find(path=> path === router.pathname)  // if there is no token and user come to /game or other route -> redirect to "/characters" page for choose character
       && character === undefined)
       Router.push("/characters")
   },[])
+  */
 
   React.useEffect(()=>{
     setDesktop(isDesktop)
@@ -70,7 +72,6 @@ const Layout = ({ children, user }) => {
           <>
           {user ? user.role==="unUser" && (
             <>
-              {console.log(user)}
               <div className={styles.unUserBanner}><span>Please confirm your email!</span></div>
             </>
           ) : ""}
@@ -78,11 +79,11 @@ const Layout = ({ children, user }) => {
               <>
                 {character!== undefined && (
                   <>
-                  <div className={styles.rightTop}><RightTop user={user} /></div>
+                  <div className={styles.rightTop}><RightTop user={user} character={character}/></div>
                   <div className={styles.body}><div className={styles.children}>{children}</div></div>
                   { router.pathname === "/game" && (
                     <>
-                      <div className={styles.leftTop}><LeftTop user={user} /></div>
+                      <div className={styles.leftTop}><LeftTop user={user} character={character}/></div>
                       <div className={styles.leftBottom}><LeftBottom /></div>
                       <div className={styles.rightBottom}><RightBottom /></div>
                     </>

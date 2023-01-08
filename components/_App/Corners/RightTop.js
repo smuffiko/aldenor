@@ -23,7 +23,7 @@ const NULL_PANEL_BG = {
   characters: 1
 }
 
-const RightTop = ({ user }) => {
+const RightTop = ({ user, character }) => {
   const [open, setOpen] = React.useState({ devs: false, game: false, others: false})
   const [panelBg, setPanelBg] = React.useState(NULL_PANEL_BG)
   const [buttonBg, setButtonBg] = React.useState(NULL_PANEL_BG)
@@ -107,7 +107,7 @@ const RightTop = ({ user }) => {
             <AldenorButton button={buttonBg.shop}>Shop</AldenorButton>
           </div>
         </List.Item>
-        {(user.role === "admin" || user.role === "root") && (
+        {(character.role === "admin" || character.role === "root") && (
           <List.Item
             onMouseLeave={()=>close("devs")}
             className={`${styles[`panel${panelBg.tools}`]} ${styles.menuItem}`}
@@ -119,7 +119,7 @@ const RightTop = ({ user }) => {
                 <AldenorButton button={buttonBg.tools}>Tools</AldenorButton>
               </div>
             <List className={open.devs ? styles.visible : styles.hidden}>
-              {user.role === "admin" && (
+              {character.role === "admin" && (
                 <List.Item className={styles[`panel${panelBg.adminTools}`]}>
                   <div
                     className={styles.rightTopListItem}
@@ -129,7 +129,7 @@ const RightTop = ({ user }) => {
                   </div>
                 </List.Item>
               )}
-              {user.role === "root" && (
+              {character.role === "root" && (
                 <>
                   <List.Item className={styles[`panel${panelBg.gameManag}`]}>
                     <div

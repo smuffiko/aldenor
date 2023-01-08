@@ -2,7 +2,7 @@ import styles from "../../../styles/AldenorUI/AldenorUI.module.css"
 import React from "react"
 import cookies from "js-cookie"
 import { Icon, Image } from "semantic-ui-react"
-import FillBar from "./FillBar"
+import FillBar from "../../Game/FillBar"
 import baseUrl from "../../../utils/baseUrl"
 import { unsetCharToken } from "../../../utils/character"
 

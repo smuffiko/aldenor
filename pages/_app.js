@@ -5,7 +5,7 @@ import { parseCookies, destroyCookie } from "nookies"
 import { redirectUser } from "../utils/auth"
 import baseUrl from "../utils/baseUrl"
 
-function MyApp({ Component, pageProps, user }) {
+function MyApp({ Component, pageProps }) {
   return (
     <>
       <Layout {...pageProps}>
@@ -25,8 +25,7 @@ MyApp.getInitialProps = async({ ctx })=> {
   }
   
   const pageProps = {}
-  const { token } = parseCookies(ctx)
-
+  const { token, charId } = parseCookies(ctx)
   if(!token) {
     // not logged user - ban these paths
     if(
@@ -38,10 +37,11 @@ MyApp.getInitialProps = async({ ctx })=> {
       || ctx.pathname==="/settings"
       || ctx.pathname==="/shop"
       || ctx.pathname==="/staffManag"
+      || ctx.pathname==="/ticket"
     )
       redirectUser(ctx,"/401")
   } else {
-    // logged user
+    //logged user
     const url = `${baseUrl}/api/account`
     await fetch(url, {
       method: "GET",
@@ -57,47 +57,95 @@ MyApp.getInitialProps = async({ ctx })=> {
       return await response.json()
     }).then(async user => {
       pageProps.user = user
-
-      // logged user but at pages confirm, signup, signin or lostPw
-      if(
-        ctx.pathname==="/confirm"
-        || ctx.pathname==="/signup"
-        || ctx.pathname==="/signin"
-        || ctx.pathname==="/lostPw"
-      ) redirectUser(ctx,"/401")
-
-      // unUser or banned cant go shop
-      if(
-        (
-          ctx.pathname==="/shop"
-          || ctx.pathname==="/gameShop"
-        ) && (
-          user.role === "unUser"
-          || user.role === "ban"
-        )
-      ) redirectUser(ctx,"/401")
-
-      // only admin can go to adminTools
-      if(
-        ctx.pathname==="/adminTools"
-        && user.role!=="admin"
-      ) redirectUser(ctx,"/401")
-
-      // only root can go to gameManag and staffManag
-      if(
-        ( ctx.pathname==="/gameManag"
-        || ctx.pathname==="/staffManag")
-        && user.role!=="root"
-      ) redirectUser(ctx,"/401")
-
     }).catch(error => { 
       // 1) Throw out invalid token
       destroyCookie(ctx, 'token')
       // 2) Redirect to sign in
       redirectUser(ctx, "/signin")
     })
+
+    // logged user but at pages confirm, signup, signin or lostPw
+    if(
+      ctx.pathname==="/confirm"
+      || ctx.pathname==="/signup"
+      || ctx.pathname==="/signin"
+      || ctx.pathname==="/lostPw"
+    ) redirectUser(ctx,"/401")
+
+    if(!charId) {
+      // logged user but not logged via character
+      // ban pages where you need charId
+      if(
+        ctx.pathname==="/adminTools"
+        || ctx.pathname==="/game"
+        || ctx.pathname==="/gameManag"
+        || ctx.pathname==="/gameShop"
+        || ctx.pathname==="/staffManag"
+        || ctx.pathname==="/ticket"
+      ) redirectUser(ctx,"/401")
+    } else {
+      // logged user (in game) with character
+
+      // user token is set but he is not in game, then destroy cookie charId
+      if(!(
+        ctx.pathname==="/adminTools"
+        || ctx.pathname==="/game"
+        || ctx.pathname==="/gameManag"
+        || ctx.pathname==="/gameShop"
+        || ctx.pathname==="/staffManag"
+        || ctx.pathname==="/ticket")
+      ) destroyCookie(ctx, 'charId')
+      else {
+        const url = `${baseUrl}/api/character?charToken=${charId}`
+        await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        }).then(async response => {
+          if(!response.ok) {
+            const er = await response.text()
+            throw new Error(er)
+          }
+          return await response.json()
+        }).then(async data => {
+          pageProps.character = data.character
+
+          // unUser or banned cant go shop
+          if(
+            (
+              ctx.pathname==="/shop"
+              || ctx.pathname==="/gameShop"
+            ) && (
+              pageProps.user.role === "unUser"
+              || pageProps.user.role === "ban"
+            )
+          ) redirectUser(ctx,"/401")
+          
+          // only admin can go to adminTools
+          if(
+            ctx.pathname==="/adminTools"
+            && pageProps.character.role!=="admin"
+          ) redirectUser(ctx,"/401")
+
+          // only root can go to gameManag and staffManag
+          if(
+            ( ctx.pathname==="/gameManag"
+            || ctx.pathname==="/staffManag")
+            && pageProps.character.role!=="root"
+          ) redirectUser(ctx,"/401")
+
+        }).catch(error => { 
+          // 1) Throw out invalid token
+          destroyCookie(ctx, 'token')
+          // 2) Redirect to sign in
+          redirectUser(ctx, "/signin")
+        })
+      }
+    }
   }
-  return { pageProps, user: pageProps.user }
+  return { pageProps }
 }
 
 export default MyApp

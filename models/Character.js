@@ -8,6 +8,12 @@ const CharacterSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User"
     },
+    role: {
+      type: String,
+      required: true,
+      default: "user",
+      enum: ["ban", "user", "mod", "admin", "root"]
+    }, 
     name: {
       type: String,
       required: true,

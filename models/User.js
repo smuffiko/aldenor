@@ -21,9 +21,9 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: true,
+      required: false,
       default: "unUser",
-      enum: ["ban", "unUser", "user", "mod", "admin", "root"]
+      enum: ["ban", "unUser"]
     },
     characters: [
       {
