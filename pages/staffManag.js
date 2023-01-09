@@ -136,7 +136,6 @@ const StaffManag = ({ user, character }) => {
         <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
         <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
         <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role*
-        <Button icon circular color="green" size="mini"><Icon name="plus" /></Button>Add new char*
         <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot*
         <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot*
       </div>
@@ -233,7 +232,6 @@ const StaffManag = ({ user, character }) => {
                                 }
                               </>) : (
                               <>
-                                <Button icon circular color="green" size="mini"><Icon name="plus" /></Button>
                                 {c.available ? 
                                     <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button> : 
                                     <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>
@@ -247,7 +245,6 @@ const StaffManag = ({ user, character }) => {
                       {u.characters.length==5 && (
                         <>
                           Slot {u.characters.length+1} <Icon name="caret right" />
-                          <Button icon circular color="green" size="mini"><Icon name="plus" /></Button>
                           <Icon name="question" />
                         </>
                       )}
@@ -259,14 +256,12 @@ const StaffManag = ({ user, character }) => {
                               <>
                                 <Popup content={(
                                   <>
-                                  <>
                                     <Button icon circular onClick={()=>changeSlot(dc,0)} disabled={u.characters[0].character !== null}>1</Button>
                                     <Button icon circular onClick={()=>changeSlot(dc,1)} disabled={u.characters[1].character !== null}>2</Button>
                                     <Button icon circular onClick={()=>changeSlot(dc,2)} disabled={u.characters[2].character !== null}>3</Button>
                                     <Button icon circular onClick={()=>changeSlot(dc,3)} disabled={u.characters[3].character !== null}>4</Button>
                                     <Button icon circular onClick={()=>changeSlot(dc,4)} disabled={u.characters[4].character !== null}>5</Button>
                                     <Button icon circular onClick={()=>changeSlot(dc,5)} disabled={u.characters.length>5 ? u.characters[5].character !== null : false}>6</Button>
-                                  </>
                                   </>
                                 )}
                                   pinned

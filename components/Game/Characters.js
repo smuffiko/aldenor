@@ -92,7 +92,7 @@ const Characters = ({ setSlot, setChar }) => {
       }
       return response.json()
     }).then(data => {
-      setCharacters(data)
+      setCharacters(data.slice(5).concat(data.slice(0,5)))
     }).catch(error => {
       setError(error.message)
     })
