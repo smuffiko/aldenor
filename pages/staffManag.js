@@ -134,7 +134,7 @@ const StaffManag = ({ user, character }) => {
         <Icon name="chess bishop"/>mod
         <Icon name="chess board"/>dead
         <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
-        <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot*
+        <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
         <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role*
         <Button icon circular color="green" size="mini"><Icon name="plus" /></Button>Add new char*
         <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot*
@@ -200,7 +200,7 @@ const StaffManag = ({ user, character }) => {
                           {
                             c.character ? (
                               <>
-                                {c.character.role!=="s" ? ( // todo change to root
+                                {c.character.role!=="root" ? (
                                   <>
                                     <Button icon circular color="red" size="mini" onClick={()=>deleteCharacter(c,j)}><Icon name="trash alternate outline" /></Button>
                                     <Popup content={(
@@ -255,7 +255,7 @@ const StaffManag = ({ user, character }) => {
                         <div key={j}>
                           Dead 
                           <Icon name="caret right" />
-                            {dc.role!=="s" ? ( // todo change to root
+                            {dc.role!=="root" ? ( 
                               <>
                                 <Popup content={(
                                   <>
