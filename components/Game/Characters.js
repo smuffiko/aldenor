@@ -10,6 +10,7 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 const Characters = ({ setSlot, setChar }) => {
   const [characters, setCharacters] = React.useState([])
   const [error, setError] = React.useState("")
+  const staff = [ "admin","root","mod" ]
   const responsive = {
     0: { items: 1 },
     568: { items: 2 },
@@ -21,7 +22,7 @@ const Characters = ({ setSlot, setChar }) => {
     c.available ? (
       <div key={i} className={styles.card} >
         {c.character!== null ? (
-          <>
+          <div className={staff.includes(c.character.role) ? styles.staffCard : ""}>
             <div className={styles.charTop}>
               <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
             </div>
@@ -37,7 +38,7 @@ const Characters = ({ setSlot, setChar }) => {
               </List>
             </div>
             <div className={styles.charBottom}><Button onClick={()=>setChar(c.character)}>Play!</Button></div>  
-          </>
+          </div>
         ):(
           <>
             <div className={styles.charTop}><Header as="h3">Empty</Header></div>

@@ -106,7 +106,7 @@ a {
   top: 0;
   width: 49px !important;
   height: 100%;
-  text-align: left;
+  text-align: left !important;
 }
 .alice-carousel__prev-btn {
   left: 0;

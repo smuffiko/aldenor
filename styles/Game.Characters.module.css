@@ -1,6 +1,10 @@
 .card {
   height: 80vh;
 }
+.staffCard {
+  height: 80vh;
+  background-color: rgb(0, 247, 255);
+}
 .charTop {
   position: absolute;
   top: 10%;
