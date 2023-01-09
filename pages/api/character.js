@@ -113,6 +113,10 @@ const handleDeleteRequest = async (req, res) => {
     { _id: userId, "characters.character": charId },
     { $set: { "characters.$.character": null } }  
   )
+  const char = await Character.findOneAndUpdate(
+    { _id: charId },
+    { $set: { active: false } }
+  )
 
   return res.status(201).send("Character killed successfully.")
 }

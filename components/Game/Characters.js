@@ -42,7 +42,7 @@ const Characters = ({ setSlot, setChar }) => {
           <>
             <div className={styles.charTop}><Header as="h3">Empty</Header></div>
             <div className={styles.charMid}><Icon name="plus" size="huge" /></div>   
-            <div className={styles.charBottom}><Button onClick={()=>createNew(i)}>Create new character!</Button></div>   
+            <div className={styles.charBottom}><Button onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
           </>  
         )}      
       </div>

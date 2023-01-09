@@ -1,18 +1,21 @@
 import React from "react"
 import baseUrl from "../utils/baseUrl"
 import cookie from "js-cookie"
-import { Accordion, Icon, Input, Button } from "semantic-ui-react"
+import { Accordion, Icon, Input, Button, Segment, Popup } from "semantic-ui-react"
 
 const StaffManag = ({ user, character }) => {
   const [users, setUsers] = React.useState(null)
   const [newUsers, setNewUsers] = React.useState(users)
   const [activeIndex, setActiveIndex] = React.useState(-1)
-  const [loading, setLoading] = React.useState(true)
   const [text, setText] = React.useState("")
-  const charToken = cookie.get("charId")
 
-  React.useEffect(async()=>{
+  React.useEffect(()=>{
+    refreshData()
+  },[])
+
+  const refreshData = async()=> {
     const url = `${baseUrl}/api/accounts`
+    const charToken = cookie.get("charId")
     await fetch(url,{
       method: "GET",
       headers: {
@@ -30,10 +33,11 @@ const StaffManag = ({ user, character }) => {
         return ({ ...u, deadChars: data.deadChars.filter(dc=>dc.owner===u._id)})
       })
       setUsers(nu)
+      setNewUsers(nu)
     }).catch(error => {
       console.log(error.message) // todo 
     })
-  },[])
+  }
 
   React.useEffect(()=>{
     users && searchText(text)
@@ -60,6 +64,62 @@ const StaffManag = ({ user, character }) => {
     const { value } = event.target
     setText(value)
   }
+
+  const deleteCharacter = async (c, slot) => {
+    const owner = c.character.owner
+    const character = c.character._id
+    const charToken = cookie.get("charId")
+    const url = `${baseUrl}/api/characters?owner=${owner}&character=${character}&slot=${slot}`
+    await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": charToken
+      }
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.text()      
+    }).then(data => {
+      refreshData()
+    }).catch(error => {
+      console.log(error.message) // todo 
+    })
+  }
+
+  const changeSlot = async (c, newSlot, oldSlot = null) => {
+    const owner = c.character ? c.character.owner : c.owner
+    const character = c.character ? c.character._id : c._id
+    const payload = {
+      owner,
+      character,
+      newSlot,
+      oldSlot
+    }
+    const charToken = cookie.get("charId")
+    const url = `${baseUrl}/api/characters`
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": charToken
+      },
+      body: JSON.stringify(payload)
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.text()      
+    }).then(data => {
+      refreshData()
+    }).catch(error => {
+      console.log(error.message) // todo 
+    })
+  }
+
   return (
     <>
       <Input
@@ -74,11 +134,11 @@ const StaffManag = ({ user, character }) => {
         <Icon name="chess bishop"/>mod
         <Icon name="chess board"/>dead
         <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
-        <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
-        <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role
-        <Button icon circular color="green" size="mini"><Icon name="plus" /></Button>Add new char
-        <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot
-        <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot
+        <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot*
+        <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role*
+        <Button icon circular color="green" size="mini"><Icon name="plus" /></Button>Add new char*
+        <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot*
+        <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot*
       </div>
       {newUsers && (
         <>
@@ -99,8 +159,8 @@ const StaffManag = ({ user, character }) => {
                         <>
                           <Icon name="caret right" />
                           { 
-                            printChars.map(c=>
-                              <>
+                            printChars.map((c,k)=>
+                              <span key={k}>
                                 [
                                   {c.character.name}
                                   {
@@ -110,15 +170,15 @@ const StaffManag = ({ user, character }) => {
                                     : ""
                                   }
                                 ]
-                              </>
+                              </span>
                             )
                           }
                         </>
                       )}
                       {printDead.length > 0 && (
                         <>
-                          {printDead.map(c=>
-                            <>
+                          {printDead.map((c,k)=>
+                            <span key={k}>
                               [
                                 <Icon name="chess board" />
                                 {c.name}
@@ -128,7 +188,7 @@ const StaffManag = ({ user, character }) => {
                                   : ""
                                 }
                               ]
-                            </>
+                            </span>
                           )}
                         </>
                       )}
@@ -142,8 +202,21 @@ const StaffManag = ({ user, character }) => {
                               <>
                                 {c.character.role!=="s" ? ( // todo change to root
                                   <>
-                                    <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>
-                                    <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>
+                                    <Button icon circular color="red" size="mini" onClick={()=>deleteCharacter(c,j)}><Icon name="trash alternate outline" /></Button>
+                                    <Popup content={(
+                                        <>
+                                          <Button icon circular onClick={()=>changeSlot(c,0,j)} disabled={u.characters[0].character !== null}>1</Button>
+                                          <Button icon circular onClick={()=>changeSlot(c,1,j)} disabled={u.characters[1].character !== null}>2</Button>
+                                          <Button icon circular onClick={()=>changeSlot(c,2,j)} disabled={u.characters[2].character !== null}>3</Button>
+                                          <Button icon circular onClick={()=>changeSlot(c,3,j)} disabled={u.characters[3].character !== null}>4</Button>
+                                          <Button icon circular onClick={()=>changeSlot(c,4,j)} disabled={u.characters[4].character !== null}>5</Button>
+                                          <Button icon circular onClick={()=>changeSlot(c,5,j)} disabled={u.characters.length>5? u.characters[5].character !== null : false}>6</Button>
+                                        </>
+                                      )}
+                                      pinned
+                                      on="click"
+                                      trigger={<Button icon circular color="orange" size="mini" ><Icon name="retweet" /></Button>}
+                                    />
                                     <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>
                                   </>
                                 ) : (
@@ -184,7 +257,22 @@ const StaffManag = ({ user, character }) => {
                           <Icon name="caret right" />
                             {dc.role!=="s" ? ( // todo change to root
                               <>
-                                <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>
+                                <Popup content={(
+                                  <>
+                                  <>
+                                    <Button icon circular onClick={()=>changeSlot(dc,0)} disabled={u.characters[0].character !== null}>1</Button>
+                                    <Button icon circular onClick={()=>changeSlot(dc,1)} disabled={u.characters[1].character !== null}>2</Button>
+                                    <Button icon circular onClick={()=>changeSlot(dc,2)} disabled={u.characters[2].character !== null}>3</Button>
+                                    <Button icon circular onClick={()=>changeSlot(dc,3)} disabled={u.characters[3].character !== null}>4</Button>
+                                    <Button icon circular onClick={()=>changeSlot(dc,4)} disabled={u.characters[4].character !== null}>5</Button>
+                                    <Button icon circular onClick={()=>changeSlot(dc,5)} disabled={u.characters.length>5 ? u.characters[5].character !== null : false}>6</Button>
+                                  </>
+                                  </>
+                                )}
+                                  pinned
+                                  on="click"
+                                  trigger={<Button icon circular color="orange" size="mini" ><Icon name="retweet" /></Button>}
+                                />
                                 <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>
                               </>
                             ) : (
