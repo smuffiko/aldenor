@@ -70,3 +70,52 @@ a {
 .mapRow {
   clear:both;
 }
+/*
+ * Hint 
+ */
+.hint .icon {
+  margin: 0 5px;
+}
+.icon.chess.king, .icon.chess.knight, .icon.chess.bishop, .icon.chess.board {
+  margin: 0 5px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.icon.chess.king {
+  color: rgb(217, 255, 0);
+}
+.icon.chess.knight {
+  color: rgb(255, 166, 0);
+}
+.icon.chess.bishop {
+  color: rgb(0, 255, 179);
+}
+.icon.chess.board {
+  color: white
+}
+
+/*
+ * Alice carousel 
+ */
+ 
+.alice-carousel {
+  background-color: #b8f850;
+}
+.alice-carousel__next-btn, .alice-carousel__prev-btn {
+  background-color: rgb(255, 187, 0);
+  position: absolute !important;
+  top: 0;
+  width: 49px !important;
+  height: 100%;
+  text-align: left;
+}
+.alice-carousel__prev-btn {
+  left: 0;
+}
+.alice-carousel__next-btn {
+  right: 0;
+}
+.alice-carousel__next-btn i, .alice-carousel__prev-btn i  {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

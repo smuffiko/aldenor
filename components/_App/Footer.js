@@ -21,7 +21,7 @@ const Footer = () => {
           </Link>
         </List.Item>
         <List.Item>
-          <Icon name="git"/>
+          <Icon name="github"/>
           <Link href="https://github.com/smuffiko">smuffiko</Link>
         </List.Item>
       </List>

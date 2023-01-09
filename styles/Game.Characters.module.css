@@ -1,10 +1,5 @@
 .card {
-  height: 70vh;
-}
-.card:hover {
-  color: rgb(0, 105, 65);
-  cursor: pointer;
-  box-shadow: 0 0 10px black !important;
+  height: 80vh;
 }
 .charTop {
   position: absolute;
