@@ -63,12 +63,12 @@
   height: calc(64px + 2rem);
 }
 .charMid {
-  left: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   width: calc(100% - 60px);
-  vertical-align: middle;
-  line-height: 32px;
-  font-size: 16px;
   margin: 0 auto;
   padding: 20px;
   background: url("/img/UI/CharTextPanel/charTextPanel_1.png") left top no-repeat,
@@ -79,9 +79,13 @@
   border: 1px solid #000;
   box-shadow: 2px 2px 0 #B8A169 inset, -2px -2px 0 #B8A169 inset;
 }
+.charMid div {
+  line-height: 32px;
+  font-size: 16px;
+}
 .charBottom {
   position: absolute;
-  bottom: 3rem;
+  bottom: 1rem;
   text-align: center;
   width: 100%;
 }
