@@ -17,10 +17,12 @@ const Characters = ({ setSlot, setChar }) => {
     1024: { items: 3 },
   }
 
+  const handleDragStart = (e) => e.preventDefault()
+
   const items = characters.map((c, i) =>
   (
     c.available ? (
-      <div key={i} className={styles.charPanel} >
+      <div key={i} className={styles.charPanel} onDragStart={handleDragStart} >
         <div>
         {c.character!== null ? (
           <div className={staff.includes(c.character.role) ? styles.staffPanel : ""}>
@@ -38,23 +40,23 @@ const Characters = ({ setSlot, setChar }) => {
                 <List.Item className={styles.charText}>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
               </List>
             </div>
-            <div className={styles.charBottom}><Button onClick={()=>setChar(c.character)}>Play!</Button></div>  
+            <div className={styles.charBottom}><Button className={styles.button} onClick={()=>setChar(c.character)}>Play!</Button></div>  
           </div>
         ):(
           <>
             <div className={styles.charTop}><Header as="h3">Empty</Header></div>
             <div className={styles.charMid}><Icon name="plus" size="huge" /></div>   
-            <div className={styles.charBottom}><Button onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
+            <div className={styles.charBottom}><Button className={styles.button} onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
           </>  
         )}      
         </div> 
       </div>
     ) : (
-      <div key={Math.random()} className={styles.charPanel}>
+      <div key={Math.random()} className={styles.charPanel} onDragStart={handleDragStart}>
         <div>
           <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
           <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
-          <div className={styles.charBottom}><Button onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
+          <div className={styles.charBottom}><Button className={styles.button}  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
         </div>  
       </div>
     )
@@ -79,6 +81,7 @@ const Characters = ({ setSlot, setChar }) => {
       renderNextButton={renderNextButton}
       paddingLeft={50}
       paddingRight={50}
+      swipeDelta={20}
       swipeExtraPadding={0}
     />
   )

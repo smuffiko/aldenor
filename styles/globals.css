@@ -3,7 +3,7 @@
  *  Color settings 
  */
 :root {
-  --footerBg: #b8f850;
+  --footerBg: #655030;
   --progressBar: #b8f850;
 }
 
@@ -20,6 +20,7 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+  background-image: url("/img/UI/background.png");
 }
 a {
   color: inherit;
@@ -41,6 +42,11 @@ a {
   width: 100%;
   padding: 1rem;
   background: var(--footerBg);
+  box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
+}
+.menu {
+  background-color: #100C07 !important;
+  box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000 !important;
 }
 
 .table_0 {
