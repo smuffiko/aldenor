@@ -1,30 +1,68 @@
 .container {
   margin: 50px 0;
-  background-color: #000;
   box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
+}
+.panelCorner1, .panelCorner7, .panelCorner3, .panelCorner9 {
+  position: absolute;
+  z-index: 10;
+}
+.panelCorner1 {
+  top: 0;
+  left: 0;
+}
+.panelCorner7 {
+  bottom: 0;
+  left: 0;
+}
+.panelCorner3 {
+  top: 0;
+  right: 0;
+}
+.panelCorner9 {
+  bottom: 0;
+  right: 0;
 }
 
 .charPanel {
   height: calc(100vh - 100px - 100px); /* todo -> height - menu height - footer height */
-  background: url("/img/UI/CharPanel/charPanel_1.png") left top no-repeat,
-  url("/img/UI/CharPanel/charPanel_3.png") right top no-repeat,
-  url("/img/UI/CharPanel/charPanel_7.png") left bottom no-repeat,
-  url("/img/UI/CharPanel/charPanel_9.png") right bottom no-repeat,
-  url("/img/UI/CharPanel/charPanel_2.png") center top repeat-x,
-  url("/img/UI/CharPanel/charPanel_4.png") left center repeat-y,
-  url("/img/UI/CharPanel/charPanel_6.png") right center repeat-y,
-  url("/img/UI/CharPanel/charPanel_8.png") center bottom repeat-x,
-  url("/img/UI/CharPanel/charPanel_5.png") center center repeat;
+  background-color: #BCA770;
+  border: 2px solid #B8A169;
+}
+.charPanel > div::before {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #3C382D;
+  content: "";
+  display: block;
+}
+.charPanel > div {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  height: calc(100% - 16px);
+  width: calc(100% - 16px);
+  background-color: #C7B582;
+  box-shadow: -10px -10px 0 #3C382D inset, 10px -10px 0 #3C382D inset, -10px 10px 0 #3C382D inset, 10px 10px 0 #3C382D inset;
+}
+.charPanel > div > div {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - 24px + 20px);
+  width: calc(100% - 24px + 20px);
+  background-color: #CDBC8C;
+  border: 2px solid #C7B582;
 }
 .charTop {
-  position: absolute;
-  top: 10%;
+  padding: 1rem;
   text-align: center;
   width: 100%;
+  height: calc(64px + 2rem);
 }
 .charMid {
-  position: absolute;
-  top: 35%;
   left: 30px;
   text-align: center;
   width: calc(100% - 60px);
@@ -36,16 +74,14 @@
   background: url("/img/UI/CharTextPanel/charTextPanel_1.png") left top no-repeat,
   url("/img/UI/CharTextPanel/charTextPanel_3.png") right top no-repeat,
   url("/img/UI/CharTextPanel/charTextPanel_7.png") left bottom no-repeat,
-  url("/img/UI/CharTextPanel/charTextPanel_9.png") right bottom no-repeat,
-  url("/img/UI/CharTextPanel/charTextPanel_2.png") center top repeat-x,
-  url("/img/UI/CharTextPanel/charTextPanel_4.png") left center repeat-y,
-  url("/img/UI/CharTextPanel/charTextPanel_6.png") right center repeat-y,
-  url("/img/UI/CharTextPanel/charTextPanel_8.png") center bottom repeat-x,
-  url("/img/UI/CharTextPanel/charTextPanel_5.png") center center repeat;
+  url("/img/UI/CharTextPanel/charTextPanel_9.png") right bottom no-repeat;
+  background-color: #C7B582;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0 #B8A169 inset, -2px -2px 0 #B8A169 inset;
 }
 .charBottom {
   position: absolute;
-  bottom: 10%;
+  bottom: 3rem;
   text-align: center;
   width: 100%;
 }

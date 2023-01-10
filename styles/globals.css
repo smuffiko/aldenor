@@ -107,38 +107,25 @@ a {
 
 /*
  * Alice carousel 
- */ 
+ */
+.alice-carousel {
+}
 .alice-carousel__next-btn, .alice-carousel__prev-btn {
-  background-color: rgb(255, 187, 0);
   position: absolute !important;
   top: 0;
-  width: 50px !important;
+  width: 48px !important;
   height: 100%;
   text-align: left !important;
+  box-shadow: 5px 0px 2px -3px rgba(0,0,0,1) inset,
+  -1px 0px 1px 0px rgba(0,0,0,1) inset,
+  0px 0px 1px 1px rgba(0,0,0,1) inset;
+  background-color: #655030;
 }
 .alice-carousel__prev-btn {
   left: 0;
-  background: url("/img/UI/CharNavPanel/CharNavPanel_1.png") left top no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_3.png") right top no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_7.png") left bottom no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_9.png") right bottom no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_2.png") center top repeat-x,
-  url("/img/UI/CharNavPanel/CharNavPanel_4.png") left center repeat-y,
-  url("/img/UI/CharNavPanel/CharNavPanel_6.png") right center repeat-y,
-  url("/img/UI/CharNavPanel/CharNavPanel_8.png") center bottom repeat-x,
-  url("/img/UI/CharNavPanel/CharNavPanel_5.png") center center repeat;
 }
 .alice-carousel__next-btn {
   right: 0;
-  background: url("/img/UI/CharNavPanel/CharNavPanel_1.png") left top no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_3.png") right top no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_7.png") left bottom no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_9.png") right bottom no-repeat,
-  url("/img/UI/CharNavPanel/CharNavPanel_2.png") center top repeat-x,
-  url("/img/UI/CharNavPanel/CharNavPanel_4.png") left center repeat-y,
-  url("/img/UI/CharNavPanel/CharNavPanel_6.png") right center repeat-y,
-  url("/img/UI/CharNavPanel/CharNavPanel_8.png") center bottom repeat-x,
-  url("/img/UI/CharNavPanel/CharNavPanel_5.png") center center repeat;
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);

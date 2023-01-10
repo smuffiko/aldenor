@@ -13,53 +13,61 @@ const Characters = ({ setSlot, setChar }) => {
   const staff = [ "admin","root","mod" ]
   const responsive = {
     0: { items: 1 },
-    568: { items: 2 },
-    1024: { items: 3 },
+    700: { items: 2 },
+    964: { items: 3 },
   }
 
   const handleDragStart = (e) => e.preventDefault()
 
   const items = characters.map((c, i) =>
   (
-    c.available ? (
-      <div key={i} className={styles.charPanel} onDragStart={handleDragStart} >
-        <div>
-        {c.character!== null ? (
-          <div className={staff.includes(c.character.role) ? styles.staffPanel : ""}>
-            <div className={styles.charTop}>
-              <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
-            </div>
-            <div className={styles.charMid}>
-              <List>
-                <List.Item className={styles.charText}>Name: {c.character.name}</List.Item>
-                <List.Item className={styles.charText}>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
-                <List.Item className={styles.charText}>Race: {c.character.race}</List.Item>
-                <List.Item className={styles.charText}>Class: {c.character.class}</List.Item>
-                <List.Item className={styles.charText}>Lvl: {c.character.lvl}</List.Item>
-                <List.Item className={styles.charText}>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
-                <List.Item className={styles.charText}>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
-              </List>
-            </div>
-            <div className={styles.charBottom}><Button className={styles.button} onClick={()=>setChar(c.character)}>Play!</Button></div>  
+    <>
+      <img src="/img/UI/CharPanel/charPanel_1.png" className={styles.panelCorner1} />
+      <img src="/img/UI/CharPanel/charPanel_7.png" className={styles.panelCorner7} />
+      <img src="/img/UI/CharPanel/charPanel_3.png" className={styles.panelCorner3} />
+      <img src="/img/UI/CharPanel/charPanel_9.png" className={styles.panelCorner9} />
+      {
+        c.available ? (
+          <div key={i} className={styles.charPanel} onDragStart={handleDragStart} >
+            <div><div>
+            {c.character!== null ? (
+              <div className={staff.includes(c.character.role) ? styles.staffPanel : ""}>
+                <div className={styles.charTop}>
+                  <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
+                </div>
+                <div className={styles.charMid}>
+                  <List>
+                    <List.Item className={styles.charText}>Name: {c.character.name}</List.Item>
+                    <List.Item className={styles.charText}>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
+                    <List.Item className={styles.charText}>Race: {c.character.race}</List.Item>
+                    <List.Item className={styles.charText}>Class: {c.character.class}</List.Item>
+                    <List.Item className={styles.charText}>Lvl: {c.character.lvl}</List.Item>
+                    <List.Item className={styles.charText}>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
+                    <List.Item className={styles.charText}>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
+                  </List>
+                </div>
+                <div className={styles.charBottom}><Button className={styles.button} onClick={()=>setChar(c.character)}>Play!</Button></div>  
+              </div>
+            ):(
+              <>
+                <div className={styles.charTop}><Header as="h3">Empty</Header></div>
+                <div className={styles.charMid}><Icon name="plus" size="huge" /></div>   
+                <div className={styles.charBottom}><Button className={styles.button} onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
+              </>  
+            )}      
+            </div></div> 
           </div>
-        ):(
-          <>
-            <div className={styles.charTop}><Header as="h3">Empty</Header></div>
-            <div className={styles.charMid}><Icon name="plus" size="huge" /></div>   
-            <div className={styles.charBottom}><Button className={styles.button} onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
-          </>  
-        )}      
-        </div> 
-      </div>
-    ) : (
-      <div key={Math.random()} className={styles.charPanel} onDragStart={handleDragStart}>
-        <div>
-          <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
-          <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
-          <div className={styles.charBottom}><Button className={styles.button}  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
-        </div>  
-      </div>
-    )
+        ) : (
+          <div key={Math.random()} className={styles.charPanel} onDragStart={handleDragStart}>
+            <div><div>
+              <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
+              <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
+              <div className={styles.charBottom}><Button className={styles.button}  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
+            </div></div>
+          </div>
+        )
+      }
+    </>
   ))
 
   const renderPrevButton = ({ isDisabled }) => {
@@ -79,8 +87,8 @@ const Characters = ({ setSlot, setChar }) => {
       keyboardNavigation
       renderPrevButton={renderPrevButton}
       renderNextButton={renderNextButton}
-      paddingLeft={50}
-      paddingRight={50}
+      paddingLeft={48}
+      paddingRight={48}
       swipeDelta={20}
       swipeExtraPadding={0}
     />
