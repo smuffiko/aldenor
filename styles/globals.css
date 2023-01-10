@@ -138,6 +138,9 @@ a {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+.alice-carousel__next-btn, .alice-carousel__prev-btn {
+  cursor: pointer;
+}
 .alice-carousel__next-btn i, .alice-carousel__prev-btn i  {
   position: absolute;
   top: 50%;
