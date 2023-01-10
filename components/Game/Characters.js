@@ -79,7 +79,7 @@ const Characters = ({ setSlot, setChar }) => {
       renderNextButton={renderNextButton}
       paddingLeft={50}
       paddingRight={50}
-      infinite
+      swipeExtraPadding={0}
     />
   )
   
