@@ -1,4 +1,5 @@
 import Router from "next/router"
+import styles from "../../styles/AldenorUI/AldenorUI.Header.module.css"
 import Link from "next/link"
 import NProgress from "nprogress"
 import { Menu, Container, Icon } from "semantic-ui-react"
@@ -19,7 +20,7 @@ const Header = ({ user }) => {
         color="black"
         inverted
       >
-        <Container>
+        <Container className={styles.header}>
           <Link href="/" passHref>
             <Menu.Item header active={isActive("/")}>
               <Icon name="home"/>

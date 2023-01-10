@@ -24,15 +24,14 @@ a {
   position:relative;
 }
 #body {
-  padding:10px;
-  padding-bottom: 6rem;   
-  min-height: 90vh;
+  padding:0;
   position: relative;
 }
 #footer {
   position:absolute;
   bottom:0;
-  width:100%;
+  height: 50px;
+  width: 100%;
   padding: 1rem;
   background: var(--footerBg);
 }
@@ -95,24 +94,42 @@ a {
 
 /*
  * Alice carousel 
- */
- 
-.alice-carousel {
-  background-color: #b8f850;
-}
+ */ 
 .alice-carousel__next-btn, .alice-carousel__prev-btn {
   background-color: rgb(255, 187, 0);
   position: absolute !important;
   top: 0;
-  width: 49px !important;
+  width: 50px !important;
   height: 100%;
   text-align: left !important;
 }
 .alice-carousel__prev-btn {
   left: 0;
+  background: url("/img/UI/CharNavPanel/CharNavPanel_1.png") left top no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_3.png") right top no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_7.png") left bottom no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_9.png") right bottom no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_2.png") center top repeat-x,
+  url("/img/UI/CharNavPanel/CharNavPanel_4.png") left center repeat-y,
+  url("/img/UI/CharNavPanel/CharNavPanel_6.png") right center repeat-y,
+  url("/img/UI/CharNavPanel/CharNavPanel_8.png") center bottom repeat-x,
+  url("/img/UI/CharNavPanel/CharNavPanel_5.png") center center repeat;
 }
 .alice-carousel__next-btn {
   right: 0;
+  background: url("/img/UI/CharNavPanel/CharNavPanel_1.png") left top no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_3.png") right top no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_7.png") left bottom no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_9.png") right bottom no-repeat,
+  url("/img/UI/CharNavPanel/CharNavPanel_2.png") center top repeat-x,
+  url("/img/UI/CharNavPanel/CharNavPanel_4.png") left center repeat-y,
+  url("/img/UI/CharNavPanel/CharNavPanel_6.png") right center repeat-y,
+  url("/img/UI/CharNavPanel/CharNavPanel_8.png") center bottom repeat-x,
+  url("/img/UI/CharNavPanel/CharNavPanel_5.png") center center repeat;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 .alice-carousel__next-btn i, .alice-carousel__prev-btn i  {
   position: absolute;

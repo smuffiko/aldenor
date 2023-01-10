@@ -1,9 +1,18 @@
-.card {
-  height: 80vh;
+.container {
+  margin: 50px 0;
 }
-.staffCard {
-  height: 80vh;
-  background-color: rgb(0, 247, 255);
+
+.charPanel {
+  height: calc(100vh - 100px - 100px); /* todo -> height - menu height - footer height */
+  background: url("/img/UI/CharPanel/charPanel_1.png") left top no-repeat,
+  url("/img/UI/CharPanel/charPanel_3.png") right top no-repeat,
+  url("/img/UI/CharPanel/charPanel_7.png") left bottom no-repeat,
+  url("/img/UI/CharPanel/charPanel_9.png") right bottom no-repeat,
+  url("/img/UI/CharPanel/charPanel_2.png") center top repeat-x,
+  url("/img/UI/CharPanel/charPanel_4.png") left center repeat-y,
+  url("/img/UI/CharPanel/charPanel_6.png") right center repeat-y,
+  url("/img/UI/CharPanel/charPanel_8.png") center bottom repeat-x,
+  url("/img/UI/CharPanel/charPanel_5.png") center center repeat;
 }
 .charTop {
   position: absolute;
@@ -14,8 +23,23 @@
 .charMid {
   position: absolute;
   top: 35%;
+  left: 30px;
   text-align: center;
-  width: 100%;
+  width: calc(100% - 60px);
+  vertical-align: middle;
+  line-height: 32px;
+  font-size: 16px;
+  margin: 0 auto;
+  padding: 20px;
+  background: url("/img/UI/CharTextPanel/charTextPanel_1.png") left top no-repeat,
+  url("/img/UI/CharTextPanel/charTextPanel_3.png") right top no-repeat,
+  url("/img/UI/CharTextPanel/charTextPanel_7.png") left bottom no-repeat,
+  url("/img/UI/CharTextPanel/charTextPanel_9.png") right bottom no-repeat,
+  url("/img/UI/CharTextPanel/charTextPanel_2.png") center top repeat-x,
+  url("/img/UI/CharTextPanel/charTextPanel_4.png") left center repeat-y,
+  url("/img/UI/CharTextPanel/charTextPanel_6.png") right center repeat-y,
+  url("/img/UI/CharTextPanel/charTextPanel_8.png") center bottom repeat-x,
+  url("/img/UI/CharTextPanel/charTextPanel_5.png") center center repeat;
 }
 .charBottom {
   position: absolute;

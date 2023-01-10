@@ -20,21 +20,22 @@ const Characters = ({ setSlot, setChar }) => {
   const items = characters.map((c, i) =>
   (
     c.available ? (
-      <div key={i} className={styles.card} >
+      <div key={i} className={styles.charPanel} >
+        <div>
         {c.character!== null ? (
-          <div className={staff.includes(c.character.role) ? styles.staffCard : ""}>
+          <div className={staff.includes(c.character.role) ? styles.staffPanel : ""}>
             <div className={styles.charTop}>
               <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
             </div>
             <div className={styles.charMid}>
               <List>
-                <List.Item>Name: {c.character.name}</List.Item>
-                <List.Item>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
-                <List.Item>Race: {c.character.race}</List.Item>
-                <List.Item>Class: {c.character.class}</List.Item>
-                <List.Item>Lvl: {c.character.lvl}</List.Item>
-                <List.Item>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
-                <List.Item>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
+                <List.Item className={styles.charText}>Name: {c.character.name}</List.Item>
+                <List.Item className={styles.charText}>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
+                <List.Item className={styles.charText}>Race: {c.character.race}</List.Item>
+                <List.Item className={styles.charText}>Class: {c.character.class}</List.Item>
+                <List.Item className={styles.charText}>Lvl: {c.character.lvl}</List.Item>
+                <List.Item className={styles.charText}>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
+                <List.Item className={styles.charText}>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
               </List>
             </div>
             <div className={styles.charBottom}><Button onClick={()=>setChar(c.character)}>Play!</Button></div>  
@@ -46,12 +47,15 @@ const Characters = ({ setSlot, setChar }) => {
             <div className={styles.charBottom}><Button onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
           </>  
         )}      
+        </div> 
       </div>
     ) : (
-      <div key={Math.random()} className={styles.card}>
-        <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
-        <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
-        <div className={styles.charBottom}><Button onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>       
+      <div key={Math.random()} className={styles.charPanel}>
+        <div>
+          <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
+          <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
+          <div className={styles.charBottom}><Button onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
+        </div>  
       </div>
     )
   ))
@@ -60,7 +64,7 @@ const Characters = ({ setSlot, setChar }) => {
     return <Icon name="caret left" size="big" disabled={isDisabled}/>
   }
   const renderNextButton = ({ isDisabled }) => {
-    return <Icon name="caret right" size="big" disabled={isDisabled}/>
+    return <Icon name="caret left" size="big" disabled={isDisabled}/>
   }
 
   const Carousel = () => (
@@ -75,6 +79,7 @@ const Characters = ({ setSlot, setChar }) => {
       renderNextButton={renderNextButton}
       paddingLeft={50}
       paddingRight={50}
+      infinite
     />
   )
   
@@ -105,8 +110,7 @@ const Characters = ({ setSlot, setChar }) => {
 
   return (
     <>
-      <Header as="h2" align="left">Characters</Header>
-        <Carousel />
+      <div className={styles.container}><Carousel /></div>
     </>
   )
 }
