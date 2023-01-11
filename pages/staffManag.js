@@ -145,7 +145,7 @@ const StaffManag = ({ user, character }) => {
 
   const changeRole = async (char, newRole) => {
     const charToken = cookie.get("charId")
-    const payload = { char, newRole }
+    const payload = { char: char.character ? char.character : char , newRole }
     const url = `${baseUrl}/api/characters`
     await fetch(url, {
       method: "PUT",
@@ -327,9 +327,9 @@ const StaffManag = ({ user, character }) => {
                                 />
                                 <Popup content={(
                                     <>
-                                      <Button icon circular onClick={()=>changeRole(c,"user")} disabled={u.characters[j].character.role === "user"}>user</Button>
-                                      <Button icon circular onClick={()=>changeRole(c,"mod")} disabled={u.characters[j].character.role === "mod"}>mod</Button>
-                                      <Button icon circular onClick={()=>changeRole(c,"admin")} disabled={u.characters[j].character.role === "admin"}>admin</Button>
+                                      <Button icon circular onClick={()=>changeRole(dc,"user")} disabled={dc.role === "user"}>user</Button>
+                                      <Button icon circular onClick={()=>changeRole(dc,"mod")} disabled={dc.role === "mod"}>mod</Button>
+                                      <Button icon circular onClick={()=>changeRole(dc,"admin")} disabled={dc.role === "admin"}>admin</Button>
                                     </>
                                   )}
                                   pinned

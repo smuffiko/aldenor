@@ -56,9 +56,9 @@ const handlePutRequest = async (req, res) => {
 
     if(char!==undefined) {
       if(newRole!==undefined) {
-        console.log("ch",char.character._id, "newr",newRole)
+        console.log("ch",char._id, "newr",newRole)
         const newUser = await Character.findOneAndUpdate(
-          { _id: char.character._id },
+          { _id: char._id },
           { $set: { role: newRole } }
         )
       } else {
