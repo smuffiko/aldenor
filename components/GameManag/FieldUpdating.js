@@ -24,12 +24,12 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
 
   const getDbFields = async() => {
     const url = `${baseUrl}/api/fields`
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     const dbF = await fetch(url,{
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       }
     }).then(async response => {
       if(!response.ok) {
@@ -71,7 +71,7 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
   const handleChecked = async (direction, value) => { // changing checkbox -> update field in db
     setLoading(true)
     const url = `${baseUrl}/api/field`
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     const payload = {
       direction,
       value,
@@ -82,7 +82,7 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       },
       body: JSON.stringify(payload)
     }).then(async response => {
@@ -150,8 +150,6 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
                 text: `${f.imageSrc} - ${f.flip?"flipped":"basic"} ${f.rotation}°`,
                 image: { src: f.imageSrc, className: `${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}` }
               }))}
-              className={styles.dropdown}
-              
             />
             <Form.Group>
               <Form.Checkbox className={styles.check} disabled={loading} label="Left" checked={checked.left} name="left" onChange={()=>handleChecked("left", !checked.left)} />

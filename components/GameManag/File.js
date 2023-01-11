@@ -67,12 +67,12 @@ const File = ({ setUpdating, file }) => {
   const getFields = async() => {
     setLoading(true)
     const url = `${baseUrl}/api/field?imageSrc=${file}`
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     await fetch(url,{
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       }
     }).then(async response => {
       if(!response.ok) {
@@ -97,12 +97,12 @@ const File = ({ setUpdating, file }) => {
 
   const addFieldToDb = async field => {
     const url = `${baseUrl}/api/field`
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     await fetch(url,{
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       },
       body: JSON.stringify(field)
     }).then(async response => {
@@ -120,12 +120,12 @@ const File = ({ setUpdating, file }) => {
 
   const removeFieldFromDb = async _id => {
     const url = `${baseUrl}/api/field?_id=${_id}`
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     await fetch(url,{
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       }
     }).then(async response => {
       if(!response.ok) {
