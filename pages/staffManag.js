@@ -143,6 +143,30 @@ const StaffManag = ({ user, character }) => {
     })
   }
 
+  const changeRole = async (char, newRole) => {
+    const charToken = cookie.get("charId")
+    const payload = { char, newRole }
+    const url = `${baseUrl}/api/characters`
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": charToken
+      },
+      body: JSON.stringify(payload)
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.text()      
+    }).then(data => {
+      refreshData()
+    }).catch(error => {
+      console.log(error.message) // todo 
+    })
+  }
+
   return (
     <>
       <Input
@@ -239,7 +263,17 @@ const StaffManag = ({ user, character }) => {
                                       on="click"
                                       trigger={<Button icon circular color="orange" size="mini" ><Icon name="retweet" /></Button>}
                                     />
-                                    <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>
+                                    <Popup content={(
+                                        <>
+                                          <Button icon circular onClick={()=>changeRole(c,"user")} disabled={u.characters[j].character.role === "user"}>user</Button>
+                                          <Button icon circular onClick={()=>changeRole(c,"mod")} disabled={u.characters[j].character.role === "mod"}>mod</Button>
+                                          <Button icon circular onClick={()=>changeRole(c,"admin")} disabled={u.characters[j].character.role === "admin"}>admin</Button>
+                                        </>
+                                      )}
+                                      pinned
+                                      on="click"
+                                      trigger={<Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>}
+                                    />
                                   </>
                                 ) : (
                                   <>

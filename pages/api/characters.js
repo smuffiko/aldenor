@@ -52,13 +52,21 @@ const handlePutRequest = async (req, res) => {
   )
   const rootChar = await Character.findOne({ _id: charId })
   if(rootChar.role==="root") { // only root can move any character
-    const { owner, character, oldSlot, newSlot, char } = req.body
+    const { owner, character, oldSlot, newSlot, char, newRole } = req.body
 
     if(char!==undefined) {
-      const newChar = await User.findOneAndUpdate(
-        { [`characters._id`]: char._id},
-        { $set : { [`characters.$.available`] : !char.available } }
-      )
+      if(newRole!==undefined) {
+        console.log("ch",char.character._id, "newr",newRole)
+        const newUser = await Character.findOneAndUpdate(
+          { _id: char.character._id },
+          { $set: { role: newRole } }
+        )
+      } else {
+        await User.findOneAndUpdate(
+          { [`characters._id`]: char._id},
+          { $set : { [`characters.$.available`] : !char.available } }
+        )
+      }
       return res.status(200).send("Character updated")
     } else {
       
