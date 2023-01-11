@@ -325,7 +325,17 @@ const StaffManag = ({ user, character }) => {
                                   on="click"
                                   trigger={<Button icon circular color="orange" size="mini" ><Icon name="retweet" /></Button>}
                                 />
-                                <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>
+                                <Popup content={(
+                                    <>
+                                      <Button icon circular onClick={()=>changeRole(c,"user")} disabled={u.characters[j].character.role === "user"}>user</Button>
+                                      <Button icon circular onClick={()=>changeRole(c,"mod")} disabled={u.characters[j].character.role === "mod"}>mod</Button>
+                                      <Button icon circular onClick={()=>changeRole(c,"admin")} disabled={u.characters[j].character.role === "admin"}>admin</Button>
+                                    </>
+                                  )}
+                                  pinned
+                                  on="click"
+                                  trigger={<Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>}
+                                />
                               </>
                             ) : (
                               <>
