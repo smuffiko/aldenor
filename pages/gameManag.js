@@ -18,12 +18,12 @@ const GameManag = () => {
   },[updating])
 
   const searchFiles = async()=> {
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     await fetch (`${baseUrl}/api/fields`,{
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       }
     }).then(async response => {
       if(!response.ok) {

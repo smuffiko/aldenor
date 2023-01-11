@@ -1,5 +1,6 @@
 import MapField from "../../models/MapField"
 import User from "../../models/User"
+import Character from "../../models/Character"
 import jwt from "jsonwebtoken"
 import connectDB from "../../utils/connectDB"
 
@@ -29,11 +30,11 @@ const handleGetRequest = async (req, res) => {
   if (!("authorization" in req.headers)) {
     return res.status(401).send("No authorization token.")
   }
-  const { userId } = jwt.verify(
+  const { charId } = jwt.verify(
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  const user = await User.findOne({ _id: userId })
+  const user = await Character.findOne({ _id: charId })
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
@@ -47,11 +48,11 @@ const handlePostRequest = async (req, res) => {
   if (!("authorization" in req.headers)) {
     return res.status(401).send("No authorization token.")
   }
-  const { userId } = jwt.verify(
+  const { charId } = jwt.verify(
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  const user = await User.findOne({ _id: userId })
+  const user = await Character.findOne({ _id: charId })
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
@@ -69,11 +70,11 @@ const handlePutRequest = async (req, res) => {
   if (!("authorization" in req.headers)) {
     return res.status(401).send("No authorization token.")
   }
-  const { userId } = jwt.verify(
+  const { charId } = jwt.verify(
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  const user = await User.findOne({ _id: userId })
+  const user = await Character.findOne({ _id: charId })
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
@@ -114,11 +115,11 @@ const handleDeleteRequest = async (req, res)=> {
   if (!("authorization" in req.headers)) {
     return res.status(401).send("No authorization token.")
   }
-  const { userId } = jwt.verify(
+  const { charId } = jwt.verify(
     req.headers.authorization,
     process.env.JWT_SECRET
   )
-  const user = await User.findOne({ _id: userId })
+  const user = await Character.findOne({ _id: charId })
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
