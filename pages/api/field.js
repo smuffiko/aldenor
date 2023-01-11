@@ -35,6 +35,7 @@ const handleGetRequest = async (req, res) => {
     process.env.JWT_SECRET
   )
   const user = await Character.findOne({ _id: charId })
+  console.log(user.role)
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {

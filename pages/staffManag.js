@@ -2,6 +2,8 @@ import React from "react"
 import baseUrl from "../utils/baseUrl"
 import cookie from "js-cookie"
 import { Accordion, Icon, Input, Button, Segment, Popup } from "semantic-ui-react"
+import Search from "../components/StaffManag/Search"
+import Users from "../components/StaffManag/Users"
 
 const StaffManag = ({ user, character }) => {
   const [users, setUsers] = React.useState(null)
@@ -169,6 +171,8 @@ const StaffManag = ({ user, character }) => {
 
   return (
     <>
+      <Search />
+      <Users />
       <Input
         icon="search"
         placeholder="Search user..."
