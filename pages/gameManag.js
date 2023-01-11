@@ -40,13 +40,13 @@ const GameManag = () => {
   }
 
   const searchNewFiles = async()=> {
-    const token = cookie.get("token")
+    const charToken = cookie.get("charId")
     const dir = "img\\Map"
     await fetch (`${baseUrl}/api/files?dir=${dir}`,{
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "Authorization": token
+        "Authorization": charToken
       }
     }).then(async response => {
       if(!response.ok) {
