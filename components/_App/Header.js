@@ -19,6 +19,7 @@ const Header = ({ user }) => {
       <Menu
         color="black"
         inverted
+        className="mainMenu"
       >
         <Container className={styles.header}>
           <Link href="/" passHref>

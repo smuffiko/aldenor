@@ -182,7 +182,7 @@ const StaffManag = ({ user, character }) => {
         <Icon name="chess board"/>dead
         <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
         <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
-        <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role*
+        <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role
         <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot
         <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot
       </div>
@@ -239,7 +239,7 @@ const StaffManag = ({ user, character }) => {
                         </>
                       )}
                     </Accordion.Title>
-                    <Accordion.Content active={activeIndex === i}>
+                    <Accordion.Content active={activeIndex === i} >
                       {u.characters.map((c,j)=>
                         <div key={j}>
                           Slot {j+1} <Icon name="caret right" />

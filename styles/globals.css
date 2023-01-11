@@ -44,7 +44,7 @@ a {
   background: var(--footerBg);
   box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
 }
-.menu {
+.mainMenu {
   background-color: #100C07 !important;
   box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000 !important;
 }

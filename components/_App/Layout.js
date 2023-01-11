@@ -43,15 +43,6 @@ const Layout = ({ children, user, character }) => {
   const [desktop, setDesktop] = React.useState()
   const [unsupported, setUnsupported] = React.useState()
   const router = useRouter()
-//  const character = cookies.get("charId")
-
-  /* this should works after update _app.js
-  React.useEffect(()=>{
-    if( PATHS.game.find(path=> path === router.pathname)  // if there is no token and user come to /game or other route -> redirect to "/characters" page for choose character
-      && character === undefined)
-      Router.push("/characters")
-  },[])
-  */
 
   React.useEffect(()=>{
     setDesktop(isDesktop)

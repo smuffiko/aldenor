@@ -150,6 +150,8 @@ const FieldUpdating = ({ field, setFieldUpdating }) => {
                 text: `${f.imageSrc} - ${f.flip?"flipped":"basic"} ${f.rotation}°`,
                 image: { src: f.imageSrc, className: `${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}` }
               }))}
+              className={styles.dropdown}
+              
             />
             <Form.Group>
               <Form.Checkbox className={styles.check} disabled={loading} label="Left" checked={checked.left} name="left" onChange={()=>handleChecked("left", !checked.left)} />
