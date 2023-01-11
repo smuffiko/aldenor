@@ -52,21 +52,29 @@ const handlePutRequest = async (req, res) => {
   )
   const rootChar = await Character.findOne({ _id: charId })
   if(rootChar.role==="root") { // only root can move any character
-    const { owner, character, oldSlot, newSlot } = req.body
+    const { owner, character, oldSlot, newSlot, char } = req.body
 
-    // delete from old slot
-    if(oldSlot!==null) {
-      if(oldSlot===5) await User.findOneAndUpdate({ _id: owner },{ $pull: { characters: { character } } } )
-      else await User.findOneAndUpdate({ _id: owner }, { $set: { [`characters.${oldSlot}.character`]: null } } )
+    if(char!==undefined) {
+      const newChar = await User.findOneAndUpdate(
+        { [`characters._id`]: char._id},
+        { $set : { [`characters.$.available`] : !char.available } }
+      )
+      return res.status(200).send("Character updated")
     } else {
-      await Character.findOneAndUpdate({ _id: character }, { $set: { active: true } })
-    }
+      
+      // delete from old slot
+      if(oldSlot!==null) {
+        if(oldSlot===5) await User.findOneAndUpdate({ _id: owner },{ $pull: { characters: { character } } } )
+        else await User.findOneAndUpdate({ _id: owner }, { $set: { [`characters.${oldSlot}.character`]: null } } )
+      } else {
+        await Character.findOneAndUpdate({ _id: character }, { $set: { active: true } })
+      }
 
-    // add character id to user slot
-    if(newSlot!==6) await User.findOneAndUpdate({ _id: owner }, { $set: { [`characters.${newSlot}.character`]: character, [`characters.${newSlot}.available`]: true } } )
-    else await User.findOneAndUpdate({ _id: owner },{ $push: { characters: { character: character, available: true } } } )
-    
-    return res.status(200).send("ok")
+      // add character id to user slot
+      if(newSlot!==6) await User.findOneAndUpdate({ _id: owner }, { $set: { [`characters.${newSlot}.character`]: character, [`characters.${newSlot}.available`]: true } } )
+      else await User.findOneAndUpdate({ _id: owner },{ $push: { characters: { character: character, available: true } } } )
+      return res.status(200).send("Character updated")
+    }
   } else {
     return res.status(401).send("Not authorized.")
   }

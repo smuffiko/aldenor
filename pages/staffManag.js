@@ -120,6 +120,29 @@ const StaffManag = ({ user, character }) => {
     })
   }
 
+  const handleLock = async (char) => {
+    const charToken = cookie.get("charId")
+    const url = `${baseUrl}/api/characters`
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": charToken
+      },
+      body: JSON.stringify({char})
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.text()      
+    }).then(data => {
+      refreshData()
+    }).catch(error => {
+      console.log(error.message) // todo 
+    })
+  }
+
   return (
     <>
       <Input
@@ -136,8 +159,8 @@ const StaffManag = ({ user, character }) => {
         <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
         <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
         <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role*
-        <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot*
-        <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot*
+        <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot
+        <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot
       </div>
       {newUsers && (
         <>
@@ -233,8 +256,8 @@ const StaffManag = ({ user, character }) => {
                               </>) : (
                               <>
                                 {c.available ? 
-                                    <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button> : 
-                                    <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>
+                                    <Button icon circular color="teal" size="mini" onClick={()=>handleLock(c)}><Icon name="unlock" /></Button> : 
+                                    <Button icon circular color="yellow" size="mini" onClick={()=>handleLock(c)}><Icon name="lock" /></Button>
                                 }
                               </>
                               )
