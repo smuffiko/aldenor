@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const { Number, String, ObjectId } = mongoose.Schema.Types
+const { String, ObjectId } = mongoose.Schema.Types
 
 const MapSchema = new mongoose.Schema(
   {
@@ -8,20 +8,16 @@ const MapSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    coords: [{
-      x: {
-        type: Number,
-        required: true
-      },
-      y: {
-        type: Number,
-        required: true
-      },
-      field: {
-        type: ObjectId,
-        ref: "MapField"
-      }
-    }]
+    coords: [
+      [
+        { 
+          field: {
+            type: ObjectId,
+            ref: "MapField"
+          }
+        }
+      ]
+    ]
   }
 )
 

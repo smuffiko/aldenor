@@ -67,21 +67,6 @@ a {
   opacity: 0.5;
 }
 
-.mapField {
-  padding: 0;
-  height: 64px;
-  width: 64px;
-  float: left;
-}
-.mapTable {
-  padding: 0;
-  border: none;
-  margin: 1em 0 5em 0;
-  width: 1280px;
-}
-.mapRow {
-  clear:both;
-}
 /*
  * Hint 
  */

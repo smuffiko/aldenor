@@ -88,7 +88,6 @@
 }
 
 .form {
-  float: left;
   width: calc(100% - 192px - 4rem);
 }
 .check {
@@ -97,4 +96,35 @@
 .saveButton {
   position: absolute;
   bottom: 0;
+}
+.mapTable {
+  padding: 0;
+  margin: 0;
+  height: 90vh;
+  overflow: scroll;
+  -ms-overflow-style: none;  
+  -o-overflow-style: none;  
+  -webkit-overflow-style: none; 
+  scrollbar-width: none; 
+}
+.mapWrapper {
+  padding: 64px;
+  display: inline-flex;
+  background-image:
+    linear-gradient(45deg, #808080 25%, transparent 25%),
+    linear-gradient(-45deg, #808080 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #808080 75%),
+    linear-gradient(-45deg, transparent 75%, #808080 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-color: #ffffff;
+}
+.mapCol {
+  width: 64px;
+}
+.mapField  {
+  padding: 1px;
+  height: 66px;
+  width: 66px;
+  margin: 0;
 }

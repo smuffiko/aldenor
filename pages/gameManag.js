@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../styles/GameManag.Fields.module.css"
 import cookie from "js-cookie"
 import baseUrl from "../utils/baseUrl"
-import { Button, Header, Image } from "semantic-ui-react"
+import { Button, Header, Image, Dimmer, Loader } from "semantic-ui-react"
 import File from "../components/GameManag/File"
 import GenerateMap from "../components/GameManag/GenerateMap"
 
@@ -11,6 +11,8 @@ const GameManag = () => {
   const [fields, setFields] = React.useState([]) // DB 
   const [updating, setUpdating] = React.useState(false)
   const [file, setFile] = React.useState(null) // updating this file
+  const [generateMap, setGenerateMap] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
 
   React.useEffect(()=>{
     searchFiles()
@@ -85,9 +87,24 @@ const GameManag = () => {
         ) : (
           <>
             {baseUrl==="http://localhost:3000" && (<Button content="Update files" onClick={()=>searchNewFiles()} />)}
-            <Header>Files:</Header>
-            {mapFiles()}
-            <GenerateMap />
+            { !generateMap && (
+              <>
+                <Header>Files:</Header>
+                {mapFiles()}
+              </>
+            )}
+            
+            {loading && (
+              <Dimmer active>
+                <Loader size='huge'>Generating new map ... </Loader>
+              </Dimmer>
+            )}
+
+            <GenerateMap 
+              generateMap={generateMap}
+              setGenerateMap={setGenerateMap}
+              setLoading={setLoading}
+            />
           </>
         )
       }
