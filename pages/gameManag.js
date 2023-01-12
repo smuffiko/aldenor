@@ -96,7 +96,7 @@ const GameManag = () => {
             
             {loading && (
               <Dimmer active>
-                <Loader size='huge'>Generating new map ... </Loader>
+                <Loader size='huge'>Rendering map ... </Loader>
               </Dimmer>
             )}
 

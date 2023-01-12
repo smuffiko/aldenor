@@ -34,13 +34,10 @@ const handleGetRequest = async (req, res) => { // todo check it later
   const character = await Character.findOne({ _id: charId })
   if (character) {
     if(character.role==="root") { // if we are logged with root character
-      const { map } = req.body
-      let arr = []
-      for(let i=0; i< map.length; i++)
-        arr.push(`coords.${i}._id`)
+      const { _id } = req.query
       
-      const newMap = await Map.findOne({_id:map}).populate({
-        path: arr.join(" "),
+      const newMap = await Map.findOne({_id}).populate({
+        path: "coords._id",
         model: "MapField"
       })
       res.status(200).json(newMap)

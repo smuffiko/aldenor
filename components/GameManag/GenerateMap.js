@@ -20,7 +20,10 @@ const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
             setLoading={setLoading}
             setMap={setMap}
           />
-          <MapList />
+          <MapList
+            setMap={setMap}
+            setLoading={setLoading}
+          />
         </>
       : (
         <>

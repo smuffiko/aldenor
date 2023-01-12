@@ -3,7 +3,7 @@ import { Button, List, Icon, Modal } from "semantic-ui-react"
 import cookies from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
 
-const MapList = () => {
+const MapList = ({ setMap, setLoading }) => {
   const [maps, setMaps] = React.useState([])
   const [activeIndex, setActiveIndex] = React.useState(-1)
   
@@ -52,6 +52,28 @@ const MapList = () => {
     }).catch(error=>console.log(error.message)) // todo
   }
 
+  const handleUpdate = async id => {
+    setLoading(true)
+    const url = `${baseUrl}/api/map?_id=${id}`
+    const charToken = cookies.get("charId")
+    await fetch(url,{
+      method: "GET",
+      headers: {
+        "Content-type": "application-json",
+        "Authorization": charToken
+      }
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.json()
+    }).then(data => {
+      setMap(data)
+    }).catch(error=>console.log(error.message)) // todo
+    .finally(()=>setLoading(false))
+  }
+
   return (
     <>
       <List>
@@ -85,7 +107,7 @@ const MapList = () => {
               </Modal.Actions>
             </Modal>
             
-            <Button icon circular color="orange" size="mini" ><Icon name="retweet" /></Button>
+            <Button icon circular color="orange" size="mini" onClick={()=>handleUpdate(m._id)}><Icon name="retweet" /></Button>
             {m.name}
           </List.Item>
         )}
