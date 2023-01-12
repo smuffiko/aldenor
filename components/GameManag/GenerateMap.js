@@ -2,6 +2,7 @@ import React from "react"
 import { Button } from "semantic-ui-react"
 import GeneratedMap from "./GeneratedMap"
 import GenerateMapInputs from "./GenerateMapInputs"
+import MapList from "./MapList"
 
 const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
   const [map, setMap] = React.useState([])
@@ -19,6 +20,7 @@ const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
             setLoading={setLoading}
             setMap={setMap}
           />
+          <MapList />
         </>
       : (
         <>

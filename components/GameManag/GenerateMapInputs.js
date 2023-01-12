@@ -13,7 +13,6 @@ const GenerateMapInputs = ({ setLoading, setMap }) => {
   React.useEffect(()=>{
     if(Boolean(name) && name.match(/^ *$/) === null) setDisabled(false)
     else setDisabled(true)
-
   },[name])
 
   const generateNewMap = async (e) => {
@@ -21,11 +20,14 @@ const GenerateMapInputs = ({ setLoading, setMap }) => {
     setError("")
     if(x>=1 && y>=1 && x<=100 && y<=100) {
       setLoading(true)
-      const url = `${baseUrl}/api/map?border=true`
+      const charToken = cookies.get("charId")
+      const imageSrc = "img\\Map\\border.png"
+      const url = `${baseUrl}/api/field?imageSrc=${imageSrc}`
       await fetch(url,{
         method: "GET",
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
+          "Authorization": charToken
         }
       }).then(async response => {
         if(!response.ok) {
@@ -38,7 +40,7 @@ const GenerateMapInputs = ({ setLoading, setMap }) => {
         for(var i = 0; i < y; i++) {
           newMap[i] = new Array( x )
           for(var j = 0; j < x; j++) {
-            newMap[i][j] = border
+            newMap[i][j] = border[0]
           }
         }
         return newMap
