@@ -29,9 +29,25 @@ const handleGetRequest = async (req, res) => {
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
-    const fields = await MapField.find().sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields
-    const files = await PublicFile.find().sort({ src: 1 })  // find all public Files
-    const filesArrayOfString = files.map(file=> file["src"])  // convert array of object to array of strings (src only)
-    res.status(200).json({ fields, files: filesArrayOfString })
+    const { generatingMap } = req.query
+    if(generatingMap) {
+      const fields = await MapField.find(
+        { },
+        { imageSrc: 1, rotation: 1, flip: 1 }
+      ).sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields
+        const forests = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Forests"))
+        const plains = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Plains"))
+        const shores = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Shores"))
+        const water = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Water"))
+      res.status(200).json({ forests, plains, shores, water })
+    } else {
+      const fields = await MapField.find(
+        { },
+        { imageSrc: 1, rotation: 1, flip: 1 }
+      ).sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields
+      const files = await PublicFile.find().sort({ src: 1 })  // find all public Files
+      const filesArrayOfString = files.map(file=> file["src"])  // convert array of object to array of strings (src only)
+      res.status(200).json({ fields, files: filesArrayOfString })
+    }
   }
 }

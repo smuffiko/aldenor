@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../../styles/GameManag.Fields.module.css"
 import { Image } from "semantic-ui-react"
 
-const MapField = ({ field }) => {
+const GenerateMapField = ({ field }) => {
   return (
     <>
       <div className={styles.mapCol} key={Math.random()}>
@@ -12,4 +12,4 @@ const MapField = ({ field }) => {
   )
 }
  
-export default MapField
+export default GenerateMapField

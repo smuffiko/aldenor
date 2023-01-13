@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "../../styles/GameManag.Fields.module.css"
-import MapField from "./MapField"
+import GenerateMapField from "./GenerateMapField"
 
 const GeneratedMap = ({ map }) => {
   return (
@@ -13,7 +13,7 @@ const GeneratedMap = ({ map }) => {
               <div className={styles.mapRow} key={Math.random()}>
                 {
                   field.map((f,j) => 
-                    <MapField field={f._id } key={j}/>
+                    <GenerateMapField field={f._id } key={j} />
                   )
                 }
                 <div className={styles.wrap}></div>

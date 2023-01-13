@@ -93,8 +93,6 @@ a {
 /*
  * Alice carousel 
  */
-.alice-carousel {
-}
 .alice-carousel__next-btn, .alice-carousel__prev-btn {
   position: absolute !important;
   top: 0;

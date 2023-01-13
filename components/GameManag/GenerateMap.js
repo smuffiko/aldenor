@@ -1,5 +1,6 @@
 import React from "react"
 import { Button } from "semantic-ui-react"
+import GeneratedFields from "./GeneratedFields"
 import GeneratedMap from "./GeneratedMap"
 import GenerateMapInputs from "./GenerateMapInputs"
 import MapList from "./MapList"
@@ -36,6 +37,10 @@ const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
           />
           <GeneratedMap
             map={map}
+            setLoading={setLoading}
+          />
+          <GeneratedFields
+          
           />
         </>
       )}

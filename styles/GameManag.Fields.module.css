@@ -100,7 +100,8 @@
 .mapTable {
   padding: 0;
   margin: 0;
-  height: 90vh;
+  max-width: 40vw;
+  height: 80vh;
   overflow: scroll;
   -ms-overflow-style: none;  
   -o-overflow-style: none;  
@@ -127,4 +128,22 @@
   height: 66px;
   width: 66px;
   margin: 0;
+}
+
+.generatedFields {
+  width: calc(100vw - 10vw - 50vw);
+  position: absolute;
+  top: 0;
+  padding-top: 100px;
+  right: 5vw;
+}
+.generatedField  {
+  padding: 4px;
+  display: inline !important;
+  width: 40px;
+  height: 40px;
+}
+
+.selected {
+  box-shadow: -10px -10px 0 #1eff00 inset, 10px -10px 0 #1eff00 inset, -10px 10px 0 #1eff00 inset, 10px 10px 0 #1eff00 inset;
 }
