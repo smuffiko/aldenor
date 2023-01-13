@@ -38,9 +38,9 @@ const GenerateMapInputs = ({ setLoading, setMap }) => {
       }).then(border => {
         const newMap = new Array( y )
         for(var i = 0; i < y; i++) {
-          newMap[i] = new Array( x )
+          newMap[i] = { fields: [] }
           for(var j = 0; j < x; j++) {
-            newMap[i][j] = border[0]
+            newMap[i].fields.push({ field: border[0]})
           }
         }
         return newMap

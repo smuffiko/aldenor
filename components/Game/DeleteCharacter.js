@@ -14,7 +14,7 @@ const DeleteCharacter = ({setInGame}) => {
     await fetch(url, {
       method: "DELETE",
       headers: {
-        "Content-type": "application-json",
+        "Content-type": "application/json",
         "Authorization": token
       }
     }).then(response => {

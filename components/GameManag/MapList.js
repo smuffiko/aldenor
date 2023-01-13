@@ -17,7 +17,7 @@ const MapList = ({ mapRef, setLoading, setMap }) => {
     await fetch(url,{
       method: "GET",
       headers: {
-        "Content-type": "application-json",
+        "Content-type": "application/json",
         "Authorization": charToken
       }
     }).then(async response => {
@@ -37,7 +37,7 @@ const MapList = ({ mapRef, setLoading, setMap }) => {
     await fetch(url,{
       method: "DELETE",
       headers: {
-        "Content-type": "application-json",
+        "Content-type": "application/json",
         "Authorization": charToken
       }
     }).then(async response => {
@@ -59,7 +59,7 @@ const MapList = ({ mapRef, setLoading, setMap }) => {
     await fetch(url,{
       method: "GET",
       headers: {
-        "Content-type": "application-json",
+        "Content-type": "application/json",
         "Authorization": charToken
       }
     }).then(async response => {

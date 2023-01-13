@@ -4,9 +4,15 @@ import baseUrl from "../../utils/baseUrl"
 import cookies from "js-cookie"
 import { Image } from "semantic-ui-react"
 
-const GeneratedFields = () => {
-  const [selected, setSelected] = React.useState({})
+const GeneratedFields = ({ selected, setSelected }) => {
   const [fields, setFields] = React.useState(undefined)
+  const fieldsRef = React.useRef()
+
+  React.useEffect(()=>{
+    console.log("changing fields")
+    if(fields)
+      fieldsRef.current = fields
+  },[fields])
 
   React.useEffect(() => {
     const getFields = async () => {
@@ -15,7 +21,7 @@ const GeneratedFields = () => {
       await fetch(url,{
         method: "GET",
         headers: {
-          "Content-type": "application-json",
+          "Content-type": "application/json",
           "Authorization": charToken
         }
       }).then(async response => {
@@ -26,6 +32,7 @@ const GeneratedFields = () => {
         return await response.json()
       }).then(data => {
         setFields(data)
+        fieldsRef.current = data
         setSelected(data.border[0]._id) 
       }).catch(error=>console.log(error.message)) // todo? idk
     }
@@ -42,13 +49,13 @@ const GeneratedFields = () => {
       <div>
         <Image
           src="img\\Map\\border.png"
-          className={`${styles.generatedField} ${selected===fields?.border[0]._id ? styles.selected : ""}`}
-          onClick={()=>handleClick(fields?.border[0]._id)}
+          className={`${styles.generatedField} ${selected===fieldsRef.current?.border[0]._id ? styles.selected : ""}`}
+          onClick={()=>handleClick(fieldsRef.current?.border[0]._id)}
         />
       </div>
       <div>
         { 
-          fields?.forests.map((f,i)=>(
+          fieldsRef.current?.forests.map((f,i)=>(
             <Image
               src={f.imageSrc}
               className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`}
@@ -60,7 +67,7 @@ const GeneratedFields = () => {
       </div>
       <div>
         {
-          fields?.plains.map((f,i)=>(
+          fieldsRef.current?.plains.map((f,i)=>(
             <Image
               src={f.imageSrc}
               className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`} 
@@ -72,7 +79,7 @@ const GeneratedFields = () => {
       </div>
       <div>
         {
-          fields?.shores.map((f,i)=>(
+          fieldsRef.current?.shores.map((f,i)=>(
             <Image 
               src={f.imageSrc} 
               className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`} 
@@ -84,7 +91,7 @@ const GeneratedFields = () => {
       </div>
       <div>
         {
-          fields?.water.map((f,i)=>(
+          fieldsRef.current?.water.map((f,i)=>(
             <Image 
               src={f.imageSrc} 
               className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`} 

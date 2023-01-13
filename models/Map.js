@@ -9,14 +9,16 @@ const MapSchema = new mongoose.Schema(
       required: true
     },
     coords: [
-      [
-        { 
-          field: {
-            type: ObjectId,
-            ref: "MapField"
+      {
+        fields: [
+          { 
+            field: {
+              type: ObjectId,
+              ref: "MapField"
+            }
           }
-        }
-      ]
+        ]
+      }
     ]
   }
 )

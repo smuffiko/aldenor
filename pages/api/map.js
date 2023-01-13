@@ -14,6 +14,9 @@ export default async function ApiMap(req, res) {
     case "POST":
       await handlePostRequest(req, res)
       break
+    case "PUT":
+      await handlePutRequest(req, res)
+      break
     case "DELETE":
       await handleDeleteRequest(req, res)
       break
@@ -37,7 +40,7 @@ const handleGetRequest = async (req, res) => { // todo check it later
       const { _id } = req.query
       
       const newMap = await Map.findOne({_id}).populate({
-        path: "coords._id",
+        path: "coords.fields.field",
         model: "MapField"
       })
       res.status(200).json(newMap)
@@ -61,19 +64,43 @@ const handlePostRequest = async (req, res) => {
   if (character) {
     if(character.role==="root") { // if we are logged with root character
       const { map, name } = req.body
-      let arr = []
-      for(let i=0; i< map.length; i++)
-        arr.push(`coords.${i}._id`)
-      const newMap = await new Map({
-        name,
-        coords: map
-      }).save().then((t)=>
+      const newMap = await new Map({ name, coords: map }).save().then((t)=>
         t.populate({
-          path: arr.join(" "),
+          path: "coords.fields.field",
           model: "MapField"
         })
       )
       res.status(200).json(newMap)
+    } else { // if root is not logged
+      res.status(401).send("Unauthorized.")
+    }
+  } else {
+    res.status(404).send("Character not found.")
+  }
+}
+
+const handlePutRequest = async (req, res) => {
+  if (!("authorization" in req.headers)) {
+    return res.status(401).send("No authorization token.")
+  }
+  const { charId } = jwt.verify(
+    req.headers.authorization,
+    process.env.JWT_SECRET
+  )
+  const character = await Character.findOne({ _id: charId })
+  if (character) {
+    if(character.role==="root") { // if we are logged with root character
+      const { newField, oldField } = req.body
+      const field = await Map.findOneAndUpdate(
+        { "coords": { $elemMatch: { "fields": { $elemMatch: { "_id": oldField._id } } } } },
+        { $set: { "coords.$[i].fields.$[j].field": newField } },
+        { arrayFilters: [ { "i.fields": { $elemMatch: { "_id": oldField._id } } }, { "j._id": oldField._id } ], new: true }
+      ).then(async()=>{
+        const field = await MapField.findOne({ _id: newField })
+        return field
+      })
+      if(field) return res.status(200).json(field)
+      else return res.status(400).send("")
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")
     }

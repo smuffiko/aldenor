@@ -8,7 +8,7 @@ import MapList from "./MapList"
 const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
   const [map, setMap] = React.useState([])
   const mapRef = React.useRef([])
-  const selectedRef = React.useRef(null)
+  const [selected, setSelected] = React.useState({})
 
   React.useEffect(()=>{
     if(map.length!==0) setGenerateMap(true)
@@ -16,15 +16,9 @@ const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
 
     mapRef.current = []
     if(map.coords)
-      for (let row = 0; row < map.coords.length; row++) {
-        mapRef.current.push([])
-        for (let col = 0; col < map.coords[0].length; col++) {
-          mapRef.current[row].push(map.coords[row][col])
-        }
-      }
+      mapRef.current = map
   },[map])
 
-  console.log("rendering")
   return (
     <>
       {!generateMap ? 
@@ -53,12 +47,13 @@ const GenerateMap = ({ generateMap, setGenerateMap, setLoading }) => {
             type="button"
           />
           <GeneratedMap
-            map={map}
             mapRef={mapRef}
             setLoading={setLoading}
+            newField={selected}
           />
           <GeneratedFields
-            
+            selected={selected}
+            setSelected={setSelected}
           />
         </>
       )}
