@@ -4,8 +4,8 @@ import { Input, Button, Message } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
 
 const GenerateMapInputs = ({ setLoading, setMap }) => {
-  const [x, setX] = React.useState(10)
-  const [y, setY] = React.useState(10)
+  const [x, setX] = React.useState(50)
+  const [y, setY] = React.useState(50)
   const [name, setName] = React.useState("")
   const [error, setError] = React.useState("")
   const [disabled, setDisabled] = React.useState(true)

@@ -5,73 +5,96 @@ import cookies from "js-cookie"
 import { Image } from "semantic-ui-react"
 
 const GeneratedFields = () => {
-  const [fields, setFields] = React.useState(null)
-  const [selected, setSelected] = React.useState("img\\Map\\border.png")
+  const [selected, setSelected] = React.useState({})
+  const [fields, setFields] = React.useState(undefined)
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
+    const getFields = async () => {
+      const url = `${baseUrl}/api/fields?generatingMap=true`
+      const charToken = cookies.get("charId")
+      await fetch(url,{
+        method: "GET",
+        headers: {
+          "Content-type": "application-json",
+          "Authorization": charToken
+        }
+      }).then(async response => {
+        if(!response.ok) {
+          const er = await response.text()
+          throw new Error(er)
+        }
+        return await response.json()
+      }).then(data => {
+        setFields(data)
+        setSelected(data.border[0]._id) 
+      }).catch(error=>console.log(error.message)) // todo? idk
+    }
     getFields()
-  },[])
+  }, [])
 
-  const getFields = async () => {
-    const url = `${baseUrl}/api/fields?generatingMap=true`
-    const charToken = cookies.get("charId")
-    await fetch(url,{
-      method: "GET",
-      headers: {
-        "Content-type": "application-json",
-        "Authorization": charToken
-      }
-    }).then(async response => {
-      if(!response.ok) {
-        const er = await response.text()
-        throw new Error(er)
-      }
-      return await response.json()
-    }).then(data => {
-      setFields(data)
-      console.log(data)
-    }).catch(error=>console.log(error.message)) // todo? idk
-  }
+  const handleClick = React.useCallback((image) => {
+    setSelected(image)
+  }, [setSelected])
 
   return (
     <>
-      <div className={styles.generatedFields}>
-        <div>
-          <Image src="img\\Map\\border.png" className={`${styles.generatedField} ${selected==="img\\Map\\border.png" ? styles.selected : ""}`} />
-        </div>
-        <div>
-          Forests
-            { 
-              fields?.forests.map((f,i)=>(
-                <Image src={f.imageSrc} className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f.imageSrc ? styles.selected : ""}`} key={i}/>
-              ))
-            }
-        </div>
-        <div>
-          Plains
-          {
-            fields?.plains.map((f,i)=>(
-              <Image src={f.imageSrc} className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f.imageSrc ? styles.selected : ""}`} key={i}/>
-            ))
-          }
-        </div>
-        <div>
-          Shores
-          {
-            fields?.shores.map((f,i)=>(
-              <Image src={f.imageSrc} className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f.imageSrc ? styles.selected : ""}`} key={i}/>
-            ))
-          }
-        </div>
-        <div>
-          Water
-          {
-            fields?.water.map((f,i)=>(
-              <Image src={f.imageSrc} className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f.imageSrc ? styles.selected : ""}`} key={i}/>
-            ))
-          }
-        </div>
+    <div className={styles.generatedFields}>
+      <div>
+        <Image
+          src="img\\Map\\border.png"
+          className={`${styles.generatedField} ${selected===fields?.border[0]._id ? styles.selected : ""}`}
+          onClick={()=>handleClick(fields?.border[0]._id)}
+        />
       </div>
+      <div>
+        { 
+          fields?.forests.map((f,i)=>(
+            <Image
+              src={f.imageSrc}
+              className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`}
+              key={i}
+              onClick={()=>handleClick(f._id)}
+            />
+          ))
+        }
+      </div>
+      <div>
+        {
+          fields?.plains.map((f,i)=>(
+            <Image
+              src={f.imageSrc}
+              className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`} 
+              key={i}
+              onClick={()=>handleClick(f._id)}
+            />
+          ))
+        }
+      </div>
+      <div>
+        {
+          fields?.shores.map((f,i)=>(
+            <Image 
+              src={f.imageSrc} 
+              className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`} 
+              key={i}
+              onClick={()=>handleClick(f._id)}
+            />
+          ))
+        }
+      </div>
+      <div>
+        {
+          fields?.water.map((f,i)=>(
+            <Image 
+              src={f.imageSrc} 
+              className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===f._id ? styles.selected : ""}`} 
+              key={i}
+              onClick={()=>handleClick(f._id)}
+            />
+          ))
+        }
+      </div>
+    </div>
     </>
   )
 }

@@ -3,7 +3,7 @@ import { Button, List, Icon, Modal } from "semantic-ui-react"
 import cookies from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
 
-const MapList = ({ setMap, setLoading }) => {
+const MapList = ({ mapRef, setLoading, setMap }) => {
   const [maps, setMaps] = React.useState([])
   const [activeIndex, setActiveIndex] = React.useState(-1)
   
@@ -68,8 +68,8 @@ const MapList = ({ setMap, setLoading }) => {
         throw new Error(er)
       }
       return await response.json()
-    }).then(data => {
-      setMap(data)
+    }).then(map => {
+      setMap(map)
     }).catch(error=>console.log(error.message)) // todo
     .finally(()=>setLoading(false))
   }

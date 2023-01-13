@@ -39,7 +39,8 @@ const handleGetRequest = async (req, res) => {
         const plains = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Plains"))
         const shores = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Shores"))
         const water = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Water"))
-      res.status(200).json({ forests, plains, shores, water })
+        const border = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\border"))
+      res.status(200).json({ forests, plains, shores, water, border })
     } else {
       const fields = await MapField.find(
         { },
