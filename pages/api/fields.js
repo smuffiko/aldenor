@@ -35,11 +35,13 @@ const handleGetRequest = async (req, res) => {
         { },
         { imageSrc: 1, rotation: 1, flip: 1 }
       ).sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields
-        const forests = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Forests"))
-        const plains = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Plains"))
-        const shores = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Shores"))
-        const water = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Water"))
-        const border = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\border"))
+
+      const forests = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Forests"))
+      const plains = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Plains"))
+      const shores = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Shores"))
+      const water = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\Water"))
+      const border = fields.filter(f=>f.imageSrc.startsWith("img\\Map\\border"))
+
       res.status(200).json({ forests, plains, shores, water, border })
     } else {
       const fields = await MapField.find(

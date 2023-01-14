@@ -124,9 +124,9 @@
   width: 64px;
 }
 .mapField  {
-  padding: 1px;
-  height: 66px;
-  width: 66px;
+  padding: 0;
+  height: 64px;
+  width: 64px;
   margin: 0;
 }
 

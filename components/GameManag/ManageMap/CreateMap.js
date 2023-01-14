@@ -1,9 +1,9 @@
 import cookies from "js-cookie"
 import React from "react"
 import { Input, Button, Message } from "semantic-ui-react"
-import baseUrl from "../../utils/baseUrl"
+import baseUrl from "../../../utils/baseUrl"
 
-const GenerateMapInputs = ({ setLoading, setMap }) => {
+const CreateMap = ({ setLoading, setMap }) => {
   const [x, setX] = React.useState(50)
   const [y, setY] = React.useState(50)
   const [name, setName] = React.useState("")
@@ -119,5 +119,5 @@ const GenerateMapInputs = ({ setLoading, setMap }) => {
     </>
   )
 }
-
-export default GenerateMapInputs
+ 
+export default CreateMap

@@ -30,7 +30,7 @@ const handleGetRequest = async (req, res) => { // todo check it later
       const maps = await Map.find(
         {},
         { name: 1 }
-      )
+      ).sort({ name: 1 })
       res.status(200).json(maps)
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")

@@ -1,9 +1,9 @@
 import React from "react"
 import { Button, List, Icon, Modal } from "semantic-ui-react"
 import cookies from "js-cookie"
-import baseUrl from "../../utils/baseUrl"
+import baseUrl from "../../../utils/baseUrl"
 
-const MapList = ({ mapRef, setLoading, setMap }) => {
+const MapList = ({ setLoading, setMap }) => {
   const [maps, setMaps] = React.useState([])
   const [activeIndex, setActiveIndex] = React.useState(-1)
   

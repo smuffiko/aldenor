@@ -1,16 +1,15 @@
 import React from "react"
-import styles from "../../styles/GameManag.Fields.module.css"
+import styles from "../../../styles/GameManag.Fields.module.css"
 import { Image } from "semantic-ui-react"
-import baseUrl from "../../utils/baseUrl"
+import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 
-const GenerateMapField = ({ col, newField, mapRef, colIndex, rowIndex }) => {
+const MapField = ({ col, mapRef, colIndex, rowIndex }) => {
   const [field, setField] = React.useState(col.field)
-  console.log("rendering .... ")
-
   const handleClick = async ()=> {
     const url = `${baseUrl}/api/map`
     const charToken = cookies.get("charId")
+    const newField = cookies.get("selected")
     const payload = {
       newField,
       oldField: col
@@ -29,9 +28,10 @@ const GenerateMapField = ({ col, newField, mapRef, colIndex, rowIndex }) => {
       }
       return await response.json()
     }).then(data => {
-      mapRef.current.coords[colIndex].fields[rowIndex].field = data
+      //update the field in the mapRef only
+      mapRef.current.coords[rowIndex].fields[colIndex].field = data
       setField(data)
-    }).catch(error=>console.log(error.message)) // todo? idk
+    }).catch(error=>console.log(error.message)) 
   }
 
   return (
@@ -43,4 +43,4 @@ const GenerateMapField = ({ col, newField, mapRef, colIndex, rowIndex }) => {
   )
 }
  
-export default GenerateMapField
+export default MapField
