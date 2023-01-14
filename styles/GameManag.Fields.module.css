@@ -103,10 +103,11 @@
   max-width: 40vw;
   height: 80vh;
   overflow: scroll;
-  -ms-overflow-style: none;  
-  -o-overflow-style: none;  
-  -webkit-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.mapTable::-webkit-scrollbar {
+  display: none;
 }
 .mapWrapper {
   padding: 64px;
