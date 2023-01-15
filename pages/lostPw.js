@@ -120,95 +120,97 @@ const LostPw = ({ hash }) => {
 
   return (
     <>
-      <Message attached icon color="black" >
-        <Icon name="settings" />
-        <Message.Content>
-          <Message.Header>Lost password </Message.Header>
-          Recover it here
-        </Message.Content>
-      </Message>  
-      {hash ? (
-        <Form loading={loading} onSubmit={handlePw} success={successPw}>
-          <Message success icon attached >
-            <Icon name="check" />
-            <Message.Content>
-              <Message.Header>Success!</Message.Header>
-              Password was changed! You will be redirected soon!
-            </Message.Content>
-          </Message>
-          <Popup trigger={
-            <Form.Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              label="New password"
-              required={true}
-              name="password1"
-              type="password"
-              value={passwords.password1}
-              onChange={handleChangePw}
-            />}
-            content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
-          />
-          <Popup trigger={
-            <Form.Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              label="New password again"
-              required={true}
-              name="password2"
-              type="password"
-              value={passwords.password2}
-              onChange={handleChangePw}
-            />}
-            content='In case of any mistake please write again your new password.'
-          />
-          <Button
-            disabled={disabledPw || loading}
-            icon="mail"
-            type="submit"
-            color="olive"
-            content="Recover password"
-          />
-        </Form>
-      ) : (
-        <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
-          <Message error icon attached >
-            <Icon name="x" />
-            <Message.Content>
-              <Message.Header>Oops!</Message.Header>
-              {error}
-            </Message.Content>
-          </Message>
-          <Message success icon attached >
-            <Icon name="check" />
-            <Message.Content>
-              <Message.Header>Success!</Message.Header>
-              Message was sent to email {email}. Check it now and reset your password.
-            </Message.Content>
-          </Message>
-          <Segment attached>
-            <Form.Input
-              fluid
-              icon="user"
-              iconPosition="left"
-              label="Login or email"
-              required={true}
-              name="loginOrEmail"
-              value={user.loginOrEmail}
-              onChange={handleChange}
-            />
-            <Button
-              disabled={disabled || loading}
-              icon="mail"
-              type="submit"
-              color="olive"
-              content="Recover password"
-            />
-          </Segment>
-        </Form>  
-      )}  
+        <Message attached icon color="black" >
+          <Icon name="settings" />
+          <Message.Content>
+            <Message.Header>Lost password </Message.Header>
+            Recover it here
+          </Message.Content>
+        </Message>  
+        {hash ? (
+          <Form loading={loading} onSubmit={handlePw} success={successPw}>
+            <Message success icon attached >
+              <Icon name="check" />
+              <Message.Content>
+                <Message.Header>Success!</Message.Header>
+                Password was changed! You will be redirected soon!
+              </Message.Content>
+            </Message>
+            <Segment attached>
+              <Popup trigger={
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  label="New password"
+                  required={true}
+                  name="password1"
+                  type="password"
+                  value={passwords.password1}
+                  onChange={handleChangePw}
+                />}
+                content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
+              />
+              <Popup trigger={
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  label="New password again"
+                  required={true}
+                  name="password2"
+                  type="password"
+                  value={passwords.password2}
+                  onChange={handleChangePw}
+                />}
+                content='In case of any mistake please write again your new password.'
+              />
+              <Button
+                disabled={disabledPw || loading}
+                icon="mail"
+                type="submit"
+                color="olive"
+                content="Recover password"
+              />
+            </Segment>
+          </Form>
+        ) : (
+          <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
+            <Message error icon attached >
+              <Icon name="x" />
+              <Message.Content>
+                <Message.Header>Oops!</Message.Header>
+                {error}
+              </Message.Content>
+            </Message>
+            <Message success icon attached >
+              <Icon name="check" />
+              <Message.Content>
+                <Message.Header>Success!</Message.Header>
+                Message was sent to email {email}. Check it now and reset your password.
+              </Message.Content>
+            </Message>
+            <Segment attached>
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                label="Login or email"
+                required={true}
+                name="loginOrEmail"
+                value={user.loginOrEmail}
+                onChange={handleChange}
+              />
+              <Button
+                disabled={disabled || loading}
+                icon="mail"
+                type="submit"
+                color="olive"
+                content="Recover password"
+              />
+            </Segment>
+          </Form>  
+        )}  
     </>
   )
 }
