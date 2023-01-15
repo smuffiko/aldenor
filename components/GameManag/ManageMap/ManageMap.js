@@ -3,6 +3,8 @@ import CreateMap from "./CreateMap"
 import MapList from "./MapList"
 import UpdateMap from "./UpdateMap"
 import { Button, Dimmer, Loader } from "semantic-ui-react"
+import cookies from "js-cookie"
+import baseUrl from "../../../utils/baseUrl"
 
 const ManageMap = React.memo(({ map, setMap }) => {
   const mapRef = React.useRef(map)
@@ -11,6 +13,35 @@ const ManageMap = React.memo(({ map, setMap }) => {
   React.useEffect(()=> {
     mapRef.current = map
   },[map])
+
+  const handleSave = async () => {
+    setLoading(true)
+    const url = `${baseUrl}/api/map`
+    const charToken = cookies.get("charId")
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": charToken
+      },
+      body: JSON.stringify({map})
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.json()
+    }).then(data => {
+      mapRef.current = data
+      setMap(data)
+    }).catch(error=>console.log(error.message)) 
+    .finally(()=>setLoading(false))
+  }
+  
+  const handleSaveBack = async () => {
+    await handleSave()
+      .then(()=>setMap(null))
+  }
 
   return (
     <>
@@ -22,12 +53,26 @@ const ManageMap = React.memo(({ map, setMap }) => {
       { map && mapRef.current ? (
         <>
           <Button
-            color='olive'
-            icon='arrow left'
-            label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
+            color='red'
+            icon='x'
+            label={{ basic: true, color: 'grey', pointing: false , content: 'Back - Discard changes' }}
             onClick={()=> {
               setMap(null)
             }}
+            type="button"
+          />
+          <Button
+            color='orange'
+            icon='save'
+            label={{ basic: true, color: 'grey', content: 'Save & back', pointing: false }}
+            onClick={()=>handleSaveBack()}
+            type="button"
+          />
+          <Button
+            color='olive'
+            icon='save'
+            label={{ basic: true, color: 'grey', content: 'Save & stay', pointing: false }}
+            onClick={()=>handleSave()}
             type="button"
           />
           <UpdateMap mapRef={mapRef} />

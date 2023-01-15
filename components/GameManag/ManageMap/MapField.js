@@ -6,21 +6,17 @@ import cookies from "js-cookie"
 
 const MapField = ({ col, mapRef, colIndex, rowIndex }) => {
   const [field, setField] = React.useState(col.field)
+  console.log("rendering map field")
   const handleClick = async ()=> {
-    const url = `${baseUrl}/api/map`
-    const charToken = cookies.get("charId")
     const newField = cookies.get("selected")
-    const payload = {
-      newField,
-      oldField: col
-    }
+    const url = `${baseUrl}/api/field?_id=${newField}`
+    const charToken = cookies.get("charId")
     await fetch(url, {
-      method: "PUT",
+      method: "GET",
       headers: {
         "Content-type": "application/json",
         "Authorization": charToken
-      },
-      body: JSON.stringify(payload)
+      }
     }).then(async response => {
       if(!response.ok) {
         const er = await response.text()

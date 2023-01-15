@@ -38,9 +38,14 @@ const handleGetRequest = async (req, res) => {
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
-    const { imageSrc } = req.query
-    const fields = await MapField.find({ imageSrc })
-    res.status(200).json(fields)
+    const { imageSrc, _id } = req.query
+    if(_id) { // find excatly one field
+      const field = await MapField.findOne({ _id })
+      res.status(200).json(field)
+    } else { // find all fields with same image but different rotation, flip
+      const fields = await MapField.find({ imageSrc })
+      res.status(200).json(fields)
+    }
   }
 }
 

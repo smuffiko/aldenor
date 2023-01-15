@@ -90,17 +90,14 @@ const handlePutRequest = async (req, res) => {
   const character = await Character.findOne({ _id: charId })
   if (character) {
     if(character.role==="root") { // if we are logged with root character
-      const { newField, oldField } = req.body
-      const field = await Map.findOneAndUpdate(
-        { "coords": { $elemMatch: { "fields": { $elemMatch: { "_id": oldField._id } } } } },
-        { $set: { "coords.$[i].fields.$[j].field": newField } },
-        { arrayFilters: [ { "i.fields": { $elemMatch: { "_id": oldField._id } } }, { "j._id": oldField._id } ], new: true }
-      ).then(async()=>{
-        const field = await MapField.findOne({ _id: newField })
-        return field
-      })
-      if(field) return res.status(200).json(field)
-      else return res.status(400).send("")
+      const { map } = req.body
+      const newMap = await Map.findOneAndUpdate(
+        { _id: map._id },
+        { $set: { coords: map.coords },
+          new: true
+        }
+      ) 
+      return res.status(200).json(newMap)
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")
     }
