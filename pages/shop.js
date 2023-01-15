@@ -1,5 +1,11 @@
 const Shop = () => {
-  return (<>Shop</>)
+  return (
+    <>
+      <div className="bodyContent">
+        Shop
+      </div>
+    </>
+  )
 }
  
 export default Shop

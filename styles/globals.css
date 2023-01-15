@@ -32,8 +32,11 @@ a {
   position:relative;
 }
 #body {
-  padding:0;
+  padding: 0;
   position: relative;
+}
+#body div.bodyContent {
+  padding: 50px 0 100px 0;
 }
 #footer {
   position:absolute;

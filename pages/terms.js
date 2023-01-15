@@ -1,5 +1,11 @@
 const Terms = () => {
-  return (<>Terms</>)
+  return (
+    <>
+      <div className="bodyContent">
+        Terms
+      </div>
+    </>
+  )
 }
  
 export default Terms

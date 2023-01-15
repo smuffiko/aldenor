@@ -1,5 +1,10 @@
 const Contact = () => {
-  return (<>Contact</>)
+  return (
+    <>
+      <div className="bodyContent">
+        Contact
+      </div>
+    </>)
 }
  
 export default Contact

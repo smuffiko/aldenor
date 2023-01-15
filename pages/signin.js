@@ -54,6 +54,7 @@ const SignIn = () => {
 
   return (
     <>
+      <div className="bodyContent">
       <Message attached icon color="black" >
         <Icon name="settings" />
         <Message.Content>
@@ -105,6 +106,7 @@ const SignIn = () => {
         <Icon name="help" />
         Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link>
       </Message>
+      </div>
     </>
   )
 }

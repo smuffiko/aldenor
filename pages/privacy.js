@@ -1,5 +1,11 @@
 const Privacy = () => {
-  return (<>Privacy</>)
+  return (
+    <>
+      <div className="bodyContent">
+        Privacy
+      </div>
+    </>
+    )
 }
  
 export default Privacy

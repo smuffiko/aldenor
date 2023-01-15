@@ -14,6 +14,7 @@ const Confirm = ({ confirmToken }) => {
 
   return (
     <>
+      <div className="bodyContent">
       {confirmToken && (
         <>
         {confirmToken!==-1 && (
@@ -27,6 +28,7 @@ const Confirm = ({ confirmToken }) => {
         )}
         </>
       )}
+      </div>
     </>
   )
 }

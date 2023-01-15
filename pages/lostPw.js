@@ -120,6 +120,7 @@ const LostPw = ({ hash }) => {
 
   return (
     <>
+      <div className="bodyContent">
         <Message attached icon color="black" >
           <Icon name="settings" />
           <Message.Content>
@@ -211,6 +212,7 @@ const LostPw = ({ hash }) => {
             </Segment>
           </Form>  
         )}  
+      </div>
     </>
   )
 }

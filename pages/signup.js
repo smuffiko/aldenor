@@ -76,6 +76,7 @@ const SignUp = () => {
 
   return (
     <>
+      <div className="bodyContent">
       <Message attached icon color="black" >
         <Icon name="settings" />
         <Message.Content>
@@ -168,6 +169,7 @@ const SignUp = () => {
         <Icon name="help" />
         Do you already have an account? Sign in <Link href="/signin">here</Link> instead.
       </Message>
+      </div>
     </>
   )
 }
