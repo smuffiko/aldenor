@@ -29,8 +29,11 @@ const handleGetRequest = async (req, res) => {
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
-    const { generatingMap } = req.query
-    if(generatingMap) {
+    const { generatingMap, map } = req.query
+    if(map) {
+      const fields = await MapField.find()
+      res.status(200).json(fields)
+    } else if(generatingMap) {
       const fields = await MapField.find(
         { },
         { imageSrc: 1, rotation: 1, flip: 1 }
