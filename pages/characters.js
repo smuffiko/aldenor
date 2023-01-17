@@ -6,7 +6,7 @@ import CreateCharacter from "../components/Game/CreateCharacter"
 import baseUrl from "../utils/baseUrl"
 import { setCharToken, unsetCharToken } from "../utils/character"
 
-const Game = () => {
+const CharactersPage = () => {
   const [character, setCharacter] = React.useState(null)
   const [slot, setSlot] = React.useState(null)
   const [error, setError] = React.useState("")
@@ -61,4 +61,4 @@ const Game = () => {
   )
 }
  
-export default Game
+export default CharactersPage

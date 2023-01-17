@@ -205,10 +205,9 @@ const CharacterSchema = new mongoose.Schema(
           required: true,
           default: 0
         },
-        z: {
-          type: Number,
-          required: true,
-          default: 0
+        map: {
+          type: ObjectId,
+          ref: "Map"
         }
       },
       camp: {
@@ -222,10 +221,9 @@ const CharacterSchema = new mongoose.Schema(
           required: true,
           default: 0
         },
-        z: {
-          type: Number,
-          required: true,
-          default: 0
+        map: {
+          type: ObjectId,
+          ref: "Map"
         }
       }
     },

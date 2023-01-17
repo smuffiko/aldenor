@@ -3,9 +3,11 @@ import styles from "../../../styles/GameManag.Fields.module.css"
 import MapField from "./MapField"
 import cookies from "js-cookie"
 import baseUrl from "../../../utils/baseUrl"
+import Draggable from "react-draggable"
 
 const Map = ({ mapRef }) => {
   const fieldsRef = React.useRef([])
+  console.log("maprendering")
 
   React.useEffect(()=>{
     const getFields = async() => {
@@ -36,7 +38,7 @@ const Map = ({ mapRef }) => {
     Array.from({ length: mapRef.current.map.size.x }, (_, x) =>
       <div className={styles.mapRow} key={x}>
         {Array.from({ length: mapRef.current.map.size.y }, (_, y) =>
-            <MapField key={`${x}${y}`} x={x} y={y} map={mapRef.current} fieldsRef={fieldsRef} />
+          <MapField key={`${x}${y}`} x={x} y={y} map={mapRef.current} fieldsRef={fieldsRef} />	
         )}
       </div>
     )
@@ -44,9 +46,11 @@ const Map = ({ mapRef }) => {
   return (
     <>
       <div className={styles.mapTable}>
-        <div className={styles.mapWrapper} >
-          {fieldsRef.current!==undefined && mapRef.current && mapData}
-        </div>
+        <Draggable >
+          <div className={styles.mapWrapper} >
+            {fieldsRef.current!==undefined && mapRef.current && mapData}
+          </div>
+        </Draggable>
       </div>
     </>
   )

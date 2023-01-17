@@ -27,35 +27,28 @@ export default async function ApiMap(req, res) {
 }
 
 const handleGetRequest = async (req, res) => { // todo check it later
-  if (!("authorization" in req.headers)) {
-    return res.status(401).send("No authorization token.")
-  }
   const { charId } = jwt.verify(
     req.headers.authorization,
     process.env.JWT_SECRET
   )
   const character = await Character.findOne({ _id: charId })
   if (character) {
-    if(character.role==="root") { // if we are logged with root character
-      const { _id } = req.query
-      const map = await Map.findOne({_id})
-      const coords = await MapField.find({ mapId: _id }).populate({
-        path: "field",
-        model: "Field"
-      })
-      const newCoords = coords.map(c=>({
-        coords: c.coords,
-        field: c.field._id,
-        mapId: c.mapId,
-        layer: c.layer,
-        imageSrc: c.field.imageSrc,
-        flip: c.field.flip,
-        rotation: c.field.rotation
-      }))
-      res.status(200).json({map, coords: newCoords})
-    } else { // if root is not logged
-      res.status(401).send("Unauthorized.")
-    }
+    const { _id } = req.query
+    const map = await Map.findOne({_id})
+    const coords = await MapField.find({ mapId: _id }).populate({
+      path: "field",
+      model: "Field"
+    })
+    const newCoords = coords.map(c=>({
+      coords: c.coords,
+      field: c.field._id,
+      mapId: c.mapId,
+      layer: c.layer,
+      imageSrc: c.field.imageSrc,
+      flip: c.field.flip,
+      rotation: c.field.rotation
+    }))
+    res.status(200).json({map, coords: newCoords})
   } else {
     res.status(404).send("Character not found.")
   }

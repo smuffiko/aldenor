@@ -1,0 +1,32 @@
+.input input {
+  background: 
+  url("/img/UI/Forms/FormTextLine/FormTextLine_1.png") left top no-repeat,
+  url("/img/UI/Forms/FormTextLine/FormTextLine_3.png") right top no-repeat,
+  url("/img/UI/Forms/FormTextLine/FormTextLine_4.png") left bottom no-repeat,
+  url("/img/UI/Forms/FormTextLine/FormTextLine_6.png") right bottom no-repeat,
+  url("/img/UI/Forms/FormTextLine/FormTextLine_2.png") left top repeat-x,
+  url("/img/UI/Forms/FormTextLine/FormTextLine_5.png") left bottom repeat-x !important;
+  line-height: 40px;
+  font-size: 20px !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-weight: bolder;
+  height: 40px;
+  image-rendering: pixelated !important;
+}
+
+.button {
+  width: 150px !important;
+  height: 50px !important;
+  font-size: 15px !important;
+  color: #000 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  background: url("/img/UI/MainBtn/btn_2.png") !important;
+}
+.button:hover {
+  background: url("/img/UI/MainBtn/btn_1.png") !important;
+}
+.button.disabled {
+  background-image: url("/img/UI/MainBtn/btn_3.png") !important;
+  pointer-events: none;
+  opacity: 0.5;
+}

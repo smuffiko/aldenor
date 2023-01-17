@@ -1,5 +1,6 @@
 import Character from "../../models/Character"
 import User from "../../models/User"
+import Map from "../../models/Map"
 import jwt from "jsonwebtoken"
 import connectDB from "../../utils/connectDB"
 
@@ -77,21 +78,35 @@ const handlePostRequest = async (req, res) => {
   if(await Character.findOne({ name: regex }))
     return res.status(422).send("This name already exists.")
 
+  await Map.findOne({name: "Start"}) // default map name 4x6
+  .then(async(defaultMap)=>{
   // create new character and save to db
-  const newCharacter = await new Character({
-    owner: userId,
-    name,
-    skin,
-    race,
-    gender
-  }).save()
-  // add character id to user slot
-  await User.findOneAndUpdate({ _id: userId }, { $set: { [`characters.${index}.character`]: newCharacter._id } } )
-
-  // set character token
-  const charToken = jwt.sign({ charId: newCharacter._id }, process.env.JWT_SECRET,{ expiresIn: "1d"})
-
-  return res.status(200).json({ newCharacter, charToken })
+    const newCharacter = await new Character({
+      owner: userId,
+      name,
+      skin,
+      race,
+      gender,
+      "coords.current": {
+          x: 4,
+          y: 6,
+          map: defaultMap._id
+        }
+    }).save()
+    return newCharacter
+  }).then(async (newCharacter)=>{
+    // set character token
+    // find user
+    const u = await User.findOne({ _id: userId })
+    return { u, newCharacter } 
+  }).then(async({u, newCharacter}) =>{
+    // add character id to user slot
+    await User.findOneAndUpdate({ _id: userId }, { $set: { [`characters.${u.characters.length == 6 ? index - 1 : index}.character`]: newCharacter._id } } )
+    return newCharacter
+  }).then((newCharacter)=>{
+    const charToken = jwt.sign({ charId: newCharacter._id }, process.env.JWT_SECRET,{ expiresIn: "1d"})
+    return res.status(200).json({ newCharacter, charToken })
+  })
 }
 
 const handleDeleteRequest = async (req, res) => {

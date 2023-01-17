@@ -3,6 +3,7 @@ import Link from "next/link"
 import baseUrl from "../utils/baseUrl"
 import { Message, Form, Icon, Segment, Button, Popup } from "semantic-ui-react"
 import { handleLogin } from "../utils/auth"
+import styles from "../styles/AldenorUI/AldenorUI.Form.module.css"
 
 const INITIAL_USER = {
   login: "",
@@ -110,6 +111,7 @@ const SignUp = () => {
               name="login"
               value={user.login}
               onChange={handleChange}
+              className={styles.input}
             />}
             content='Your login name. Only you should know that. Login name must be between 5 and 30 chars long with only english alphabet characters and numbers.'
           />
@@ -124,6 +126,7 @@ const SignUp = () => {
               type="password"
               value={user.password}
               onChange={handleChange}
+              className={styles.input}
             />}
             content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
           />
@@ -138,6 +141,7 @@ const SignUp = () => {
               type="password"
               value={user.password2}
               onChange={handleChange}
+              className={styles.input}
             />}
             content='In case of any mistake please write again your new password.'
           />
@@ -151,16 +155,17 @@ const SignUp = () => {
               name="email"
               value={user.email}
               onChange={handleChange}
+              className={styles.input}
             />}
             content="Write there your email address. We will send you activation link. Without it you can't play this game."
           />
           <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
           <Button
-            disabled={disabled || loading}
             icon="signup"
             type="submit"
             color="olive"
             content="Sign up!"
+            className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
           />
         </Segment>
       </Form>  

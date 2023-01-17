@@ -96,7 +96,7 @@ const LeftTop = ({ user }) => {
             <div className={styles.fillBar}><FillBar img={hpImg} current={hp} max={maxHp} /></div>
             <div className={styles.fillBar}><FillBar img={epImg} current={ep} max={maxEp} /></div>
             <div className={styles.fillBar}><FillBar img={expImg} current={exp} max={maxExp} /></div>
-            <div className={styles.fillBar}><FillBar img={expImg} current={"invisible"} max={"bar"}/></div>
+            <div className={styles.fillBar}><FillBar name={character.name}/></div>
           </div>
         </div>
       )}

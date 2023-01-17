@@ -3,6 +3,7 @@ import Link from "next/link"
 import baseUrl from "../utils/baseUrl"
 import { handleLogin } from "../utils/auth"
 import { Message, Form, Icon, Segment, Button } from "semantic-ui-react"
+import styles from "../styles/AldenorUI/AldenorUI.Form.module.css"
 
 const INITIAL_USER = {
   login: "",
@@ -80,6 +81,7 @@ const SignIn = () => {
             name="login"
             value={user.login}
             onChange={handleChange}
+            className={styles.input}
           />
           <Form.Input
             fluid
@@ -91,12 +93,12 @@ const SignIn = () => {
             type="password"
             value={user.password}
             onChange={handleChange}
+            className={styles.input}
           />
           <Button
-            disabled={disabled || loading}
             icon="sign in"
             type="submit"
-            color="olive"
+            className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
             content="Sign in!"
           />
         </Segment>

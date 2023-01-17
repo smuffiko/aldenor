@@ -77,6 +77,7 @@ const Palette = ({}) => {
               <div className={`${styles.generatedField} ${selected==="cl1"? styles.selected: ""}`} onClick={()=>handleClickSelected("cl1")}><Icon name="minus" size="large"/></div>
               <div className={`${styles.generatedField} ${selected==="cl+"? styles.selected: ""}`} onClick={()=>handleClickSelected("cl+")}><Icon name="erase" size="large"/></div>
               <div className={`${styles.generatedField} ${selected==="clall"? styles.selected: ""}`} onClick={()=>handleClickSelected("clall")}><Icon name="trash alternate outline" size="large"/></div>
+              <div className={`${styles.generatedField} ${selected==="move"? styles.selected: ""}`} onClick={()=>handleClickSelected("move")}><Icon name="hand rock outline" size="large"/></div>
             </div>
             <div>
               { fieldsRef.current.forests.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }

@@ -2,6 +2,7 @@ import React from "react"
 import baseUrl from "../utils/baseUrl"
 import { Message, Form, Icon, Segment, Button, Popup } from "semantic-ui-react"
 import { handleLogin } from "../utils/auth"
+import styles from "../styles/AldenorUI/AldenorUI.Form.module.css"
 
 const INITIAL_USER = {
   loginOrEmail: ""
@@ -167,11 +168,11 @@ const LostPw = ({ hash }) => {
                 content='In case of any mistake please write again your new password.'
               />
               <Button
-                disabled={disabledPw || loading}
                 icon="mail"
                 type="submit"
                 color="olive"
                 content="Recover password"
+                className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
               />
             </Segment>
           </Form>
@@ -203,11 +204,11 @@ const LostPw = ({ hash }) => {
                 onChange={handleChange}
               />
               <Button
-                disabled={disabled || loading}
                 icon="mail"
                 type="submit"
                 color="olive"
                 content="Recover password"
+                className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
               />
             </Segment>
           </Form>  

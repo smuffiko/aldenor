@@ -1,4 +1,5 @@
 import styles from "../../styles/Game.Characters.module.css"
+import stylesUI from "../../styles/AldenorUI/AldenorUI.Form.module.css"
 import React from "react"
 import Router from "next/router"
 import cookie from "js-cookie"
@@ -46,13 +47,13 @@ const Characters = ({ setSlot, setChar }) => {
                     <List.Item className={styles.charText}>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
                   </List>
                 </div>
-                <div className={styles.charBottom}><Button className={styles.button} onClick={()=>setChar(c.character)}>Play!</Button></div>  
+                <div className={styles.charBottom}><Button className={stylesUI.button} onClick={()=>setChar(c.character)}>Play!</Button></div>  
               </div>
             ):(
               <>
                 <div className={styles.charTop}><Header as="h3">Empty</Header></div>
                 <div className={styles.charMid}><Icon name="plus" size="huge" /></div>   
-                <div className={styles.charBottom}><Button className={styles.button} onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
+                <div className={styles.charBottom}><Button className={stylesUI.button} onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
               </>  
             )}      
             </div></div> 
@@ -62,7 +63,7 @@ const Characters = ({ setSlot, setChar }) => {
             <div><div>
               <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
               <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
-              <div className={styles.charBottom}><Button className={styles.button}  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
+              <div className={styles.charBottom}><Button className={stylesUI.button}  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
             </div></div>
           </div>
         )

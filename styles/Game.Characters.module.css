@@ -4,7 +4,7 @@
 }
 .panelCorner1, .panelCorner7, .panelCorner3, .panelCorner9 {
   position: absolute;
-  z-index: 10;
+  z-index: 20;
 }
 .panelCorner1 {
   top: 0;
@@ -89,12 +89,4 @@
   bottom: 1rem;
   text-align: center;
   width: 100%;
-}
-.button {
-  width: 150px !important;
-  height: 50px !important;
-  background: url("/img/UI/MainBtn/btn_2.png") !important;
-}
-.button:hover {
-  background: url("/img/UI/MainBtn/btn_1.png") !important;
 }

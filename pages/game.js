@@ -42,9 +42,11 @@ const Game = () => {
   return (
     <>
     {!firstRound && character && (
-      <Container>
-        <Play character={character} />
-      </Container>
+      <>
+        <Container>
+            <Play character={character} />
+        </Container>
+      </>
     )}
     </>
   )
