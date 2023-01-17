@@ -127,6 +127,7 @@ const handleDeleteRequest = async (req, res) => {
   if (character) {
     if(character.role==="root") { // if we are logged with root character
       const { _id } = req.query
+      await MapField.deleteMany({ mapId: _id })
       await Map.findOneAndDelete({ _id })
       res.status(200).send("Map successfully deleted.")
     } else { // if root is not logged

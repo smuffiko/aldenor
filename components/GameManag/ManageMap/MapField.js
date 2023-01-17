@@ -10,9 +10,9 @@ const MapField = ({ fieldsRef, map, x, y }) => {
   const handleClick = async ()=> {
     const newFieldId = cookies.get("selected")
     const layer = cookies.get("layer")
-    const foundField = field.find(f=>f.layer === layer)
+    const foundField = field.find(f=>f.layer == layer)
     if(newFieldId === "cl1") { 
-      setField(field.filter(f => f.layer !== layer))  // clear just that layer
+      setField(field.filter(f => f.layer != layer))  // clear just that layer
       map.coords = map.coords.filter(f=> f.coords.x != x || f.coords.y != y || f.layer != layer )
     } else if(newFieldId === "cl+"){ // clear layers same or higher than current layer
       setField(field.filter(f => f.layer < layer))
