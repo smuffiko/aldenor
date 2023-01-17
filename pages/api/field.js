@@ -1,4 +1,4 @@
-import MapField from "../../models/MapField"
+import Field from "../../models/Field"
 import User from "../../models/User"
 import Character from "../../models/Character"
 import jwt from "jsonwebtoken"
@@ -40,10 +40,10 @@ const handleGetRequest = async (req, res) => {
   } else {
     const { imageSrc, _id } = req.query
     if(_id) { // find excatly one field
-      const field = await MapField.findOne({ _id })
+      const field = await Field.findOne({ _id })
       res.status(200).json(field)
     } else { // find all fields with same image but different rotation, flip
-      const fields = await MapField.find({ imageSrc })
+      const fields = await Field.find({ imageSrc })
       res.status(200).json(fields)
     }
   }
@@ -62,7 +62,7 @@ const handlePostRequest = async (req, res) => {
     res.status(401).send("Not authorized.")
   } else {
     const { flip, imageSrc, rotation } = req.body
-    const newField = await new MapField({
+    const newField = await new Field({
       imageSrc,
       rotation,
       flip
@@ -89,29 +89,29 @@ const handlePutRequest = async (req, res) => {
       : direction === "left" ? "right"
       : "left"
     if(value) {
-      const found = await MapField.findOne({ _id: field, [direction]: newField })
+      const found = await Field.findOne({ _id: field, [direction]: newField })
       if(!found) {
-        await MapField.findOneAndUpdate(
+        await Field.findOneAndUpdate(
           { _id: field },
           { $push: { [direction]: newField }}
         )
-        await MapField.findOneAndUpdate(
+        await Field.findOneAndUpdate(
           { _id: newField },
           { $push: { [revDirection]: field }}
         )
       }
     } else {
-      await MapField.findOneAndUpdate(
+      await Field.findOneAndUpdate(
         { _id: field },
         { $pull: { [direction]: newField }}
       )
-      await MapField.findOneAndUpdate(
+      await Field.findOneAndUpdate(
         { _id: newField },
         { $pull: { [revDirection]: field }}
       )
     }
-    const f1 = await MapField.findOne({ _id: field })
-    const f2 = await MapField.findOne({ _id: newField })
+    const f1 = await Field.findOne({ _id: field })
+    const f2 = await Field.findOne({ _id: newField })
     res.status(200).json({ f1, f2 })
   }
 }
@@ -130,9 +130,9 @@ const handleDeleteRequest = async (req, res)=> {
   } else {
     const { _id } = req.query
     // delete from DB
-    await MapField.findOneAndDelete({ _id })
+    await Field.findOneAndDelete({ _id })
     // delete from left, top, right, bottom
-    await MapField.updateMany(
+    await Field.updateMany(
       { },
       { $pull: { left: _id, top: _id, right: _id, bottom: _id } }
     )

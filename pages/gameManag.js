@@ -8,7 +8,7 @@ const GameManag = () => {
 
   return (
     <>
-      { !map && <ManageFiles setUpdatingFiles={setUpdatingFiles} updatingFiles={updatingFiles} /> }
+      { !map && <ManageFiles setUpdating={setUpdatingFiles} updating={updatingFiles} /> }
       { !updatingFiles && <ManageMap map={map} setMap={setMap} /> }
     </>
   )

@@ -1,4 +1,4 @@
-import MapField from "../../models/MapField"
+import Field from "../../models/Field"
 import Character from "../../models/Character"
 import PublicFile from "../../models/PublicFile"
 import jwt from "jsonwebtoken"
@@ -31,10 +31,10 @@ const handleGetRequest = async (req, res) => {
   } else {
     const { generatingMap, map } = req.query
     if(map) {
-      const fields = await MapField.find()
+      const fields = await Field.find()
       res.status(200).json(fields)
     } else if(generatingMap) {
-      const fields = await MapField.find(
+      const fields = await Field.find(
         { },
         { imageSrc: 1, rotation: 1, flip: 1 }
       ).sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields
@@ -47,7 +47,7 @@ const handleGetRequest = async (req, res) => {
 
       res.status(200).json({ forests, plains, shores, water, border })
     } else {
-      const fields = await MapField.find(
+      const fields = await Field.find(
         { },
         { imageSrc: 1, rotation: 1, flip: 1 }
       ).sort({ imageSrc: 1, flip: 1, rotation: 1 })  // find all DB fields

@@ -32,28 +32,20 @@ const Map = ({ mapRef }) => {
     getFields()
   },[])
 
-  const mapData = () => {
-    return mapRef.current.coords.map((row, rowIndex) =>(
-      <div key={rowIndex} className={styles.mapRow}>
-        {row.fields.map((col, colIndex) => (
-          <MapField
-            key={colIndex}
-            col={col}
-            colIndex={colIndex}
-            rowIndex={rowIndex}
-            mapRef={mapRef}
-            fieldsRef={fieldsRef}
-          />
-        ))}
+  const mapData = 
+    Array.from({ length: mapRef.current.map.size.x }, (_, x) =>
+      <div className={styles.mapRow} key={x}>
+        {Array.from({ length: mapRef.current.map.size.y }, (_, y) =>
+            <MapField key={`${x}${y}`} x={x} y={y} map={mapRef.current} fieldsRef={fieldsRef} />
+        )}
       </div>
-    ))
-  }
+    )
 
   return (
     <>
       <div className={styles.mapTable}>
-        <div className={styles.mapWrapper}>
-          {fieldsRef.current!==undefined && mapData()}
+        <div className={styles.mapWrapper} >
+          {fieldsRef.current!==undefined && mapRef.current && mapData}
         </div>
       </div>
     </>

@@ -21,48 +21,27 @@ const CreateMap = ({ setLoading, setMap }) => {
     if(x>=1 && y>=1 && x<=100 && y<=100) {
       setLoading(true)
       const charToken = cookies.get("charId")
-      const imageSrc = "img\\Map\\border.png"
-      const url = `${baseUrl}/api/field?imageSrc=${imageSrc}`
+      const url = `${baseUrl}/api/map`
+      const payload = {
+        name,
+        x,
+        y
+      }
       await fetch(url,{
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-type": "application/json",
           "Authorization": charToken
-        }
+        },
+        body: JSON.stringify(payload)
       }).then(async response => {
         if(!response.ok) {
           const er = await response.text()
           throw new Error(er)
         }
         return await response.json()
-      }).then(border => {
-        const newMap = new Array( y )
-        for(var i = 0; i < y; i++) {
-          newMap[i] = { fields: [] }
-          for(var j = 0; j < x; j++) {
-            newMap[i].fields.push({ field: border[0]})
-          }
-        }
-        return newMap
-      }).then(async map=>{
-        const charToken = cookies.get("charId")
-        const url = `${baseUrl}/api/map`
-        await fetch(url,{
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            "Authorization": charToken
-          },
-          body: JSON.stringify({map, name})
-        }).then(async response => {
-          if(!response.ok) {
-            const er = await response.text()
-            throw new Error(er)
-          }
-          return await response.json()
-        }).then(map=>{
-          setMap(map)
-        }).catch(error=>setError(error.message)) 
+      }).then(map=>{
+        setMap(map)
       }).catch(error=>setError(error.message) // todo ?
       ).finally(()=>{
         setLoading(false)

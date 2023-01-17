@@ -5,10 +5,9 @@ import styles from "../../../styles/GameManag.Fields.module.css"
 import { Button, Header, Image } from "semantic-ui-react"
 import cookie from "js-cookie"
 
-const ManageFiles = ({ setUpdatingFiles, updatingFiles }) => {  
+const ManageFiles = ({ setUpdating, updating }) => {  
   const [files, setFiles] = React.useState([]) // git files
   const [fields, setFields] = React.useState([]) // DB 
-  const [updating, setUpdating] = React.useState(false)
   const [file, setFile] = React.useState(null) // updating this file
 
   React.useEffect(()=>{

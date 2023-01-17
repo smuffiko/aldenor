@@ -4,35 +4,23 @@ const { String, Boolean, Number, ObjectId } = mongoose.Schema.Types
 
 const MapFieldSchema = new mongoose.Schema(
   {
-    imageSrc: {
-      type: String,
-      required: true
+    field: {
+      type: ObjectId,
+      ref: "Field"
     },
-    rotation: {
-      type: Number,
-      default: 0
+    mapId: {
+      type: ObjectId,
+      ref: "Map"
     },
-    flip: {
-      type: Boolean,
-      default: false
+    coords: {
+      x: Number, 
+      y: Number
     },
-    left: [{
-      type: ObjectId
-    }],
-    top: [{
-      type: ObjectId
-    }],
-    right: [{
-      type: ObjectId
-    }],
-    bottom: [{
-      type: ObjectId
-    }],
     layer: {
       type: Number,
-      default: 5
+      required: true
     }
-  }
+  } 
 )
 
 

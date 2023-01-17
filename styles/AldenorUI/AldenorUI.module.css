@@ -200,3 +200,6 @@
   visibility: visible;
   padding: 0 !important;
 }
+.active {
+  background-color: red !important;
+}

@@ -18,13 +18,16 @@ const ManageMap = React.memo(({ map, setMap }) => {
     setLoading(true)
     const url = `${baseUrl}/api/map`
     const charToken = cookies.get("charId")
+    const payload = {
+      map
+    }
     await fetch(url, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
         "Authorization": charToken
       },
-      body: JSON.stringify({map})
+      body: JSON.stringify(payload)
     }).then(async response => {
       if(!response.ok) {
         const er = await response.text()

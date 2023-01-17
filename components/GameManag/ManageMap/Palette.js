@@ -3,16 +3,25 @@ import styles from "../../../styles/GameManag.Fields.module.css"
 import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 import PaletteField from "./PaletteField"
-import { Dimmer, Loader } from "semantic-ui-react"
+import { Dimmer, Loader, Icon } from "semantic-ui-react"
+import PaletteLayer from "./PaletteLayer"
 
-const Palette = () => {
+const Palette = ({}) => {
   const fieldsRef = React.useRef(null)
   const [fields, setFields] = React.useState()
   const [selected, setSelected] = React.useState()
+  const [layer, setLayer] = React.useState(0)
   const [loading, setLoading] = React.useState(true)
-  const handleClick = React.useCallback((image) => {
+  const handleClickSelected = React.useCallback((image) => {
     setSelected(image)
     cookies.set("selected",image, {
+      sameSite: "None",
+      secure: true
+    })
+  }, [setSelected])
+  const handleClickLayer = React.useCallback((value) => {
+    setLayer(value)
+    cookies.set("layer",value, {
       sameSite: "None",
       secure: true
     })
@@ -42,6 +51,10 @@ const Palette = () => {
           sameSite: "None",
           secure: true
         })
+        cookies.set("layer", 0 , {
+          sameSite: "None",
+          secure: true
+        })
       }).catch(error=>console.log(error.message))  // todo
       .finally(()=>setLoading(false))
     }
@@ -58,20 +71,24 @@ const Palette = () => {
       { fieldsRef.current && !loading &&
         (<>
           <div className={styles.generatedFields}>
+            <PaletteLayer layer={layer} handleClick={handleClickLayer} />
             <div>
-              <PaletteField field={fieldsRef.current.border[0]} selected={selected} handleClick={handleClick} />
+              <PaletteField field={fieldsRef.current.border[0]} selected={selected} handleClick={handleClickSelected} />
+              <div className={`${styles.generatedField} ${selected==="cl1"? styles.selected: ""}`} onClick={()=>handleClickSelected("cl1")}><Icon name="minus" size="large"/></div>
+              <div className={`${styles.generatedField} ${selected==="cl+"? styles.selected: ""}`} onClick={()=>handleClickSelected("cl+")}><Icon name="erase" size="large"/></div>
+              <div className={`${styles.generatedField} ${selected==="clall"? styles.selected: ""}`} onClick={()=>handleClickSelected("clall")}><Icon name="trash alternate outline" size="large"/></div>
             </div>
             <div>
-              { fieldsRef.current.forests.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClick} />)) }
+              { fieldsRef.current.forests.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
             </div>
             <div>
-              { fieldsRef.current.plains.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClick} />)) }
+              { fieldsRef.current.plains.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
             </div>
             <div>
-              { fieldsRef.current.shores.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClick} />)) }
+              { fieldsRef.current.shores.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
             </div>
             <div>
-              { fieldsRef.current.water.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClick} />)) }
+              { fieldsRef.current.water.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
             </div>
           </div>
         </>)

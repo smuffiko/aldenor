@@ -38,12 +38,21 @@ const handleGetRequest = async (req, res) => { // todo check it later
   if (character) {
     if(character.role==="root") { // if we are logged with root character
       const { _id } = req.query
-      
-      const newMap = await Map.findOne({_id}).populate({
-        path: "coords.fields.field",
-        model: "MapField"
+      const map = await Map.findOne({_id})
+      const coords = await MapField.find({ mapId: _id }).populate({
+        path: "field",
+        model: "Field"
       })
-      res.status(200).json(newMap)
+      const newCoords = coords.map(c=>({
+        coords: c.coords,
+        field: c.field._id,
+        mapId: c.mapId,
+        layer: c.layer,
+        imageSrc: c.field.imageSrc,
+        flip: c.field.flip,
+        rotation: c.field.rotation
+      }))
+      res.status(200).json({map, coords: newCoords})
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")
     }
@@ -63,14 +72,15 @@ const handlePostRequest = async (req, res) => {
   const character = await Character.findOne({ _id: charId })
   if (character) {
     if(character.role==="root") { // if we are logged with root character
-      const { map, name } = req.body
-      const newMap = await new Map({ name, coords: map }).save().then((t)=>
-        t.populate({
-          path: "coords.fields.field",
-          model: "MapField"
-        })
-      )
-      res.status(200).json(newMap)
+      const { name, x, y } = req.body
+      const newMap = await new Map({
+        name,
+        size: {
+          x,
+          y
+        }
+      }).save()
+      res.status(200).json({ map: newMap, coords: []})
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")
     }
@@ -91,13 +101,12 @@ const handlePutRequest = async (req, res) => {
   if (character) {
     if(character.role==="root") { // if we are logged with root character
       const { map } = req.body
-      const newMap = await Map.findOneAndUpdate(
-        { _id: map._id },
-        { $set: { coords: map.coords },
-          new: true
-        }
-      ) 
-      return res.status(200).json(newMap)
+      const newFields = await MapField.deleteMany({ mapId: map.map._id }).then(async ()=>{
+        const newFields = await MapField.insertMany(map.coords)
+        return newFields
+      })
+      const newMap = { ...map, coords: newFields }
+      res.status(200).send(newMap)
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")
     }

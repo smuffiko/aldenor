@@ -70,7 +70,7 @@ const RightTop = ({ user, character }) => {
         characters: Math.floor(Math.random()*4+1)
       }
       const tenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000)
-      cookies.set("menu",JSON.stringify({ panel, button }), { expires: tenMinutes })
+      cookies.set("menu",JSON.stringify({ panel, button }), { expires: tenMinutes, SameSite: 'None', secure: true })
       setPanelBg(panel)
       setButtonBg(button)
     } else {

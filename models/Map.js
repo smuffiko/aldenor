@@ -8,18 +8,18 @@ const MapSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    coords: [
-      {
-        fields: [
-          { 
-            field: {
-              type: ObjectId,
-              ref: "MapField"
-            }
-          }
-        ]
+    size: {
+      x: {
+        type: Number,
+        required: true,
+        default: 50
+      },
+      y: {
+        type: Number,
+        required: true,
+        default: 50
       }
-    ]
+    } 
   }
 )
 
