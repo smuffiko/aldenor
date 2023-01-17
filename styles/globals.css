@@ -26,6 +26,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+img {
+  image-rendering: pixelated !important;
+}
 
 #container {
   min-height: 100vh;

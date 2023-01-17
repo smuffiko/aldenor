@@ -16,7 +16,6 @@ const PaletteField = ({ field, selected, handleClick }) => {
                 className={`${styles[`rotate${field.rotation}${field.flip ? "flip" : ""}`]}`}
                 src={field.imageSrc}
                 size="big"
-                style={{imageRendering:"pixelated"}}
               />
             </>
           }
@@ -26,7 +25,6 @@ const PaletteField = ({ field, selected, handleClick }) => {
               className={`${styles[`rotate${field.rotation}${field.flip ? "flip" : ""}`]} ${styles.generatedField} ${selected===field._id ? styles.selected : ""}`}
               key={field.imageSrc}
               onClick={()=>handleClick(field._id)}
-              style={{imageRendering:"pixelated"}}
             />
           }
         />
