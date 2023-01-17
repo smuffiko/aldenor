@@ -15,8 +15,8 @@ const MapField = ({ fieldsRef, map, x, y }) => {
       setField(field.filter(f => f.layer !== layer))  // clear just that layer
       map.coords = map.coords.filter(f=> f.coords.x != x || f.coords.y != y || f.layer != layer )
     } else if(newFieldId === "cl+"){ // clear layers same or higher than current layer
-      setField(field.filter(f => f.layer <= layer))
-      map.coords = map.coords.filter(f=> f.coords.x != x || f.coords.y != y || f.layer <= layer )
+      setField(field.filter(f => f.layer < layer))
+      map.coords = map.coords.filter(f=> f.coords.x != x || f.coords.y != y || f.layer < layer )
     } else if(newFieldId === "clall") { // clear all
       setField([])
       map.coords = map.coords.filter(f=> f.coords.x != x || f.coords.y != y)
