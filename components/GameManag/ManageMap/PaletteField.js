@@ -13,6 +13,7 @@ const PaletteField = ({ field, selected, handleClick }) => {
               {field.flip ? <div>Flipped</div> : ""}
               <div>rotate {field.rotation}°</div>
               <Image
+                className={`${styles[`rotate${field.rotation}${field.flip ? "flip" : ""}`]}`}
                 src={field.imageSrc}
                 size="big"
               />
