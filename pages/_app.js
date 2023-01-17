@@ -72,7 +72,7 @@ MyApp.getInitialProps = async({ ctx })=> {
       || ctx.pathname==="/lostPw"
     ) redirectUser(ctx,"/401")
 
-    if(!charId) {
+    if(charId===undefined) {
       // logged user but not logged via character
       // ban pages where you need charId
       if(
@@ -82,7 +82,7 @@ MyApp.getInitialProps = async({ ctx })=> {
         || ctx.pathname==="/gameShop"
         || ctx.pathname==="/staffManag"
         || ctx.pathname==="/ticket"
-      ) redirectUser(ctx,"/401")
+      ) redirectUser(ctx,"/characters")
     } else {
       // logged user (in game) with character
 
