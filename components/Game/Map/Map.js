@@ -51,6 +51,7 @@ const Map = ({ character }) => {
         position={null}
         grid={[1, 1]}
         scale={1}
+        
         className={styles.draggable}
       >
         <div className={styles.mapWrapper} >

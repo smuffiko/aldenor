@@ -16,6 +16,9 @@ const MapField = ({ map, x, y, character }) => {
           return <Image key={i} style={{zIndex: f.layer, pointerEvents:"none"}} className={`${styles.mapField} ${f.imageSrc==="img\\Map\\border.png" ? styles.border : ""} ${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}`} src={f.imageSrc}></Image>
         })
         }
+        {character.coords.current.map==map.map._id && character.coords.current.x === x && character.coords.current.y === y &&
+          <Image style={{zIndex: 11, pointerEvents:"none"}} className={styles.mapField} src={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`} />
+        }
       </div>
     </>
   )
