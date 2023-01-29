@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import baseUrl from "../utils/baseUrl"
-import { Message, Form, Icon, Segment, Button, Popup } from "semantic-ui-react"
+import { Message, Form, Icon, Segment, Button, Popup, Header } from "semantic-ui-react"
 import { handleLogin } from "../utils/auth"
 import styles from "../styles/AldenorUI/AldenorUI.Form.module.css"
 
@@ -76,104 +76,109 @@ const SignUp = () => {
   }
 
   return (
-    <>
-      <div className="bodyContent">
-      <Message attached icon color="black" >
-        <Icon name="settings" />
-        <Message.Content>
-          <Message.Header>Welcome!</Message.Header>
-          Create new account here
-        </Message.Content>
-      </Message>    
-      <Form error={Boolean(error)} loading={loading} success={success} onSubmit={handleSubmit} >
-        <Message error icon attached >
-          <Icon name="x" />
-          <Message.Content>
-            <Message.Header>Oops!</Message.Header>
-            {error}
-          </Message.Content>
-        </Message>
-        <Message success icon attached >
-          <Icon name="check" />
-          <Message.Content>
-            <Message.Header>Success!</Message.Header>
-            Signing up successfull! Don't forget to confirm your email. You will be redirected soon.
-          </Message.Content>
-        </Message>
-        <Segment attached>
-          <Popup trigger={
-            <Form.Input
-              fluid
-              icon="user"
-              iconPosition="left"
-              label="Login"
-              required={true}
-              name="login"
-              value={user.login}
-              onChange={handleChange}
-              className={styles.input}
-            />}
-            content='Your login name. Only you should know that. Login name must be between 5 and 30 chars long with only english alphabet characters and numbers.'
-          />
-          <Popup trigger={
-            <Form.Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              label="Password"
-              required={true}
-              name="password"
-              type="password"
-              value={user.password}
-              onChange={handleChange}
-              className={styles.input}
-            />}
-            content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
-          />
-          <Popup trigger={
-            <Form.Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              label="Password again"
-              required={true}
-              name="password2"
-              type="password"
-              value={user.password2}
-              onChange={handleChange}
-              className={styles.input}
-            />}
-            content='In case of any mistake please write again your new password.'
-          />
-          <Popup trigger={
-            <Form.Input
-              fluid
-              icon="envelope"
-              iconPosition="left"
-              label="Email"
-              required={true}
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              className={styles.input}
-            />}
-            content="Write there your email address. We will send you activation link. Without it you can't play this game."
-          />
-          <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
-          <Button
-            icon="signup"
-            type="submit"
-            color="olive"
-            content="Sign up!"
-            className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
-          />
-        </Segment>
-      </Form>  
-    
-      <Message attached="bottom" color="grey">
-        <Icon name="help" />
-        Do you already have an account? Sign in <Link href="/signin">here</Link> instead.
-      </Message>
+    <> 
+      <div className={`${styles.container} bodyContent`}>
+        <div>
+        <img src="/img/UI/CharPanel/charPanel_1.png" className={styles.panelCorner1} />
+        <img src="/img/UI/CharPanel/charPanel_2.png" className={styles.panelCorner2} />
+        <img src="/img/UI/CharPanel/charPanel_3.png" className={styles.panelCorner3} />
+        <img src="/img/UI/CharPanel/charPanel_4.png" className={styles.panelCorner4} />
+        <img src="/img/UI/CharPanel/charPanel_6.png" className={styles.panelCorner6} />
+        <img src="/img/UI/CharPanel/charPanel_7.png" className={styles.panelCorner7} />
+        <img src="/img/UI/CharPanel/charPanel_8.png" className={styles.panelCorner8} />
+        <img src="/img/UI/CharPanel/charPanel_9.png" className={styles.panelCorner9} />
+
+        <div className={styles.header}>
+            <Header>Welcome!</Header>
+            <p>Create new account here</p>
+        </div>    
+        <Form error={Boolean(error)} loading={loading} success={success} onSubmit={handleSubmit} className={styles.form} >
+          <Message error icon attached >
+            <Icon name="x" />
+            <Message.Content>
+              <Message.Header>Oops!</Message.Header>
+              {error}
+            </Message.Content>
+          </Message>
+          <Message success icon >
+            <Icon name="check" />
+            <Message.Content>
+              <Message.Header>Success!</Message.Header>
+              Signing up successfull! Don't forget to confirm your email. You will be redirected soon.
+            </Message.Content>
+          </Message>
+            <Popup trigger={
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                label="Login"
+                required={true}
+                name="login"
+                value={user.login}
+                onChange={handleChange}
+                className={styles.input}
+              />}
+              content='Your login name. Only you should know that. Login name must be between 5 and 30 chars long with only english alphabet characters and numbers.'
+            />
+            <Popup trigger={
+              <Form.Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                label="Password"
+                required={true}
+                name="password"
+                type="password"
+                value={user.password}
+                onChange={handleChange}
+                className={styles.input}
+              />}
+              content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
+            />
+            <Popup trigger={
+              <Form.Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                label="Password again"
+                required={true}
+                name="password2"
+                type="password"
+                value={user.password2}
+                onChange={handleChange}
+                className={styles.input}
+              />}
+              content='In case of any mistake please write again your new password.'
+            />
+            <Popup trigger={
+              <Form.Input
+                fluid
+                icon="envelope"
+                iconPosition="left"
+                label="Email"
+                required={true}
+                name="email"
+                value={user.email}
+                onChange={handleChange}
+                className={styles.input}
+              />}
+              content="Write there your email address. We will send you activation link. Without it you can't play this game."
+            />
+            <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
+            <Button
+              icon="signup"
+              type="submit"
+              color="olive"
+              content="Sign up!"
+              className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
+            />
+        </Form>  
+        <div className={styles.info}>
+          <Icon name="help" size="large"/>
+          Do you already have an account? Sign in <Link href="/signin">here</Link> instead.
+        </div>
+      </div>
       </div>
     </>
   )

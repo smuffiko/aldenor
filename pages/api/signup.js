@@ -2,6 +2,7 @@ import connectDB from "../../utils/connectDB"
 import User from "../../models/User"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+import { isEmail } from "../../utils/email"
 
 connectDB()
 
@@ -37,6 +38,9 @@ const handlePostRequest = async(req, res) => {
   // does email exists
   if(await User.findOne({ email: email.toLowerCase() }))
     message.push(`This email already exists.`)
+  // is email valid
+  if(!isEmail(email))
+    message.push(`This email is not valid.`)
   
   /* validate password */
   // if passwords are not same
