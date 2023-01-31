@@ -17,7 +17,6 @@ const LostPw = ({ hash }) => {
   const [user, setUser] = React.useState(INITIAL_USER)
   const [error, setError] = React.useState("")
   const [disabled, setDisabled] = React.useState(false)
-  const [disabledPw, setDisabledPw] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
   const [email, setEmail] = React.useState("")
@@ -31,7 +30,7 @@ const LostPw = ({ hash }) => {
   
   React.useEffect(() => {
     const isPw = Object.values(passwords).every(el => Boolean(el) && el.length >= 6) && passwords.password1 === passwords.password2
-    isPw ? setDisabledPw(false) : setDisabledPw(true)
+    isPw ? setDisabled(false) : setDisabled(true)
   },[passwords])
 
   const handleChange = event => {
@@ -120,6 +119,7 @@ const LostPw = ({ hash }) => {
     })
   }
 
+  console.log(disabled, loading)
   return (
     <>
       <div className="bodyContent">
@@ -130,7 +130,7 @@ const LostPw = ({ hash }) => {
           </AldenorMessage>
           {hash ? (
             <Form loading={loading} onSubmit={handlePw} success={successPw}>
-              <AldenorMessage box="green" >
+              <AldenorMessage box="green" visible={successPw}>
                 <Header><Icon name="check" />Success!</Header>
                 <p>Password was changed! You will be redirected soon!</p>
               </AldenorMessage>
@@ -162,13 +162,10 @@ const LostPw = ({ hash }) => {
                 />}
                 content='In case of any mistake please write again your new password.'
               />
-              <Button
-                icon="mail"
+              <button
                 type="submit"
-                color="olive"
-                content="Recover"
                 className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-              />
+              ><Icon name="mail"/>Recover</button>
             </Form>
           ) : (
             <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
@@ -191,13 +188,10 @@ const LostPw = ({ hash }) => {
                 value={user.loginOrEmail}
                 onChange={handleChange}
               />
-              <Button
-                icon="mail"
+              <button
                 type="submit"
-                color="olive"
-                content="Recover"
                 className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-              />
+              ><Icon name="mail"/>Recover</button>
             </Form>  
           )}  
         </AldenorSegment>

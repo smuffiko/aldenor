@@ -91,12 +91,10 @@ const SignIn = () => {
               value={user.password}
               onChange={handleChange}
             />
-            <Button
-              icon="sign in"
+            <button
               type="submit"
               className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-              content="Sign in!"
-            />
+            ><Icon name="sign in"/>Sign in!</button>
           </Form>  
           <AldenorMessage box="yellow" >
             <p><Icon name="help" size="large"/> Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link></p>

@@ -132,13 +132,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
             <Icon name="arrow right"/>
           </Button>
         </Form.Field>
-        <Button
-          icon="game"
-          type="submit"
-          color="olive"
-          content="Create!"
-          className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-        />
+        <button type="submit" className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"} ><Icon name="gamepad" />Create!</button>
       </Form>
     </>
   )

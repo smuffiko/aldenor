@@ -155,13 +155,10 @@ const SignUp = () => {
               content="Write there your email address. We will send you activation link. Without it you can't play this game."
             />
             <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
-            <Button
-              icon="signup"
+            <button
               type="submit"
-              color="olive"
-              content="Sign up!"
               className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-            />
+            ><Icon name="signup"/>Sign up!</button>
           </Form>  
           <AldenorMessage box="yellow" >
             <p><Icon name="help" size="large"/> Do you already have an account? Sign in <Link href="/signin">here</Link> instead..</p>

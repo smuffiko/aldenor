@@ -44,19 +44,19 @@ const Characters = ({ setSlot, setChar }) => {
                   </List>
                 </AldenorBorderBox>
               </div>
-              <div className="char-panel-bottom"><Button className="basic-button" onClick={()=>setChar(c.character)}>Play!</Button></div>  
+              <div className="char-panel-bottom"><button className="basic-button" onClick={()=>setChar(c.character)}>Play!</button></div>  
             </>
           ):(
             <>
               <div className="char-panel-top"><Header as="h3">Empty</Header></div>
               <div className="char-panel-mid"><Icon name="plus" size="huge" /></div>   
-              <div className="char-panel-bottom"><Button className="basic-button" onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
+              <div className="char-panel-bottom"><button className="basic-button" onClick={()=>createNew(i+1)}>Create new character!</button></div>   
             </>  
           ) : (
           <>
             <div className="char-panel-top"><Header as="h3">Locked</Header></div>    
             <div className="char-panel-mid"><Icon name="lock" size="huge" /></div>   
-            <div className="char-panel-bottom"><Button className="basic-button"  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>   
+            <div className="char-panel-bottom"><button className="basic-button"  onClick={()=>Router.push("/shop")}>Unlock it!</button></div>   
           </>
         )}
         </div>
