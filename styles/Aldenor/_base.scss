@@ -23,6 +23,9 @@ a {
 img {
   image-rendering: pixelated !important;
 }
+svg {
+  position: absolute;
+}
 
 #container {
   min-height: 100vh;

@@ -41,22 +41,24 @@ const StaffManag = ({ user, character }) => {
 
   return (
     <>
-      <Search users={users} setNewUsers={setNewUsers} />
-      <div className="hint">
-        <Icon name="chess king"/>root
-        <Icon name="chess knight"/>admin
-        <Icon name="chess bishop"/>mod
-        <Icon name="chess board"/>dead
-        <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
-        <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
-        <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role
-        <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot
-        <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot
-      </div>      
-      {newUsers && <Users
-        newUsers={newUsers}
-        refreshData={refreshData}
-      />}
+      <div className="manage-bg">
+        <Search users={users} setNewUsers={setNewUsers} />
+        <div className="hint">
+          <Icon name="chess king"/>root
+          <Icon name="chess knight"/>admin
+          <Icon name="chess bishop"/>mod
+          <Icon name="chess board"/>dead
+          <Button icon circular color="red" size="mini"><Icon name="trash alternate outline" /></Button>Kill char
+          <Button icon circular color="orange" size="mini"><Icon name="retweet" /></Button>Change slot
+          <Button icon circular color="orange" size="mini"><Icon name="pencil" /></Button>Manage role
+          <Button icon circular color="yellow" size="mini"><Icon name="lock" /></Button>Locked, unlock slot
+          <Button icon circular color="teal" size="mini"><Icon name="unlock" /></Button>Unlocked, lock slot
+        </div>      
+        {newUsers && <Users
+          newUsers={newUsers}
+          refreshData={refreshData}
+        />}
+      </div>
     </>
   )
 }

@@ -4,10 +4,9 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(133, 133, 255); // todo -> change nm bg
+  background-image: url("#{$base-public-folder}/img/UI/background.png");
   &>div {
     position: relative;
-    padding: 60px 240px;
-    background-color: rgb(131, 112, 29);
+    padding: 60px 5vw 0 5vw;
   }
 }

@@ -8,8 +8,10 @@ const GameManag = () => {
 
   return (
     <>
-      { !map && <ManageFiles setUpdating={setUpdatingFiles} updating={updatingFiles} /> }
-      { !updatingFiles && <ManageMap map={map} setMap={setMap} /> }
+      <div className="manage-bg">
+        { !map && <ManageFiles setUpdating={setUpdatingFiles} updating={updatingFiles} /> }
+        { !updatingFiles && <ManageMap map={map} setMap={setMap} /> }
+      </div>
     </>
   )
 }
