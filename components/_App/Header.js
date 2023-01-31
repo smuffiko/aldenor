@@ -2,6 +2,7 @@ import Router from "next/router"
 import Link from "next/link"
 import { Menu, Container, Icon } from "semantic-ui-react"
 import { handleLogout } from "../../utils/auth"
+import AldenorIcon from "./AldenorUIComponents/AldenorIcon"
 
 const Header = ({ user }) => {
   const isLogged = Boolean(user)
@@ -18,7 +19,7 @@ const Header = ({ user }) => {
         <Container className="navbar">
           <Link href="/" passHref>
             <Menu.Item header active={isActive("/")}>
-              <Icon name="home"/>
+              <AldenorIcon name="tower" size="nm" color="white"/>
               Home
             </Menu.Item>
           </Link>
@@ -41,27 +42,27 @@ const Header = ({ user }) => {
             {/* everyone logged can log to the game via character (even banned user, they can make ticket with their nickname) */}  
             <Link href="/characters" passHref>
               <Menu.Item header active={isActive("/characters")}>
-                <Icon name="gamepad"/>
+              <AldenorIcon name="sword" size="nm" color="white"/>
                 Play
               </Menu.Item>
             </Link>
             {/* everyone can see shop */}
             <Link href="/shop" passHref>
               <Menu.Item header active={isActive("/shop")}>
-                <Icon name="cart"/>
+              <AldenorIcon name="pouch" size="nm" color="white"/>
                 Shop
               </Menu.Item>
             </Link>
             {/* everyone can see settings */}
             <Link href="/settings" passHref>
               <Menu.Item header active={isActive("/settings")}>
-                <Icon name="settings"/>
+              <AldenorIcon name="settings" size="nm" color="white"/>
                 Settings
               </Menu.Item>
             </Link>
             {/* everyone logged in can log out, ofc */}
             <Menu.Item header onClick={handleLogout}>
-              <Icon name="log out" />
+              <AldenorIcon name="logout" size="nm" color="white"/>
               Logout
             </Menu.Item>
           </>)}

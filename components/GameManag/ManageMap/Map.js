@@ -6,7 +6,6 @@ import Draggable from "react-draggable"
 
 const Map = ({ mapRef }) => {
   const fieldsRef = React.useRef([])
-  console.log("maprendering")
 
   React.useEffect(()=>{
     const getFields = async() => {

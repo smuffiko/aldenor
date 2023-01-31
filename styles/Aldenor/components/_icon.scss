@@ -1,0 +1,63 @@
+%icon {
+  image-rendering: pixelated;
+  position: relative;
+}
+@each $key, $val in $icon-names {
+  @each $color, $value-color in $icon-colors {
+    .icon.icon-#{$key}-xs-#{$color} {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      -webkit-mask-size: $icon-size*0.5;
+      width: $icon-size*0.5;
+      height: $icon-size*0.5;
+      background-color: $value-color;
+    }
+    .icon.icon-#{$key}-sm-#{$color}  {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      -webkit-mask-size: $icon-size*0.75;
+      width: $icon-size*0.75;
+      height: $icon-size*0.75;
+      background-color: $value-color;
+    }
+    .icon.icon-#{$key}-nm-#{$color}  {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      width: $icon-size;
+      height: $icon-size;
+      background-color: $value-color;
+    }
+    .icon.icon-#{$key}-md-#{$color}  {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      -webkit-mask-size: $icon-size*1.5;
+      width: $icon-size*1.5;
+      height: $icon-size*1.5;
+      background-color: $value-color;
+    }
+    .icon.icon-#{$key}-lg-#{$color}  {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      -webkit-mask-size: $icon-size*2;
+      width: $icon-size*2;
+      height: $icon-size*2;
+      background-color: $value-color;
+    }
+    .icon.icon-#{$key}-xl-#{$color}  {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      -webkit-mask-size: $icon-size*3;
+      width: $icon-size*3;
+      height: $icon-size*3;
+      background-color: $value-color;
+    }
+    .icon.icon-#{$key}-xxl-#{$color}  {
+      @extend %icon;
+      -webkit-mask-image: $val;
+      -webkit-mask-size: $icon-size*4;
+      width: $icon-size*4;
+      height: $icon-size*4;
+      background-color: $value-color;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { handleLogin } from "../utils/auth"
 import { Message, Form, Icon, Header, Button } from "semantic-ui-react"
 import AldenorSegment from "../components/_App/AldenorUIComponents/AldenorSegment"
 import AldenorMessage from "../components/_App/AldenorUIComponents/AldenorMessage"
+import AldenorIcon from "../components/_App/AldenorUIComponents/AldenorIcon"
 
 const INITIAL_USER = {
   login: "",

@@ -1,7 +1,7 @@
 import React from "react"
 import Router from "next/router"
 import cookie from "js-cookie"
-import { Button, Icon, Header, List, Image } from "semantic-ui-react"
+import { Icon, Header, List, Image } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
@@ -50,7 +50,7 @@ const Characters = ({ setSlot, setChar }) => {
             <>
               <div className="char-panel-top"><Header as="h3">Empty</Header></div>
               <div className="char-panel-mid"><Icon name="plus" size="huge" /></div>   
-              <div className="char-panel-bottom"><button className="basic-button" onClick={()=>createNew(i+1)}>Create new character!</button></div>   
+              <div className="char-panel-bottom"><button className="basic-button" onClick={()=>createNew(i+1)}>New</button></div>   
             </>  
           ) : (
           <>

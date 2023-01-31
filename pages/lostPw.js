@@ -118,8 +118,7 @@ const LostPw = ({ hash }) => {
       setLoading(false)
     })
   }
-
-  console.log(disabled, loading)
+  
   return (
     <>
       <div className="bodyContent">
@@ -190,7 +189,7 @@ const LostPw = ({ hash }) => {
               />
               <button
                 type="submit"
-                className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
+                className={!successPw && (disabled || loading ) ? "basic-button-disabled disabled" : "basic-button"}
               ><Icon name="mail"/>Recover</button>
             </Form>  
           )}  

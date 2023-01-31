@@ -4,6 +4,7 @@ import { unsetCharToken } from "../../../utils/character"
 import AldenorGCMenuItem from "../AldenorUIComponents/AldenorGCMenuItem"
 import AldenorList from "../AldenorUIComponents/AldenorList"
 import AldenorListItem from "../AldenorUIComponents/AldenorListItem"
+import AldenorIcon from "../AldenorUIComponents/AldenorIcon"
 
 const RightTop = ({ user, character }) => {
   const [open, setOpen] = React.useState({ devs: false, game: false, others: false})
@@ -89,7 +90,7 @@ const RightTop = ({ user, character }) => {
               <AldenorGCMenuItem>Ticket</AldenorGCMenuItem>
             </AldenorListItem>
             <AldenorListItem onClick={()=>logoutChar()}>
-              <AldenorGCMenuItem>Characters</AldenorGCMenuItem>
+              <AldenorGCMenuItem><AldenorIcon name="logout" size="sm" color="black" />Chars</AldenorGCMenuItem>
             </AldenorListItem>
           </AldenorList>
         </AldenorListItem>

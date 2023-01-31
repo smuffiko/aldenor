@@ -80,10 +80,10 @@ $footer-bg-color: #655030;
 $progress-bar-color: #b8f850;
 
 // base layout variables
+$base-public-folder: "../../../public/";
 $base-bg-image: url("/img/UI/background.png") !default;
 $base-font-family: Calibri, sans-serif !default;
 $base-font-size: 16px !default;
-$base-public-folder: "../../../public/";
 
 // link settings
 $basic-link-color: $shingle-fawn;
@@ -103,3 +103,25 @@ $unuser-text-color: #fac6b6;
 $unuser-font-size: 30px;
 $unuser-line-height: 40px;
 $unuser-font-family: "Consolas";
+
+// icon
+// xs sm nm lg xl 
+$icon-size: 32px;
+$icon-names: (
+  "crystal": url("/img/UI/Icons/crystal.png"),
+  "logout": url("/img/UI/Icons/logout.png"),
+  "pouch": url("/img/UI/Icons/pouch.png"),
+  "settings": url("/img/UI/Icons/settings.png"),
+  "sword": url("/img/UI/Icons/sword.png"),
+  "tower": url("/img/UI/Icons/tower.png")
+);
+$icon-colors: (
+  "white": #ffffff,
+  "black": #000000,
+  "red": #ff0000,
+  "green": #00ff00,
+  "blue": #0000ff,
+  "yellow": #ffff00,
+  "magneta": #ff00ff,
+  "cyan": #00ffff
+);
