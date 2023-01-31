@@ -1,0 +1,51 @@
+.game-corner-l-t {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  .game-corner-l-t-wrap {
+    position: relative;
+
+    .game-corner-l-t-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+
+      .game-corner-char {
+        display: block;
+        width: 60px;
+        height: 80px;
+        background-image: url("#{$base-public-folder}/img/UI/Panel/Panel_4.png");
+
+        img {
+          top: 8px;
+        }
+      }
+
+      .game-corner-inv {
+        display: block;
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .game-corner-l-t-left {
+      position: absolute;
+      top: 0;
+      left: 60px;
+      display: block;
+      width: 120px;
+      height: 60px;
+      background-image: url("#{$base-public-folder}/img/UI/Panel/Panel_4.png");
+      font-size: 10px;
+      line-height: 10px;
+
+      .game-corner-l-t-fb {
+        height: 15px;
+        margin: 5px 10px;
+      }
+    }
+  }
+}

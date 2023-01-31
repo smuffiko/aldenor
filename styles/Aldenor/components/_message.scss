@@ -1,0 +1,8 @@
+.message {
+  position: relative;
+  margin: 32px 0 !important;
+  & > * {
+    padding: 32px !important;
+  }
+  
+}

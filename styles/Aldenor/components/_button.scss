@@ -1,0 +1,21 @@
+%basic-button {
+  width: 150px !important;
+  height: 50px !important;
+  font-size: 15px !important;
+  color: #000 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.basic-button {
+  @extend %basic-button;
+  background: url("#{$base-public-folder}/img/UI/MainBtn/btn_2.png") !important;
+
+  &:hover {
+    background: url("#{$base-public-folder}/img/UI/MainBtn/btn_1.png") !important;
+  }
+}
+
+.basic-button-disabled {
+  @extend %basic-button;
+  background-image: url("#{$base-public-folder}/img/UI/MainBtn/btn_3.png") !important;
+}

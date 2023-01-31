@@ -1,7 +1,6 @@
 import React from "react"
 import Fields from "./Fields"
 import baseUrl from "../../../utils/baseUrl"
-import styles from "../../../styles/GameManag.Fields.module.css"
 import { Button, Header, Image } from "semantic-ui-react"
 import cookie from "js-cookie"
 
@@ -65,7 +64,7 @@ const ManageFiles = ({ setUpdating, updating }) => {
     <Image.Group>
     {files.map(file => 
       <Image
-        className={fields.find(f=>file.slice(7)===f.imageSrc) ? styles.fieldSet : styles.fieldUnset }
+        className={fields.find(f=>file.slice(7)===f.imageSrc) ? "map-field-set" : "map-field-unset" }
         src={file.slice(7)}
         key={file}
         onClick={()=>updateField(file.slice(7))}

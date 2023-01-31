@@ -1,8 +1,9 @@
 import React from "react"
 import baseUrl from "../utils/baseUrl"
-import { Message, Form, Icon, Segment, Button, Popup } from "semantic-ui-react"
+import { Form, Icon, Button, Popup, Header } from "semantic-ui-react"
 import { handleLogin } from "../utils/auth"
-import styles from "../styles/AldenorUI/AldenorUI.Form.module.css"
+import AldenorMessage from "../components/_App/AldenorUIComponents/AldenorMessage"
+import AldenorSegment from "../components/_App/AldenorUIComponents/AldenorSegment"
 
 const INITIAL_USER = {
   loginOrEmail: ""
@@ -122,23 +123,17 @@ const LostPw = ({ hash }) => {
   return (
     <>
       <div className="bodyContent">
-        <Message attached icon color="black" >
-          <Icon name="settings" />
-          <Message.Content>
-            <Message.Header>Lost password </Message.Header>
-            Recover it here
-          </Message.Content>
-        </Message>  
-        {hash ? (
-          <Form loading={loading} onSubmit={handlePw} success={successPw}>
-            <Message success icon attached >
-              <Icon name="check" />
-              <Message.Content>
-                <Message.Header>Success!</Message.Header>
-                Password was changed! You will be redirected soon!
-              </Message.Content>
-            </Message>
-            <Segment attached>
+        <AldenorSegment>
+          <AldenorMessage box="grey" >
+            <Header>Lost password</Header>
+            <p>Recover it here</p>
+          </AldenorMessage>
+          {hash ? (
+            <Form loading={loading} onSubmit={handlePw} success={successPw}>
+              <AldenorMessage box="green" >
+                <Header><Icon name="check" />Success!</Header>
+                <p>Password was changed! You will be redirected soon!</p>
+              </AldenorMessage>
               <Popup trigger={
                 <Form.Input
                   fluid
@@ -171,28 +166,21 @@ const LostPw = ({ hash }) => {
                 icon="mail"
                 type="submit"
                 color="olive"
-                content="Recover password"
-                className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
+                content="Recover"
+                className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
               />
-            </Segment>
-          </Form>
-        ) : (
-          <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
-            <Message error icon attached >
-              <Icon name="x" />
-              <Message.Content>
-                <Message.Header>Oops!</Message.Header>
+            </Form>
+          ) : (
+            <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
+              <AldenorMessage box="red" visible={Boolean(error)}>
+                <Header><Icon name="x" />Oops!</Header>
                 {error}
-              </Message.Content>
-            </Message>
-            <Message success icon attached >
-              <Icon name="check" />
-              <Message.Content>
-                <Message.Header>Success!</Message.Header>
-                Message was sent to email {email}. Check it now and reset your password.
-              </Message.Content>
-            </Message>
-            <Segment attached>
+              </AldenorMessage>
+              <AldenorMessage box="green" visible={success}>
+                <Header><Icon name="check" />Success!</Header>
+                <p>Message was sent to email {email}. Check it now and reset your password.</p>
+                {error}
+              </AldenorMessage>
               <Form.Input
                 fluid
                 icon="user"
@@ -207,12 +195,12 @@ const LostPw = ({ hash }) => {
                 icon="mail"
                 type="submit"
                 color="olive"
-                content="Recover password"
-                className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
+                content="Recover"
+                className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
               />
-            </Segment>
-          </Form>  
-        )}  
+            </Form>  
+          )}  
+        </AldenorSegment>
       </div>
     </>
   )

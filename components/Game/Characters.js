@@ -1,5 +1,3 @@
-import styles from "../../styles/Game.Characters.module.css"
-import stylesUI from "../../styles/AldenorUI/AldenorUI.Form.module.css"
 import React from "react"
 import Router from "next/router"
 import cookie from "js-cookie"
@@ -7,11 +5,11 @@ import { Button, Icon, Header, List, Image } from "semantic-ui-react"
 import baseUrl from "../../utils/baseUrl"
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
+import AldenorBorderBox from "../_App/AldenorUIComponents/AldenorBorderBox"
 
 const Characters = ({ setSlot, setChar }) => {
   const [characters, setCharacters] = React.useState([])
   const [error, setError] = React.useState("")
-  const staff = [ "admin","root","mod" ]
   const responsive = {
     0: { items: 1 },
     700: { items: 2 },
@@ -21,55 +19,49 @@ const Characters = ({ setSlot, setChar }) => {
   const handleDragStart = (e) => e.preventDefault()
 
   const items = characters.map((c, i) =>
-  (
     <>
-      <img src="/img/UI/CharPanel/charPanel_1.png" className={styles.panelCorner1} />
-      <img src="/img/UI/CharPanel/charPanel_7.png" className={styles.panelCorner7} />
-      <img src="/img/UI/CharPanel/charPanel_3.png" className={styles.panelCorner3} />
-      <img src="/img/UI/CharPanel/charPanel_9.png" className={styles.panelCorner9} />
-      {
-        c.available ? (
-          <div key={i} className={styles.charPanel} onDragStart={handleDragStart} >
-            <div><div>
-            {c.character!== null ? (
-              <div className={staff.includes(c.character.role) ? styles.staffPanel : ""}>
-                <div className={styles.charTop}>
-                  <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
-                </div>
-                <div className={styles.charMid}>
-                  <List>
-                    <List.Item className={styles.charText}>Name: {c.character.name}</List.Item>
-                    <List.Item className={styles.charText}>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
-                    <List.Item className={styles.charText}>Race: {c.character.race}</List.Item>
-                    <List.Item className={styles.charText}>Class: {c.character.class}</List.Item>
-                    <List.Item className={styles.charText}>Lvl: {c.character.lvl}</List.Item>
-                    <List.Item className={styles.charText}>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
-                    <List.Item className={styles.charText}>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
-                  </List>
-                </div>
-                <div className={styles.charBottom}><Button className={stylesUI.button} onClick={()=>setChar(c.character)}>Play!</Button></div>  
+      <img src="/img/UI/BorderBox/double-l-t.png" className="char-panel-l-t char-panel-corner" />
+      <img src="/img/UI/BorderBox/double-l-b.png" className="char-panel-l-b char-panel-corner" />
+      <img src="/img/UI/BorderBox/double-r-t.png" className="char-panel-r-t char-panel-corner" />
+      <img src="/img/UI/BorderBox/double-r-b.png" className="char-panel-r-b char-panel-corner" />
+      <div key={i} className="char-panel" onDragStart={handleDragStart} >
+        <div className="char-panel-container">
+          { c.available ? c.character!== null ? (
+            <>
+              <div className="char-panel-top">
+                <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
               </div>
-            ):(
-              <>
-                <div className={styles.charTop}><Header as="h3">Empty</Header></div>
-                <div className={styles.charMid}><Icon name="plus" size="huge" /></div>   
-                <div className={styles.charBottom}><Button className={stylesUI.button} onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
-              </>  
-            )}      
-            </div></div> 
-          </div>
-        ) : (
-          <div key={Math.random()} className={styles.charPanel} onDragStart={handleDragStart}>
-            <div><div>
-              <div className={styles.charTop}><Header as="h3">Locked</Header></div>    
-              <div className={styles.charMid}><Icon name="lock" size="huge" /></div>   
-              <div className={styles.charBottom}><Button className={stylesUI.button}  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>     
-            </div></div>
-          </div>
-        )
-      }
-    </>
-  ))
+              <div className="char-panel-mid">
+                <AldenorBorderBox box="basic">
+                  <List>
+                    <List.Item>Name: {c.character.name}</List.Item>
+                    <List.Item>Gender: { c.character.gender ? "Female" : "Male" }</List.Item>
+                    <List.Item>Race: {c.character.race}</List.Item>
+                    <List.Item>Class: {c.character.class}</List.Item>
+                    <List.Item>Lvl: {c.character.lvl}</List.Item>
+                    <List.Item>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
+                    <List.Item>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
+                  </List>
+                </AldenorBorderBox>
+              </div>
+              <div className="char-panel-bottom"><Button className="basic-button" onClick={()=>setChar(c.character)}>Play!</Button></div>  
+            </>
+          ):(
+            <>
+              <div className="char-panel-top"><Header as="h3">Empty</Header></div>
+              <div className="char-panel-mid"><Icon name="plus" size="huge" /></div>   
+              <div className="char-panel-bottom"><Button className="basic-button" onClick={()=>createNew(i+1)}>Create new character!</Button></div>   
+            </>  
+          ) : (
+          <>
+            <div className="char-panel-top"><Header as="h3">Locked</Header></div>    
+            <div className="char-panel-mid"><Icon name="lock" size="huge" /></div>   
+            <div className="char-panel-bottom"><Button className="basic-button"  onClick={()=>Router.push("/shop")}>Unlock it!</Button></div>   
+          </>
+        )}
+        </div>
+      </div>
+    </> )
 
   const renderPrevButton = ({ isDisabled }) => {
     return <Icon name="caret left" size="big" disabled={isDisabled}/>
@@ -77,23 +69,6 @@ const Characters = ({ setSlot, setChar }) => {
   const renderNextButton = ({ isDisabled }) => {
     return <Icon name="caret left" size="big" disabled={isDisabled}/>
   }
-
-  const Carousel = () => (
-    <AliceCarousel
-      mouseTracking
-      items={items}
-      responsive={responsive}
-      controlsStrategy="alternate"
-      disableDotsControls
-      keyboardNavigation
-      renderPrevButton={renderPrevButton}
-      renderNextButton={renderNextButton}
-      paddingLeft={48}
-      paddingRight={48}
-      swipeDelta={20}
-      swipeExtraPadding={0}
-    />
-  )
   
   React.useEffect(async()=>{
     const url = `${baseUrl}/api/characters`
@@ -122,7 +97,25 @@ const Characters = ({ setSlot, setChar }) => {
 
   return (
     <>
-      <div className={styles.container}><Carousel /></div>
+      <div className="body-content">
+        <div className="character-panel-container">
+          <AliceCarousel
+            mouseTracking
+            items={items}
+            responsive={responsive}
+            controlsStrategy="alternate"
+            disableDotsControls
+            keyboardNavigation
+            renderPrevButton={renderPrevButton}
+            renderNextButton={renderNextButton}
+            paddingLeft={48}
+            paddingRight={48}
+            swipeDelta={20}
+            swipeExtraPadding={0}
+            className="carousel"
+          />
+        </div>
+      </div>
     </>
   )
 }

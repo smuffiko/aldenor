@@ -3,7 +3,6 @@ import { Form, Button, Icon, Message, Image } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
 import { RACES, GENDER, SKIN } from "../../utils/characters"
-import styles from "../../styles/AldenorUI/AldenorUI.Form.module.css"
 
 const INITIAL_CHARACTER = {
   name: "",
@@ -138,7 +137,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
           type="submit"
           color="olive"
           content="Create!"
-          className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
+          className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
         />
       </Form>
     </>

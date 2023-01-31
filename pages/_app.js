@@ -1,5 +1,4 @@
-import '../styles/globals.css'
-import "../styles/nprogress.css"
+import "../styles/sass/index.scss"
 import Layout from "../components/_App/Layout"
 import { parseCookies, destroyCookie } from "nookies"
 import { redirectUser } from "../utils/auth"

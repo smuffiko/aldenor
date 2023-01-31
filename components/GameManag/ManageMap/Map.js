@@ -1,5 +1,4 @@
 import React from "react"
-import styles from "../../../styles/GameManag.Fields.module.css"
 import MapField from "./MapField"
 import cookies from "js-cookie"
 import baseUrl from "../../../utils/baseUrl"
@@ -36,7 +35,7 @@ const Map = ({ mapRef }) => {
 
   const mapData = 
     Array.from({ length: mapRef.current.map.size.x }, (_, x) =>
-      <div className={styles.mapRow} key={x}>
+      <div key={x}>
         {Array.from({ length: mapRef.current.map.size.y }, (_, y) =>
           <MapField key={`${x}${y}`} x={x} y={y} map={mapRef.current} fieldsRef={fieldsRef} />	
         )}
@@ -45,9 +44,9 @@ const Map = ({ mapRef }) => {
 
   return (
     <>
-      <div className={styles.mapTable}>
+      <div className="manage-map">
         <Draggable >
-          <div className={styles.mapWrapper} >
+          <div className="map-wrapper" >
             {fieldsRef.current!==undefined && mapRef.current && mapData}
           </div>
         </Draggable>

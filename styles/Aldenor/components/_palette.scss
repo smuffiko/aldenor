@@ -1,0 +1,21 @@
+.palette {
+  width: calc(100vw - 10vw - 50vw);
+  position: absolute;
+  top: 0;
+  padding-top: 100px;
+  right: 5vw;
+  
+  .active {
+    background-color: red !important;
+  }
+  .selected {
+    box-shadow: -20px -20px 0 #1eff00 inset, 20px -20px 0 #1eff00 inset, -20px 20px 0 #1eff00 inset, 20px 20px 0 #1eff00 inset;
+  }
+  .field {
+    padding: 4px;
+    display: inline-block !important;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+  }
+}

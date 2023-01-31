@@ -1,0 +1,101 @@
+.character-panel-container {
+  position: relative;
+  box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
+
+  .char-panel-corner {
+    position: absolute;
+    z-index: 20;
+  }
+  .char-panel-l-t {
+    top: 0;
+    left: 0;
+  }
+  .char-panel-l-b {
+    bottom: 0;
+    left: 0;
+  }
+  .char-panel-r-t {
+    top: 0;
+    right: 0;
+  }
+  .char-panel-r-b {
+    bottom: 0;
+    right: 0;
+  }
+
+  .char-panel {
+    height: calc(100vh - 100px - 100px); /* todo -> height - menu height - footer height */
+    min-height: 600px;
+    background-color: map-get($double-colors, "bg");
+    box-shadow:
+      2px 2px map-get($double-colors,"outer") inset,
+      2px -2px map-get($double-colors,"outer") inset,
+      -2px 2px map-get($double-colors,"outer") inset,
+      -2px -2px map-get($double-colors,"outer") inset,
+      
+      4px 4px map-get($double-colors,"middle-outer") inset,
+      4px -4px map-get($double-colors,"middle-outer") inset,
+      -4px 4px map-get($double-colors,"middle-outer") inset,
+      -4px -4px map-get($double-colors,"middle-outer") inset,
+
+      6px 6px map-get($double-colors,"border") inset,
+      6px -6px map-get($double-colors,"border") inset,
+      -6px 6px map-get($double-colors,"border") inset,
+      -6px -6px map-get($double-colors,"border") inset,
+
+      8px 8px map-get($double-colors,"middle") inset,
+      8px -8px map-get($double-colors,"middle") inset,
+      -8px 8px map-get($double-colors,"middle") inset,
+      -8px -8px map-get($double-colors,"middle") inset,
+
+      10px 10px map-get($double-colors,"border") inset,
+      10px -10px map-get($double-colors,"border") inset,
+      -10px 10px map-get($double-colors,"border") inset,
+      -10px -10px map-get($double-colors,"border") inset,
+
+      12px 12px map-get($double-colors,"inner") inset,
+      12px -12px map-get($double-colors,"inner") inset,
+      -12px 12px map-get($double-colors,"inner") inset,
+      -12px -12px map-get($double-colors,"inner") inset
+    ;
+
+    .char-panel-container {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 24px + 20px);
+      width: calc(100% - 24px + 20px);
+
+      .char-panel-top {
+        padding: 0;
+        margin-top: calc(25%);
+        text-align: center;
+        width: 100%;
+        height: calc(64px + 2rem);
+      }
+      .char-panel-mid {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: calc(100% - 60px);
+        margin: auto;
+        
+        & > div {
+          padding: 20px;
+        }
+        div {
+          line-height: 32px;
+          font-size: 16px;
+        }
+      }
+      .char-panel-bottom {
+        position: absolute;
+        bottom: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+}

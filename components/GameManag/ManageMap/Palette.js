@@ -1,5 +1,4 @@
 import React from "react"
-import styles from "../../../styles/GameManag.Fields.module.css"
 import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 import PaletteField from "./PaletteField"
@@ -70,14 +69,14 @@ const Palette = ({}) => {
       )}
       { fieldsRef.current && !loading &&
         (<>
-          <div className={styles.generatedFields}>
+          <div className="palette">
             <PaletteLayer layer={layer} handleClick={handleClickLayer} />
             <div>
               <PaletteField field={fieldsRef.current.border[0]} selected={selected} handleClick={handleClickSelected} />
-              <div className={`${styles.generatedField} ${selected==="cl1"? styles.selected: ""}`} onClick={()=>handleClickSelected("cl1")}><Icon name="minus" size="large"/></div>
-              <div className={`${styles.generatedField} ${selected==="cl+"? styles.selected: ""}`} onClick={()=>handleClickSelected("cl+")}><Icon name="erase" size="large"/></div>
-              <div className={`${styles.generatedField} ${selected==="clall"? styles.selected: ""}`} onClick={()=>handleClickSelected("clall")}><Icon name="trash alternate outline" size="large"/></div>
-              <div className={`${styles.generatedField} ${selected==="move"? styles.selected: ""}`} onClick={()=>handleClickSelected("move")}><Icon name="hand rock outline" size="large"/></div>
+              <div className={`field ${selected==="cl1"? "selected" : ""}`} onClick={()=>handleClickSelected("cl1")}><Icon name="minus" size="large"/></div>
+              <div className={`field ${selected==="cl+"? "selected" : ""}`} onClick={()=>handleClickSelected("cl+")}><Icon name="erase" size="large"/></div>
+              <div className={`field ${selected==="clall"? "selected" : ""}`} onClick={()=>handleClickSelected("clall")}><Icon name="trash alternate outline" size="large"/></div>
+              <div className={`field ${selected==="move"? "selected" : ""}`} onClick={()=>handleClickSelected("move")}><Icon name="hand rock outline" size="large"/></div>
             </div>
             <div>
               { fieldsRef.current.forests.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }

@@ -1,12 +1,9 @@
-import styles from "../../styles/AldenorUI/FillBars.module.css"
-
 const FillBar = ({ img, current, max, name }) => {
   const percent = name!==undefined ? 0 : Math.round(100*current/max)
-  console.log("name",name, percent)
   return (
     <>
-      <div className={styles.fillBarBg} style={{position:"relative"}}>
-        <div className={styles.fillBarText}>{name!==undefined?name:`${current}/${max}`}</div>
+      <div className="fill-bar">
+        <div className="fill-bar-text">{name!==undefined?name:`${current}/${max}`}</div>
         {percent!==0 && (
           <>
             <img src={img[0]} />

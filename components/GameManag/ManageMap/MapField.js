@@ -1,5 +1,4 @@
 import React from "react"
-import styles from "../../../styles/GameManag.Fields.module.css"
 import { Image } from "semantic-ui-react"
 import cookies from "js-cookie"
 
@@ -43,9 +42,9 @@ const MapField = ({ fieldsRef, map, x, y }) => {
 
   return (
     <>
-      <div className={styles.mapCol} key={Math.random()} onClick={()=>handleClick()} >
+      <div className="map-col" key={Math.random()} onClick={()=>handleClick()} >
         {field?.map((f,i)=>{
-          return <Image key={i} style={{zIndex: f.layer }} className={`${styles.mapField} ${f.imageSrc==="img\\Map\\border.png" ? styles.border : ""} ${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}`} src={f.imageSrc}></Image>
+          return <Image key={i} style={{zIndex: f.layer }} className={`map-field rotate-${f.rotation}${f.flip ? "-flip" : ""}`} src={f.imageSrc}></Image>
         })
         }
       </div>

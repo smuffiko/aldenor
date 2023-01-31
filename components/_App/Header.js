@@ -1,15 +1,9 @@
 import Router from "next/router"
-import styles from "../../styles/AldenorUI/AldenorUI.Header.module.css"
 import Link from "next/link"
-import NProgress from "nprogress"
 import { Menu, Container, Icon } from "semantic-ui-react"
 import { handleLogout } from "../../utils/auth"
 
 const Header = ({ user }) => {
-  Router.events.on("routeChangeStart", ()=> NProgress.start())
-  Router.events.on("routeChangeComplete", ()=> NProgress.done())
-  Router.events.on("routeChangeError", ()=> NProgress.done())
-
   const isLogged = Boolean(user)
   
   const isActive = route => route === Router.pathname
@@ -19,9 +13,9 @@ const Header = ({ user }) => {
       <Menu
         color="black"
         inverted
-        className="mainMenu"
+        className="navbar-bg"
       >
-        <Container className={styles.header}>
+        <Container className="navbar">
           <Link href="/" passHref>
             <Menu.Item header active={isActive("/")}>
               <Icon name="home"/>
@@ -47,7 +41,7 @@ const Header = ({ user }) => {
             {/* everyone logged can log to the game via character (even banned user, they can make ticket with their nickname) */}  
             <Link href="/characters" passHref>
               <Menu.Item header active={isActive("/characters")}>
-                <Icon name="game"/>
+                <Icon name="gamepad"/>
                 Play
               </Menu.Item>
             </Link>

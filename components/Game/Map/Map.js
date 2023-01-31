@@ -1,6 +1,5 @@
 import React from "react"
 import MapField from "./MapField"
-import styles from "../../../styles/Game.MapBackground.module.css"
 import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 import Draggable from "react-draggable"
@@ -8,8 +7,6 @@ import Draggable from "react-draggable"
 const Map = ({ character }) => {
   const [map, setMap] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
-  console.log("map",map)
-  console.log(character)
 
   React.useEffect(async()=> {
     setLoading(true)
@@ -35,7 +32,7 @@ const Map = ({ character }) => {
 
   const mapData = map ? 
     Array.from({ length: map.map.size.x }, (_, x) =>
-      <div className={styles.mapRow} key={x}>
+      <div key={x}>
         {Array.from({ length: map.map.size.y }, (_, y) =>
           <MapField key={`${x}${y}`} x={x} y={y} map={map} character={character} />	
         )}
@@ -45,16 +42,14 @@ const Map = ({ character }) => {
 
   return (
     <>
-    <div className={styles.map}>
+    <div className="map">
       <Draggable
         defaultPosition={{x: character.coords.current.x*(-64), y: character.coords.current.y*(-64)}}
         position={null}
         grid={[1, 1]}
         scale={1}
-        
-        className={styles.draggable}
       >
-        <div className={styles.mapWrapper} >
+        <div className="map-wrapper" >
           { map && mapData }
         </div>
       </Draggable>

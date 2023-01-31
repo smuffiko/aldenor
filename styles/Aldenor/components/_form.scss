@@ -1,0 +1,32 @@
+form {
+  input {
+    &:focus {
+      border: 1px solid  map-get($basic-colors,"basic") !important;
+    }
+    background-color: map-get($basic-colors,"light") !important;
+    background-image:
+      url("#{$base-public-folder}/img/UI/BorderBox/basic-l-t.png"),
+      url("#{$base-public-folder}/img/UI/BorderBox/basic-l-b.png"),
+      url("#{$base-public-folder}/img/UI/BorderBox/basic-r-t.png"),
+      url("#{$base-public-folder}/img/UI/BorderBox/basic-r-b.png") !important;
+    box-shadow: 
+      1px 1px map-get($basic-colors,"basic"),
+      1px -1px map-get($basic-colors,"basic"),
+      -1px 1px map-get($basic-colors,"basic"),
+      -1px -1px map-get($basic-colors,"basic"),
+      2px 2px map-get($basic-colors,"dark"),
+      2px -2px map-get($basic-colors,"dark"),
+      -2px 2px map-get($basic-colors,"dark"),
+      -2px -2px map-get($basic-colors,"dark") !important;
+    background-position:
+      top -2px left -2px,
+      bottom -2px left -2px,
+      top -2px right -2px,
+      bottom -2px right -2px !important;
+    background-repeat: no-repeat !important;
+    border-radius: 0 !important;
+    border: 1px solid  map-get($basic-colors,"basic") ;
+    image-rendering: pixelated;
+    font-family: $font-form-input !important;
+  }
+}

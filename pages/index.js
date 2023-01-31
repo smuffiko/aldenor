@@ -1,6 +1,5 @@
 import React from "react"
 import { Message, Segment } from "semantic-ui-react"
-import styles from "../styles/AldenorUI/FillBars.module.css"
 
 export default function Home({user}) {
   const imagesPath1 = [
@@ -75,6 +74,27 @@ export default function Home({user}) {
  
   return (
     <>
+      <div className="test">
+        test
+        <div className="border-box-basic">
+          basic
+        </div>
+        <div className="border-box-red">
+          red
+        </div>
+        <div className="border-box-green">
+          green
+        </div>
+        <div className="border-box-yellow">
+          yellow
+        </div>
+
+
+      </div>
+
+
+
+
       <div className="bodyContent">
         <div>
           Walking man ^^
@@ -88,7 +108,7 @@ export default function Home({user}) {
           HP Bar test
           <br/>
             {bar} % HP
-            <div className={styles.fillBarBg} style={{position:"relative"}}>
+            <div className="fill-bar" style={{position:"relative"}}>
               <img src={hpBarImages[0]} />
               {bar > 1 && <img src={hpBarImages[1]} />}
               {bar > 2 && <img src={hpBarImages[2]} />}
@@ -102,7 +122,7 @@ export default function Home({user}) {
           Energy Bar test
           <br/>
             {bar} % Energy
-            <div className={styles.fillBarBg} style={{position:"relative"}}>
+            <div className="fill-bar" style={{position:"relative"}}>
               <img src={energyBarImages[0]} />
               {bar > 1 && <img src={energyBarImages[1]} />}
               {bar > 2 && <img src={energyBarImages[2]} />}
@@ -116,7 +136,7 @@ export default function Home({user}) {
           EXP Bar test
           <br/>
             {bar} % Exp
-            <div className={styles.fillBarBg} style={{position:"relative"}}>
+            <div className="fill-bar" style={{position:"relative"}}>
               <img src={expBarImages[0]} />
               {bar > 1 && <img src={expBarImages[1]} />}
               {bar > 2 && <img src={expBarImages[2]} />}

@@ -1,0 +1,105 @@
+// theme colors
+// brown
+$sorrel-brown-light: #CDBC8C;
+$sorrel-brown: #C7B582;
+$gimblet-light: #BCA770;
+$gimblet: #C1AD78;
+$teak: #B8A169;
+$barley-corn: #A28E5F;
+$shingle-fawn: #655030;
+$armadillo: #3C382D;
+$eternity-light: #20180F;
+$eternity: #100C07;
+
+// grey
+$napa: #aea99b;
+$pale-oyster: #9c9585;
+$armadillo-grey: #3a372f;
+
+// red
+$old-rose: #C78282;
+$matrix: #B86969;
+$woody-brown: #3C2D2D;
+
+// green
+$de-york: #82C782;
+$fern: #6EB869;
+$heavy-metal: #2D3C2D;
+
+// yellow
+$sundance: #C7B95A;
+$roti: #BEB04E;
+$kelp: #3C3C2D;
+
+// colors for messages etc
+$double-colors: (
+  "bg": $sorrel-brown-light,
+  "inner": $sorrel-brown,
+  "middle": $gimblet-light,
+  "middle-outer": $gimblet,
+  "outer": $teak,
+  "border": $armadillo
+);
+$basic-colors: (
+  "light": $sorrel-brown,
+  "basic": $barley-corn,
+  "dark": $armadillo
+) !default;
+$grey-colors: (
+  "light": $napa,
+  "basic": $pale-oyster,
+  "dark": $armadillo-grey
+) !default;
+$red-colors: (
+  "light": $old-rose,
+  "basic": $matrix,
+  "dark": $woody-brown
+) !default;
+$green-colors: (
+  "light": $de-york,
+  "basic": $fern,
+  "dark": $heavy-metal
+) !default;
+$yellow-colors: (
+  "light": $sundance,
+  "basic": $roti,
+  "dark": $kelp
+) !default;
+
+// colors for border box
+$border-box: (
+  "basic": $basic-colors,
+  "red": $red-colors,
+  "green": $green-colors,
+  "yellow": $yellow-colors,
+  "grey": $grey-colors
+);
+
+// other colors
+$footer-bg-color: #655030;
+$progress-bar-color: #b8f850;
+
+// base layout variables
+$base-bg-image: url("/img/UI/background.png") !default;
+$base-font-family: Calibri, sans-serif !default;
+$base-font-size: 16px !default;
+$base-public-folder: "../../../public/";
+
+// link settings
+$basic-link-color: $shingle-fawn;
+$basic-link-hover-color: $eternity;
+
+// fonts
+$font-form-input: "Consolas";
+$font-fill-bars: "Consolas";
+
+//
+// component variables
+//
+
+// unuser banner
+$unuser-banner-bg: #ac2800;
+$unuser-text-color: #fac6b6;
+$unuser-font-size: 30px;
+$unuser-line-height: 40px;
+$unuser-font-family: "Consolas";

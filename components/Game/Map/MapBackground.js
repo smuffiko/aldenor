@@ -1,10 +1,9 @@
-import styles from "../../../styles/Game.MapBackground.module.css"
 import Map from "./Map"
 
 const MapBackground = ({ character }) => {
   return (
     <>
-      <div className={styles.mapBackground}>
+      <div className="game-map">
         <Map character={character} />
       </div>
     </>

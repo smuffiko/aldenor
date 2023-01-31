@@ -1,7 +1,7 @@
 import React from "react"
 import Router, { useRouter } from "next/router"
+import NProgress from "nprogress"
 import Head from "next/head"
-import cookies from "js-cookie"
 import { Container, Message } from "semantic-ui-react"
 import Footer from "./Footer"
 import HeadContent from "./HeadContent"
@@ -12,7 +12,6 @@ import LeftTop from "./Corners/LeftTop"
 import RightTop from "./Corners/RightTop"
 import LeftBottom from "./Corners/LeftBottom"
 import RightBottom from "./Corners/RightBottom"
-import styles from "../../styles/AldenorUI/AldenorUI.module.css"
 
 const PATHS = {
   main: [
@@ -40,6 +39,10 @@ const PATHS = {
 }
 
 const Layout = ({ children, user, character }) => {
+  Router.events.on("routeChangeStart", ()=> NProgress.start())
+  Router.events.on("routeChangeComplete", ()=> NProgress.done())
+  Router.events.on("routeChangeError", ()=> NProgress.done())
+
   const [desktop, setDesktop] = React.useState()
   const [unsupported, setUnsupported] = React.useState()
   const router = useRouter()
@@ -63,20 +66,20 @@ const Layout = ({ children, user, character }) => {
           <>
           {user ? user.role==="unUser" && (
             <>
-              <div className={styles.unUserBanner}><span>Please confirm your email!</span></div>
+              <div className="unuser-banner"><span>Please confirm your email!</span></div>
             </>
           ) : ""}
             { PATHS.game.find(path=> path === router.pathname) ? (
               <>
                 {character!== undefined && (
                   <>
-                  <div className={styles.rightTop}><RightTop user={user} character={character}/></div>
-                  <div className={styles.body}><div className={styles.children}>{children}</div></div>
+                  <div className="game-corner-r-t"><RightTop user={user} character={character}/></div>
+                  <div className="game"><div>{children}</div></div>
                   { router.pathname === "/game" && (
                     <>
-                      <div className={styles.leftTop}><LeftTop user={user} character={character}/></div>
-                      <div className={styles.leftBottom}><LeftBottom /></div>
-                      <div className={styles.rightBottom}><RightBottom /></div>
+                      <div className="game-corner-l-t"><LeftTop user={user} character={character}/></div>
+                      <div className="game-corner-l-b"><LeftBottom /></div>
+                      <div className="game-corner-r-b"><RightBottom /></div>
                     </>
                   )}
                 </>

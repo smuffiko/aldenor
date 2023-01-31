@@ -1,0 +1,44 @@
+@for $i from 0 through 3 {
+  .rotate-#{$i*90} {
+    transform: rotate($i*90deg);
+    -webkit-transform: rotate($i*90deg);
+  }
+  .rotate-#{$i*90}-flip {
+    transform: rotate($i*90deg) scaleX(-1);
+    -webkit-transform: rotate($i*90deg) scaleX(-1);
+  }
+}
+
+.map-field {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  padding: 0;
+  height: 64px;
+  width: 64px;
+  margin: 0;
+  &:hover {
+    
+  border: 3px solid white;
+  }
+}
+
+%hover-yellow {
+  -webkit-filter: drop-shadow(0 0 5px rgb(255, 255, 0));
+  filter: drop-shadow(0 0 5px  rgb(255, 255, 0));
+}
+
+.map-field-set {
+  -webkit-filter: drop-shadow(0 0 5px #35ff03);
+  filter: drop-shadow(0 0 5px #35ff03);
+  &:hover {
+    @extend %hover-yellow;
+  }
+}
+.map-field-unset {
+  -webkit-filter: drop-shadow(0 0 5px #ff2903);
+  filter: drop-shadow(0 0 5px  #ff2903);
+  &:hover {
+    @extend %hover-yellow;
+  }
+}

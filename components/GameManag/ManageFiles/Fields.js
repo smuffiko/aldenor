@@ -1,5 +1,4 @@
 import React from "react"
-import styles from "../../../styles/GameManag.Fields.module.css"
 import { Button, Image, Header, Modal, List, Icon } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../../utils/baseUrl"
@@ -138,7 +137,7 @@ const Fields = ({ setUpdating, file }) => {
   const mapFields = () => fields.map(f=>
     <div key={JSON.stringify(f)} className={loading?"loading":""}>
       <Image
-        className={`${styles[`rotate${f.rotation}${f.flip ? "flip" : ""}`]}`}
+        className={`rotate-${f.rotation}${f.flip ? "-flip" : ""}`}
         src={file}
       />
       {
@@ -157,7 +156,7 @@ const Fields = ({ setUpdating, file }) => {
               </Modal.Header>
               <Modal.Content>
                 <Image
-                  className={`${styles[`rotate${f.rotation}${f.flip?`flip`:``}`]}`}
+                  className={`rotate-${f.rotation}${f.flip ? "-flip" : ""}`}
                   src={file}
                 />
                 <p>Do you want to delete this field from DB?</p>

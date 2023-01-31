@@ -2,8 +2,9 @@ import React from "react"
 import Link from "next/link"
 import baseUrl from "../utils/baseUrl"
 import { handleLogin } from "../utils/auth"
-import { Message, Form, Icon, Segment, Button } from "semantic-ui-react"
-import styles from "../styles/AldenorUI/AldenorUI.Form.module.css"
+import { Message, Form, Icon, Header, Button } from "semantic-ui-react"
+import AldenorSegment from "../components/_App/AldenorUIComponents/AldenorSegment"
+import AldenorMessage from "../components/_App/AldenorUIComponents/AldenorMessage"
 
 const INITIAL_USER = {
   login: "",
@@ -13,7 +14,7 @@ const INITIAL_USER = {
 const SignIn = () => {
   const [user, setUser] = React.useState(INITIAL_USER)
   const [error, setError] = React.useState("")
-  const [disabled, setDisabled] = React.useState(false)
+  const [disabled, setDisabled] = React.useState(true)
   const [loading, setLoading] = React.useState(false)
 
   React.useEffect(() => {
@@ -56,58 +57,51 @@ const SignIn = () => {
   return (
     <>
       <div className="bodyContent">
-      <Message attached icon color="black" >
-        <Icon name="settings" />
-        <Message.Content>
-          <Message.Header>Welcome back!</Message.Header>
-          Sign in here
-        </Message.Content>
-      </Message>    
-      <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
-        <Message error icon attached >
-          <Icon name="x" />
-          <Message.Content>
-            <Message.Header>Oops!</Message.Header>
-            {error}
-          </Message.Content>
-        </Message>
-        <Segment attached>
-          <Form.Input
-            fluid
-            icon="user"
-            iconPosition="left"
-            label="Login"
-            required={true}
-            name="login"
-            value={user.login}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          <Form.Input
-            fluid
-            icon="lock"
-            iconPosition="left"
-            label="Password"
-            required={true}
-            name="password"
-            type="password"
-            value={user.password}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          <Button
-            icon="sign in"
-            type="submit"
-            className={`${styles.button} ${disabled || loading ? styles.disabled : ""}`}
-            content="Sign in!"
-          />
-        </Segment>
-      </Form>  
-    
-      <Message attached="bottom" color="grey">
-        <Icon name="help" />
-        Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link>
-      </Message>
+        <AldenorSegment>
+          <AldenorMessage box="grey">
+            <Header>Welcome back!</Header>
+            <p>Sign in here</p>
+          </AldenorMessage>    
+          <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
+            <Message error icon attached >
+              <Icon name="x" />
+              <Message.Content>
+                <Message.Header>Oops!</Message.Header>
+                {error}
+              </Message.Content>
+            </Message>
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              label="Login"
+              required={true}
+              name="login"
+              value={user.login}
+              onChange={handleChange}
+            />
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              label="Password"
+              required={true}
+              name="password"
+              type="password"
+              value={user.password}
+              onChange={handleChange}
+            />
+            <Button
+              icon="sign in"
+              type="submit"
+              className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
+              content="Sign in!"
+            />
+          </Form>  
+          <AldenorMessage box="yellow" >
+            <p><Icon name="help" size="large"/> Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link></p>
+          </AldenorMessage>    
+        </AldenorSegment>
       </div>
     </>
   )

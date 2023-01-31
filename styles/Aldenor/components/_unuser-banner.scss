@@ -1,0 +1,15 @@
+.unuser-banner {
+  width: 100%;
+  background-color:$unuser-banner-bg;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  span {
+    font-size: $unuser-font-size;
+    line-height: $unuser-line-height;
+    color: $unuser-text-color;
+    font-weight: bold;
+    font-family: $unuser-font-family !important;
+    animation: blinker 3s reverse infinite;
+    padding: 50px 0;
+  }
+}

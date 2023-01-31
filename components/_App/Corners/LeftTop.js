@@ -1,4 +1,3 @@
-import styles from "../../../styles/AldenorUI/AldenorUI.module.css"
 import React from "react"
 import cookies from "js-cookie"
 import { Icon, Image } from "semantic-ui-react"
@@ -84,19 +83,19 @@ const LeftTop = ({ user }) => {
   return (
     <>
       {character && (
-        <div className={styles.leftTopMenu}>
-          <div className={styles.charInv}>
-            <div className={styles.char}>
+        <div className="game-corner-l-t-wrap">
+          <div className="game-corner-l-t-right">
+            <div className="game-corner-char">
               <Image floated="left" src={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`} />          
             </div>
-            <div className={styles.inv}><Icon name="suitcase" size="large"/></div>
+            <div className="game-corner-inv"><Icon name="suitcase" size="large"/></div>
           </div>
         
-          <div className={styles.bars}>
-            <div className={styles.fillBar}><FillBar img={hpImg} current={hp} max={maxHp} /></div>
-            <div className={styles.fillBar}><FillBar img={epImg} current={ep} max={maxEp} /></div>
-            <div className={styles.fillBar}><FillBar img={expImg} current={exp} max={maxExp} /></div>
-            <div className={styles.fillBar}><FillBar name={character.name}/></div>
+          <div className="game-corner-l-t-left">
+            <div className="game-corner-l-t-fb"><FillBar img={hpImg} current={hp} max={maxHp} /></div>
+            <div className="game-corner-l-t-fb"><FillBar img={epImg} current={ep} max={maxEp} /></div>
+            <div className="game-corner-l-t-fb"><FillBar img={expImg} current={exp} max={maxExp} /></div>
+            <div className="game-corner-l-t-fb"><FillBar name={character.name}/></div>
           </div>
         </div>
       )}
