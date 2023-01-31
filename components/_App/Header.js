@@ -49,7 +49,7 @@ const Header = ({ user }) => {
             {/* everyone can see shop */}
             <Link href="/shop" passHref>
               <Menu.Item header active={isActive("/shop")}>
-              <AldenorIcon name="pouch" size="nm" color="white"/>
+              <AldenorIcon name="crystal" size="nm" color="white"/>
                 Shop
               </Menu.Item>
             </Link>

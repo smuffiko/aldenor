@@ -4,6 +4,7 @@ import { Icon, Image } from "semantic-ui-react"
 import FillBar from "../../Game/FillBar"
 import baseUrl from "../../../utils/baseUrl"
 import { unsetCharToken } from "../../../utils/character"
+import AldenorIcon from "../AldenorUIComponents/AldenorIcon"
 
 const LeftTop = ({ user }) => {
   const hpImg = [
@@ -88,7 +89,7 @@ const LeftTop = ({ user }) => {
             <div className="game-corner-char">
               <Image floated="left" src={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`} />          
             </div>
-            <div className="game-corner-inv"><Icon name="suitcase" size="large"/></div>
+            <div className="game-corner-inv"><AldenorIcon name="pouch" color="yellow"/></div>
           </div>
         
           <div className="game-corner-l-t-left">
