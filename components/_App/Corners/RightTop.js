@@ -90,7 +90,7 @@ const RightTop = ({ user, character }) => {
               <AldenorGCMenuItem>Ticket</AldenorGCMenuItem>
             </AldenorListItem>
             <AldenorListItem onClick={()=>logoutChar()}>
-              <AldenorGCMenuItem><AldenorIcon name="logout" size="sm" color="black" />Chars</AldenorGCMenuItem>
+              <AldenorGCMenuItem>Chars</AldenorGCMenuItem>
             </AldenorListItem>
           </AldenorList>
         </AldenorListItem>
