@@ -41,6 +41,22 @@
     }
     .create-image {
       align-self: center;
+      position: relative;
+      width: 320px;
+      height: 320px;
+      padding: 32px;
+    }
+    .create-image-basic {
+      width: 256px;
+      position: absolute;
+      bottom: 16px;
+      z-index: 10;
+    }
+    .create-image-hair-human {
+      width: 256px;
+      position: absolute;
+      bottom: 16px;
+      z-index: 11;
     }
     .create-name {
       align-self: flex-start;

@@ -10,7 +10,8 @@ const INITIAL_CHARACTER = {
   name: "",
   gender: 0,
   race: 0,
-  skin: 0
+  skin: 0,
+  hair: 0
 }
 
 const CreateCharacter = ({ slot, setSlot, setChar }) => {
@@ -19,6 +20,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState("")
   const [charPreview, setCharPreview] = React.useState("/img/Characters/Human/Mountaineer/Export_male/male_1.png")
+  const [hair, setHair] = React.useState(character.hair)
 
   React.useEffect(()=>{
     setError("")
@@ -31,11 +33,20 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     const { name, value } = event.target
     setCharacter(prevState => ({...prevState, [name]:value}))
   }
+
   const changeSkin = changeTo => {
     setCharacter(prevState => ({ ...prevState, skin: (
       ( (prevState.skin + changeTo) % 3 ) < 0 ?
       2 :
       ( (prevState.skin + changeTo) % 3 ) 
+    ) }))
+  }
+
+  const changeHair = changeTo => {
+    setCharacter(prevState => ({ ...prevState, hair: (
+      ( (prevState.hair + changeTo) % 3 ) < 0 ?
+      2 :
+      ( (prevState.hair + changeTo) % 3 ) 
     ) }))
   }
 
@@ -108,10 +119,19 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
               <Button icon="exchange" type="button" onClick={()=>changeGender()} />
             </div>
             <div>
+              <Button icon onClick={()=>changeHair(-1)} >
+                <Icon name="arrow left"/>
+              </Button>
+              <span>Hair</span>
+              <Button icon type="button" onClick={()=>changeHair(1)} >
+                <Icon name="arrow right"/>
+              </Button>
+            </div>
+            <div>
               <Button icon onClick={()=>changeSkin(-1)} >
                 <Icon name="arrow left"/>
               </Button>
-                <span>Skin: {SKIN[character.race][character.skin]}</span>
+                <span>{SKIN[character.race][character.skin]}</span>
               <Button icon type="button" onClick={()=>changeSkin(1)} >
                 <Icon name="arrow right"/>
               </Button>
@@ -120,19 +140,24 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
         </div>
 
         <div className="create-mid">
-            <Button
-              color='olive'
-              icon='arrow left'
-              label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
-              onClick={()=>setSlot(null)}
-              type="button"
-              className="create-back"
-            />
-            <AldenorMessage box="red" className="create-error" visible={Boolean(error)}>
-              <Header><Icon name="x" />Oops!</Header>
-              {error}
-            </AldenorMessage>
-            <Image src={charPreview} style={{width:"256px", height:"256px"}} className="create-image"/>
+          <Button
+            color='olive'
+            icon='arrow left'
+            label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
+            onClick={()=>setSlot(null)}
+            type="button"
+            className="create-back"
+          />
+          <AldenorMessage box="red" className="create-error" visible={Boolean(error)}>
+            <Header><Icon name="x" />Oops!</Header>
+            {error}
+          </AldenorMessage>
+
+          <div className="create-image">
+            <Image src={`/img/Characters/${RACES[character.race]}/${GENDER[character.gender]}_Hair_${character.hair+1}/${GENDER[character.gender]}_Hair_${character.hair+1}_1.png`} className={`create-image-hair-${RACES[character.race].toLowerCase()}`}/>
+            <Image src={charPreview} className="create-image-basic"/>
+          </div>
+
           <div className="create-mid-bottom">
             <Input
               iconPosition="left"
