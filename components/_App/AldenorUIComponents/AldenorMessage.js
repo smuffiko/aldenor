@@ -1,10 +1,10 @@
 import AldenorBorderBox from "./AldenorBorderBox"
 
-const AldenorMessage = ({ children, box, visible, style }) => {
+const AldenorMessage = ({ children, box, visible, style, className }) => {
   return (
     <>
       {( visible===undefined || visible!=false) && (
-        <div className="message" style={style}>
+        <div className={`message ${className}`} style={style}>
           <AldenorBorderBox box={box}>{children}</AldenorBorderBox>
         </div>
       )}

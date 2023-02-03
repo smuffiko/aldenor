@@ -1,8 +1,10 @@
 import React, { Fragment } from "react"
-import { Form, Button, Icon, Message, Image } from "semantic-ui-react"
+import { Form, Button, Icon, Message, Image, Input, Header } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
 import { RACES, GENDER, SKIN, SKINS } from "../../utils/characters"
+import AldenorBorderBox from "../_App/AldenorUIComponents/AldenorBorderBox"
+import AldenorMessage from "../_App/AldenorUIComponents/AldenorMessage"
 
 const INITIAL_CHARACTER = {
   name: "",
@@ -19,6 +21,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
   const [charPreview, setCharPreview] = React.useState("/img/Characters/Human/Mountaineer/Export_male/male_1.png")
 
   React.useEffect(()=>{
+    setError("")
     if(Boolean(character.name)) setDisabled(false)
       else setDisabled(true)
     setCharPreview(`/img/Characters/${RACES[character.race]}/${SKIN[character.race][character.skin]}/Export_${GENDER[character.gender].toLowerCase()}/${GENDER[character.gender].toLowerCase()}_1.png`)
@@ -37,12 +40,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
   }
 
   const changeRace = changeTo => {
-    setCharacter(prevState => {
-      const newRace = ( ( (prevState.race + changeTo) % RACES.length ) < 0 ?
-        RACES.length - 1 :
-        ( (prevState.race + changeTo) % RACES.length ) )
-      return { ...prevState, race: newRace }
-    })
+    setCharacter(prevState => ({ ...prevState, race: changeTo }))
   }
 
   const changeGender = () => {
@@ -56,7 +54,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     setDisabled(true)
 
     const url = `${baseUrl}/api/character`
-    const payload = { slot, skin: SKIN[character.race][character.skin], name: character.name, race: RACES[character.race], gender: character.gender }
+    const payload = { slot, skin: SKIN[character.race][character.skin], name: character.name, race: character.race, gender: character.gender }
     const token = cookie.get("token")
     await fetch(url, {
       method: "POST",
@@ -80,6 +78,7 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     })
   }
 
+  // todo it is only for preview, so maybe i can delete it later
   const printAll = () => 
     Object.keys(SKINS).map(race=>
       SKINS[race].map(skin=> 
@@ -94,60 +93,64 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
 
   return (
     <>
-      <div className="body-content">
-        <Button
-          color='olive'
-          icon='arrow left'
-          label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
-          onClick={()=>setSlot(null)}
-          type="button"
-        />
-        <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
-          <Message error icon attached >
-            <Icon name="x" />
-            <Message.Content>
-              <Message.Header>Oops!</Message.Header>
-              {error}
-            </Message.Content>
-          </Message>
-          <Form.Input
-            fluid
-            icon="pencil"
-            iconPosition="left"
-            label="Name"
-            required={true}
-            name="name"
-            value={character.name}
-            onChange={handleChange}
-          />
-          {printAll()}
-          <Image src={charPreview} style={{width:"256px", height:"256px"}}/>
-          <Form.Field>
+      <div className="body-content create-character">
+        <div className="create-left">
+          <div className="create-race">
+          <Button onClick={()=>changeRace(0)} content="Human"/>
+          <Button onClick={()=>changeRace(1)} content="Elf"/>
+          <Button onClick={()=>changeRace(2)} content="Dwarf"/>
+          <Button onClick={()=>changeRace(3)} content="Halfling"/>
+          </div>
+
+          <div className="create-select">
+            <div>
               <span>Gender: {GENDER[character.gender]}</span>
-            <Button icon type="button" onClick={()=>changeGender()}>
-              <Icon name="exchange"/>
-            </Button>
-          </Form.Field>
-          <Form.Field>
-            <Button icon type="button" onClick={()=>changeRace(-1)}>
-              <Icon name="arrow left"/>
-            </Button>
-              <span>Race: {RACES[character.race]}</span>
-            <Button icon type="button" onClick={()=>changeRace(1)}>
-              <Icon name="arrow right"/>
-            </Button>
-          </Form.Field>
-          <Form.Field>
-            <Button icon type="button" onClick={()=>changeSkin(-1)}>
-              <Icon name="arrow left"/>
-            </Button>
-              <span>Skin: {SKIN[character.race][character.skin]}</span>
-            <Button icon type="button" onClick={()=>changeSkin(1)}>
-              <Icon name="arrow right"/>
-            </Button>
-          </Form.Field>
-          <button type="submit" className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"} ><Icon name="gamepad" />Create!</button>
-        </Form>
+              <Button icon="exchange" type="button" onClick={()=>changeGender()} />
+            </div>
+            <div>
+              <Button icon onClick={()=>changeSkin(-1)} >
+                <Icon name="arrow left"/>
+              </Button>
+                <span>Skin: {SKIN[character.race][character.skin]}</span>
+              <Button icon type="button" onClick={()=>changeSkin(1)} >
+                <Icon name="arrow right"/>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="create-mid">
+            <Button
+              color='olive'
+              icon='arrow left'
+              label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
+              onClick={()=>setSlot(null)}
+              type="button"
+              className="create-back"
+            />
+            <AldenorMessage box="red" className="create-error" visible={Boolean(error)}>
+              <Header><Icon name="x" />Oops!</Header>
+              {error}
+            </AldenorMessage>
+            <Image src={charPreview} style={{width:"256px", height:"256px"}} className="create-image"/>
+          <div className="create-mid-bottom">
+            <Input
+              iconPosition="left"
+              label="Name"
+              required={true}
+              name="name"
+              value={character.name}
+              onChange={handleChange}
+              className="create-name"
+            />
+            <button type="submit" onClick={handleSubmit} className={disabled || loading ? "basic-button-disabled disabled create-submit" : "basic-button create-submit"} ><Icon name="gamepad" />Create!</button>
+          </div>
+        </div>
+        <div className="create-right">
+          <AldenorBorderBox box="basic" className="create-info"><div>info rasa</div></AldenorBorderBox>
+          <AldenorBorderBox box="basic" className="create-info"><div>info skin</div></AldenorBorderBox>
+        </div>
+        
       </div>
     </>
   )

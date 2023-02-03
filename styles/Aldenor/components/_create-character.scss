@@ -1,0 +1,64 @@
+.create-character {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+
+  .create-left {
+    width: 200px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    .create-race {
+      button {
+        width: 60px;
+        height: 60px;
+        margin: 1rem;
+      }
+    }
+  }
+  .create-mid {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    position: relative;
+
+    .create-back {
+      align-self: flex-start;
+    }
+    .create-error {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .create-image {
+      align-self: center;
+    }
+    .create-name {
+      align-self: flex-start;
+    }
+    .create-submit {
+      align-self: flex-end;
+    }
+  }
+  .create-right {
+    width: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .create-info {
+    background-color: $sorrel-brown;
+    padding: 64px 32px;
+  }
+}
