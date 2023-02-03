@@ -4,4 +4,13 @@
   right: 0;
   height: 60px; 
   z-index: 20;
+  .hidden {
+    position: absolute;
+    visibility: hidden;
+  }
+  .visible {
+    position: absolute;
+    visibility: visible;
+    padding: 0 !important;
+  }
 }

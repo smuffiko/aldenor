@@ -16,7 +16,11 @@
 // alice carousel setiings
 @import "alice-carousel-settings";
 
+// rich text editor
+@import "rte";
+
 // components (button, card, navbar,..)
+@import "components/body-content";
 @import "components/border-box";
 @import "components/button";
 @import "components/character-panel";
@@ -34,5 +38,6 @@
 @import "components/message";
 @import "components/navbar";
 @import "components/palette";
+@import "components/race-info";
 @import "components/segment";
 @import "components/unuser-banner";

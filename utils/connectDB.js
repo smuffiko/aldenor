@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 require("../models/Character")
+require("../models/CharactersInfo")
 require("../models/Field")
 require("../models/Item")
 require("../models/Map")

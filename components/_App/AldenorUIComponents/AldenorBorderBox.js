@@ -1,7 +1,7 @@
-const AldenorBorderBox = ({children, box}) => {
+const AldenorBorderBox = ({children, box, className}) => {
   return (
     <>
-      <div className={`border-box-${box}`}>{children}</div>
+      <div className={`border-box-${box} ${className}`}>{children}</div>
     </>
   )
 }

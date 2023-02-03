@@ -1,0 +1,14 @@
+.rich-text-editor {
+  .ProseMirror {
+    border: 1px solid #cacaca;
+    padding: 16px;
+  }
+  & * {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+  }
+}

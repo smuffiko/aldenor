@@ -29,15 +29,13 @@ svg {
 
 #container {
   min-height: 100vh;
-  position:relative;
-}
-#body {
-  padding: 0;
   position: relative;
 }
-#body div.bodyContent {
+#body {
+  position: relative;
   padding: 50px 0 100px 0;
 }
+
 #footer {
   position:absolute;
   bottom:0;
@@ -46,10 +44,6 @@ svg {
   padding: 1rem;
   background: $footer-bg-color;
   box-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
-}
-
-.body-content {
-  padding: 50px 0 100px 0;
 }
 .disabled {
   pointer-events: none;
@@ -60,15 +54,6 @@ svg {
 }
 .horizontal {
   display: inline-block;
-}
-.hidden {
-  position: absolute;
-  visibility: hidden;
-}
-.visible {
-  position: absolute;
-  visibility: visible;
-  padding: 0 !important;
 }
 .loading {
   pointer-events: none;

@@ -1,8 +1,8 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Form, Button, Icon, Message, Image } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
-import { RACES, GENDER, SKIN } from "../../utils/characters"
+import { RACES, GENDER, SKIN, SKINS } from "../../utils/characters"
 
 const INITIAL_CHARACTER = {
   name: "",
@@ -80,60 +80,75 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     })
   }
 
+  const printAll = () => 
+    Object.keys(SKINS).map(race=>
+      SKINS[race].map(skin=> 
+        <Fragment key={Math.random()}>
+          <div style={{display:"inline", width:"500px", wordWrap:"none"}} className="stst">
+            <Image src={`/img/Characters/${race}/${skin}/Export_male/male_1.png`} label={`${race} ${skin} male`}/>
+            <Image src={`/img/Characters/${race}/${skin}/Export_female/female_1.png`}  label={`${race} ${skin} female`}/>
+          </div>
+        </Fragment>
+      )
+    )
+
   return (
     <>
-      <Button
-        color='olive'
-        icon='arrow left'
-        label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
-        onClick={()=>setSlot(null)}
-        type="button"
-      />
-      <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
-        <Message error icon attached >
-          <Icon name="x" />
-          <Message.Content>
-            <Message.Header>Oops!</Message.Header>
-            {error}
-          </Message.Content>
-        </Message>
-        <Form.Input
-          fluid
-          icon="pencil"
-          iconPosition="left"
-          label="Name"
-          required={true}
-          name="name"
-          value={character.name}
-          onChange={handleChange}
+      <div className="body-content">
+        <Button
+          color='olive'
+          icon='arrow left'
+          label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
+          onClick={()=>setSlot(null)}
+          type="button"
         />
-        <Image src={charPreview}/>
-        <Form.Field>
-            <span>Gender: {GENDER[character.gender]}</span>
-          <Button icon type="button" onClick={()=>changeGender()}>
-            <Icon name="exchange"/>
-          </Button>
-        </Form.Field>
-        <Form.Field>
-          <Button icon type="button" onClick={()=>changeRace(-1)}>
-            <Icon name="arrow left"/>
-          </Button>
-            <span>Race: {RACES[character.race]}</span>
-          <Button icon type="button" onClick={()=>changeRace(1)}>
-            <Icon name="arrow right"/>
-          </Button>
-        </Form.Field>
-        <Form.Field>
-          <Button icon type="button" onClick={()=>changeSkin(-1)}>
-            <Icon name="arrow left"/>
-          </Button>
-            <span>Skin: {SKIN[character.race][character.skin]}</span>
-          <Button icon type="button" onClick={()=>changeSkin(1)}>
-            <Icon name="arrow right"/>
-          </Button>
-        </Form.Field>
-        <button type="submit" className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"} ><Icon name="gamepad" />Create!</button>
-      </Form>
+        <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
+          <Message error icon attached >
+            <Icon name="x" />
+            <Message.Content>
+              <Message.Header>Oops!</Message.Header>
+              {error}
+            </Message.Content>
+          </Message>
+          <Form.Input
+            fluid
+            icon="pencil"
+            iconPosition="left"
+            label="Name"
+            required={true}
+            name="name"
+            value={character.name}
+            onChange={handleChange}
+          />
+          {printAll()}
+          <Image src={charPreview} style={{width:"256px", height:"256px"}}/>
+          <Form.Field>
+              <span>Gender: {GENDER[character.gender]}</span>
+            <Button icon type="button" onClick={()=>changeGender()}>
+              <Icon name="exchange"/>
+            </Button>
+          </Form.Field>
+          <Form.Field>
+            <Button icon type="button" onClick={()=>changeRace(-1)}>
+              <Icon name="arrow left"/>
+            </Button>
+              <span>Race: {RACES[character.race]}</span>
+            <Button icon type="button" onClick={()=>changeRace(1)}>
+              <Icon name="arrow right"/>
+            </Button>
+          </Form.Field>
+          <Form.Field>
+            <Button icon type="button" onClick={()=>changeSkin(-1)}>
+              <Icon name="arrow left"/>
+            </Button>
+              <span>Skin: {SKIN[character.race][character.skin]}</span>
+            <Button icon type="button" onClick={()=>changeSkin(1)}>
+              <Icon name="arrow right"/>
+            </Button>
+          </Form.Field>
+          <button type="submit" className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"} ><Icon name="gamepad" />Create!</button>
+        </Form>
+      </div>
     </>
   )
 }

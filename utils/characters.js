@@ -33,4 +33,27 @@ export const SKIN = [
   ]
 ]
 
+export const SKINS = {
+  "Human": [
+    "Desert",
+    "Mountaineer", 
+    "Plains"
+  ],
+  "Elf": [
+    "Forest",
+    "Mountain",
+    "Plains"
+  ],
+  "Dwarf": [
+    "Dark",
+    "Deep",
+    "Rock"
+  ],
+  "Halfling": [
+    "Hills",
+    "Meadows",
+    "Town"
+  ]
+}
+
 // can i use it somewhere? todo

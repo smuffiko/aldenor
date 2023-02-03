@@ -97,24 +97,22 @@ const Characters = ({ setSlot, setChar }) => {
 
   return (
     <>
-      <div className="body-content">
-        <div className="character-panel-container">
-          <AliceCarousel
-            mouseTracking
-            items={items}
-            responsive={responsive}
-            controlsStrategy="alternate"
-            disableDotsControls
-            keyboardNavigation
-            renderPrevButton={renderPrevButton}
-            renderNextButton={renderNextButton}
-            paddingLeft={48}
-            paddingRight={48}
-            swipeDelta={20}
-            swipeExtraPadding={0}
-            className="carousel"
-          />
-        </div>
+      <div className="character-panel-container">
+        <AliceCarousel
+          mouseTracking
+          items={items}
+          responsive={responsive}
+          controlsStrategy="alternate"
+          disableDotsControls
+          keyboardNavigation
+          renderPrevButton={renderPrevButton}
+          renderNextButton={renderNextButton}
+          paddingLeft={48}
+          paddingRight={48}
+          swipeDelta={20}
+          swipeExtraPadding={0}
+          className="carousel"
+        />
       </div>
     </>
   )
