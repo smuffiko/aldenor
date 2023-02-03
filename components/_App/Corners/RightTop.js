@@ -4,7 +4,6 @@ import { unsetCharToken } from "../../../utils/character"
 import AldenorGCMenuItem from "../AldenorUIComponents/AldenorGCMenuItem"
 import AldenorList from "../AldenorUIComponents/AldenorList"
 import AldenorListItem from "../AldenorUIComponents/AldenorListItem"
-import AldenorIcon from "../AldenorUIComponents/AldenorIcon"
 
 const RightTop = ({ user, character }) => {
   const [open, setOpen] = React.useState({ devs: false, game: false, others: false})
@@ -46,16 +45,16 @@ const RightTop = ({ user, character }) => {
             <AldenorList visibility={open.devs ? "visible" : "hidden"}>
               {character.role === "admin" && (
                 <AldenorListItem onClick={()=>Router.push("/adminTools")}>
-                  <AldenorGCMenuItem>Admin Tools</AldenorGCMenuItem>
+                  <AldenorGCMenuItem>Admin</AldenorGCMenuItem>
                 </AldenorListItem>
               )}
               {character.role === "root" && (
                 <>
                   <AldenorListItem onClick={()=>Router.push("/gameManag")}>
-                    <AldenorGCMenuItem>Game Manag</AldenorGCMenuItem>
+                    <AldenorGCMenuItem>Game</AldenorGCMenuItem>
                   </AldenorListItem>
                   <AldenorListItem onClick={()=>Router.push("/staffManag")}>
-                    <AldenorGCMenuItem>Staff Manag</AldenorGCMenuItem>
+                    <AldenorGCMenuItem>Staff</AldenorGCMenuItem>
                   </AldenorListItem>
                 </>
               )}
@@ -74,7 +73,7 @@ const RightTop = ({ user, character }) => {
               <AldenorGCMenuItem>Party</AldenorGCMenuItem>
             </AldenorListItem>
             <AldenorListItem>
-              <AldenorGCMenuItem>Achievments</AldenorGCMenuItem>
+              <AldenorGCMenuItem>Achiev</AldenorGCMenuItem>
             </AldenorListItem>
             <AldenorListItem>
               <AldenorGCMenuItem>Camp</AldenorGCMenuItem>
