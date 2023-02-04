@@ -5,6 +5,7 @@ import baseUrl from "../../utils/baseUrl"
 import { RACES, GENDER, SKIN, SKINS } from "../../utils/characters"
 import AldenorBorderBox from "../_App/AldenorUIComponents/AldenorBorderBox"
 import AldenorMessage from "../_App/AldenorUIComponents/AldenorMessage"
+import AldenorCharacterPreview from "../_App/AldenorUIComponents/AldenorCharacterPreview"
 
 const INITIAL_CHARACTER = {
   name: "",
@@ -20,6 +21,11 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState("")
   const [charPreview, setCharPreview] = React.useState("/img/Characters/Human/Mountaineer/Export_male/male_1.png")
+  const [info, setInfo] = React.useState("")
+
+  React.useEffect(()=>{
+    getCharactersInfo()
+  },[])
 
   React.useEffect(()=>{
     setError("")
@@ -27,6 +33,29 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
       else setDisabled(true)
     setCharPreview(`/img/Characters/${RACES[character.race]}/${SKIN[character.race][character.skin]}/Export_${GENDER[character.gender].toLowerCase()}/${GENDER[character.gender].toLowerCase()}_1.png`)
   },[character])
+
+  const getCharactersInfo = async () => {
+    setLoading(true)
+    const url = `${baseUrl}/api/charactersInfo`
+    await fetch(url,{
+      method: "GET",
+      headers: {
+        "Content-type": "application/json"
+      }
+    }).then(async response => {
+      if(!response.ok) {
+        const er = await response.text()
+        throw new Error(er)
+      }
+      return await response.json()      
+    }).then(data => {
+      setInfo(data)
+    }).catch(error => {
+      setError(error.message)
+    }).finally(()=>{
+      setLoading(false)
+    })
+  }
 
   const handleChange = event => {
     const { name, value } = event.target
@@ -53,8 +82,8 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     setCharacter(prevState => ({ ...prevState, race: changeTo }))
   }
 
-  const changeGender = () => {
-    setCharacter(prevState => ({...prevState, gender: Number(!prevState.gender)}))
+  const changeGender = gender => {
+    setCharacter(prevState => ({...prevState, gender: gender }))
   }
 
   const handleSubmit = async event => {
@@ -107,16 +136,16 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
       <div className="body-content create-character">
         <div className="create-left">
           <div className="create-race">
-          <Button onClick={()=>changeRace(0)} content="Human"/>
-          <Button onClick={()=>changeRace(1)} content="Elf"/>
-          <Button onClick={()=>changeRace(2)} content="Dwarf"/>
-          <Button onClick={()=>changeRace(3)} content="Halfling"/>
+            <Button onClick={()=>changeRace(0)} content="Human"/>
+            <Button onClick={()=>changeRace(1)} content="Elf"/>
+            <Button onClick={()=>changeRace(2)} content="Dwarf"/>
+            <Button onClick={()=>changeRace(3)} content="Halfling"/>
           </div>
 
           <div className="create-select">
             <div>
-              <span>Gender: {GENDER[character.gender]}</span>
-              <Button icon="exchange" type="button" onClick={()=>changeGender()} />
+              <Button icon="venus" type="button" onClick={()=>changeGender(1)} />
+              <Button icon="mars" type="button" onClick={()=>changeGender(0)} />
             </div>
             <div>
               <Button icon onClick={()=>changeHair(-1)} >
@@ -138,7 +167,6 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
             </div>
           </div>
         </div>
-
         <div className="create-mid">
           <Button
             color='olive'
@@ -153,27 +181,31 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
             {error}
           </AldenorMessage>
 
-          <div className="create-image character-preview">
-            <Image src={`/img/Characters/${RACES[character.race]}/${GENDER[character.gender]}_Hair_${character.hair+1}/${GENDER[character.gender]}_Hair_${character.hair+1}_1.png`} className="hair"/>
-            <Image src={charPreview} className="basic-char"/>
-          </div>
+          <AldenorCharacterPreview
+            basic={charPreview}
+            hair={`/img/Characters/${RACES[character.race]}/${GENDER[character.gender]}_Hair_${character.hair+1}/${GENDER[character.gender]}_Hair_${character.hair+1}_1.png`}
+            size={256}
+            className="create-image"
+          />
 
           <div className="create-mid-bottom">
             <Input
-              iconPosition="left"
-              label="Name"
-              required={true}
+              placeholder="Name"
               name="name"
               value={character.name}
               onChange={handleChange}
               className="create-name"
             />
-            <button type="submit" onClick={handleSubmit} className={disabled || loading ? "basic-button-disabled disabled create-submit" : "basic-button create-submit"} ><Icon name="gamepad" />Create!</button>
+            <button type="submit" onClick={handleSubmit} className={disabled || loading ? "basic-button-disabled disabled create-submit" : "basic-button create-submit"} >Create!</button>
           </div>
         </div>
         <div className="create-right">
-          <AldenorBorderBox box="basic" className="create-info"><div>info rasa</div></AldenorBorderBox>
-          <AldenorBorderBox box="basic" className="create-info"><div>info skin</div></AldenorBorderBox>
+          {info && (
+            <>
+              <AldenorBorderBox box="basic" className="create-info"><div dangerouslySetInnerHTML={{__html: info[character.race].raceInfo}}></div></AldenorBorderBox>
+              <AldenorBorderBox box="basic" className="create-info"><div dangerouslySetInnerHTML={{__html: info[character.race].skins[character.skin].skinInfo}}></div></AldenorBorderBox>
+            </>
+          )}
         </div>
         
       </div>

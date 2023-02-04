@@ -9,18 +9,33 @@
   align-items: stretch;
   height: calc(100vh - 200px);
   min-height: 600px;
+  padding: 16px;
 
   .create-left {
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     .create-race {
+      width: 200px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      align-items: center;
       button {
-        width: 60px;
-        height: 60px;
-        margin: 1rem;
+        width: 46%;
+        margin: 2%;
       }
+    }
+    .create-select {
+      padding: 16px;
+      height: 50%;
+      width: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+      align-items: center;
     }
   }
   .create-mid {
@@ -56,23 +71,66 @@
       height: 256px;
       bottom: 16px;
     }
-    .create-name {
-      align-self: flex-start;
-    }
-    .create-submit {
-      align-self: flex-end;
+    .create-mid-bottom {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-end;
+      align-items: stretch;
+      gap: 16px;
+      .create-name {
+        input {
+          text-align: center;
+          background-color: map-get($basic-colors,"light") !important;
+          background-image:
+            url("#{$base-public-folder}/img/UI/BorderBox/basic-l-t.png"),
+            url("#{$base-public-folder}/img/UI/BorderBox/basic-l-b.png"),
+            url("#{$base-public-folder}/img/UI/BorderBox/basic-r-t.png"),
+            url("#{$base-public-folder}/img/UI/BorderBox/basic-r-b.png") !important;
+          box-shadow: 
+            1px 1px map-get($basic-colors,"basic"),
+            1px -1px map-get($basic-colors,"basic"),
+            -1px 1px map-get($basic-colors,"basic"),
+            -1px -1px map-get($basic-colors,"basic"),
+            2px 2px map-get($basic-colors,"dark"),
+            2px -2px map-get($basic-colors,"dark"),
+            -2px 2px map-get($basic-colors,"dark"),
+            -2px -2px map-get($basic-colors,"dark") !important;
+          background-position:
+            top -2px left -2px,
+            bottom -2px left -2px,
+            top -2px right -2px,
+            bottom -2px right -2px !important;
+          background-repeat: no-repeat !important;
+          border-radius: 0 !important;
+          border: 1px solid  map-get($basic-colors,"basic") ;
+          image-rendering: pixelated;
+          font-family: $font-form-input !important;
+          &:focus {
+            border: 1px solid  map-get($basic-colors,"basic") !important;
+          }
+          &::placeholder {
+            font-weight: bold;
+            opacity: 0.5;
+            color: rgb(41, 41, 41);
+          }
+        }      
+      }
+      .create-submit {
+        align-self: center;
+      }
     }
   }
   .create-right {
-    width: 300px;
+    width: 400px;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: stretch;
+    line-height: 12px;
+    font-size: 12px;
+    .create-info {
+      padding: 32px;
+    }
   }
 
-  .create-info {
-    background-color: $sorrel-brown;
-    padding: 64px 32px;
-  }
 }

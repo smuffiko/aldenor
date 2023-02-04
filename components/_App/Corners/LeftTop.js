@@ -5,6 +5,7 @@ import FillBar from "../../Game/FillBar"
 import baseUrl from "../../../utils/baseUrl"
 import { unsetCharToken } from "../../../utils/character"
 import AldenorIcon from "../AldenorUIComponents/AldenorIcon"
+import AldenorCharacterPreview from "../AldenorUIComponents/AldenorCharacterPreview"
 
 const LeftTop = ({ user }) => {
   const hpImg = [
@@ -87,10 +88,11 @@ const LeftTop = ({ user }) => {
         <div className="game-corner-l-t-wrap">
           <div className="game-corner-l-t-right">
             <div className="game-corner-char">
-              <div className="character-preview">
-                <Image src={`/img/Characters/${character.race}/${character.gender ? "Female" : "Male"}_Hair_${character.hair+1}/${character.gender ? "Female" : "Male"}_Hair_${character.hair+1}_1.png`} className="hair"/>
-                <Image floated="left" src={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`} className="basic-char" />    
-              </div>      
+                <AldenorCharacterPreview
+                  basic={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`}
+                  hair={`/img/Characters/${character.race}/${character.gender ? "Female" : "Male"}_Hair_${character.hair+1}/${character.gender ? "Female" : "Male"}_Hair_${character.hair+1}_1.png`}
+                  size={64}
+                />      
             </div>
             <div className="game-corner-inv"><AldenorIcon name="pouch" color="yellow"/></div>
           </div>

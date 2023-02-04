@@ -64,13 +64,10 @@ const SignIn = () => {
             <p>Sign in here</p>
           </AldenorMessage>    
           <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
-            <Message error icon attached >
-              <Icon name="x" />
-              <Message.Content>
-                <Message.Header>Oops!</Message.Header>
-                {error}
-              </Message.Content>
-            </Message>
+            <AldenorMessage box="red" visible={Boolean(error)}>
+              <Header><Icon name="x" />Oops!</Header>
+              {error}
+            </AldenorMessage>
             <Form.Input
               fluid
               icon="user"

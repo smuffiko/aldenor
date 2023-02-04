@@ -70,18 +70,8 @@
       .char-panel-top {
         position: absolute;
         top: 3rem;
-        .character-preview {
-          width: 128px;
-          height: 128px;
-          .basic-char {
-            width: 128px;
-            height: 128px;
-          }
-          .hair {
-            width: 128px;
-            height: 128px;
-          }
-        }
+        width: 128px;
+        height: 128px;
       }
       
       .char-panel-mid {

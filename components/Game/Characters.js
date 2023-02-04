@@ -6,6 +6,7 @@ import baseUrl from "../../utils/baseUrl"
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import AldenorBorderBox from "../_App/AldenorUIComponents/AldenorBorderBox"
+import AldenorCharacterPreview from "../_App/AldenorUIComponents/AldenorCharacterPreview"
 
 const Characters = ({ setSlot, setChar }) => {
   const [characters, setCharacters] = React.useState([])
@@ -29,10 +30,11 @@ const Characters = ({ setSlot, setChar }) => {
           { c.available ? c.character!== null ? (
             <>
               <div className="char-panel-top">
-                <div className="character-preview">
-                  <Image src={`/img/Characters/${c.character.race}/${c.character.gender ? "Female" : "Male"}_Hair_${c.character.hair+1}/${c.character.gender ? "Female" : "Male"}_Hair_${c.character.hair+1}_1.png`} className="hair"/>
-                  <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} className="basic-char" />              
-                </div>
+                <AldenorCharacterPreview
+                  basic={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`}
+                  hair={`/img/Characters/${c.character.race}/${c.character.gender ? "Female" : "Male"}_Hair_${c.character.hair+1}/${c.character.gender ? "Female" : "Male"}_Hair_${c.character.hair+1}_1.png`}
+                  size={128}
+                />          
               </div>
               <div className="char-panel-mid">
                 <AldenorBorderBox box="basic">
