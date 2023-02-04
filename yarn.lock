@@ -369,14 +369,6 @@
   "resolved" "https://registry.npmjs.org/@tiptap/extension-bold/-/extension-bold-2.0.0-beta.212.tgz"
   "version" "2.0.0-beta.212"
 
-"@tiptap/extension-bubble-menu@^2.0.0-beta.212":
-  "integrity" "sha512-LqwXN66hIhjQL+aVbKHlsu6ryX6Mtnz2eaKrUPDkU/vqu1M7iSlB9kSDu7DQgOJzd9a69UrsH9DiD3LdUtyd/g=="
-  "resolved" "https://registry.npmjs.org/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.0.0-beta.212.tgz"
-  "version" "2.0.0-beta.212"
-  dependencies:
-    "lodash" "^4.17.21"
-    "tippy.js" "^6.3.7"
-
 "@tiptap/extension-bullet-list@^2.0.0-beta.212":
   "integrity" "sha512-owW+SPkeYEB4SKCprp5yt6MRMvB+TOObxauvaiuZ+RPGKX/a6/uXyCfsPJ+Wz85lPn1GYefZwlfANJ6C5HQGkg=="
   "resolved" "https://registry.npmjs.org/@tiptap/extension-bullet-list/-/extension-bullet-list-2.0.0-beta.212.tgz"
@@ -565,7 +557,6 @@
   "resolved" "https://registry.npmjs.org/@tiptap/react/-/react-2.0.0-beta.212.tgz"
   "version" "2.0.0-beta.212"
   dependencies:
-    "@tiptap/extension-bubble-menu" "^2.0.0-beta.212"
     "@tiptap/extension-floating-menu" "^2.0.0-beta.212"
 
 "@tiptap/starter-kit@^2.0.0-beta.190":
