@@ -78,7 +78,7 @@ const handlePostRequest = async (req, res) => {
   if(await Character.findOne({ name: regex }))
     return res.status(422).send("This name already exists.")
 
-  await Map.findOne({name: "Start"}) // default map name 4x6
+  await Map.findOne({name: "Test Island"}) // default map name todo -> change name of default map
   .then(async(defaultMap)=>{
   // create new character and save to db
     const newCharacter = await new Character({
