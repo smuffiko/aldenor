@@ -28,17 +28,24 @@ svg {
 }
 
 #container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between; 
   min-height: 100vh;
   position: relative;
 }
+
+#header {
+  align-self: center;
+  width: 100%;
+}
+
 #body {
+  padding: 50px 0 50px 0;
   position: relative;
-  padding: 50px 0 100px 0;
 }
 
 #footer {
-  position:absolute;
-  bottom:0;
   height: 50px;
   width: 100%;
   padding: 1rem;
