@@ -1,14 +1,16 @@
 .character-preview {
   position: relative;
+  width: 64px;
+  height: 64px;
   .basic-char {
-    position: absolute !important;
+    position: absolute;
     top: 0;
     width: 64px;
     height: 64px;
     z-index: 20;
   }
   .hair {
-    position: absolute !important;
+    position: absolute;
     top: 0;
     width: 64px;
     height: 64px;

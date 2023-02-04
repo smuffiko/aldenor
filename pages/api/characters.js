@@ -33,7 +33,12 @@ const handleGetRequest = async (req, res) => {
   // get all characters
   const user = await User.findOne({ _id: userId }).populate({
     path: "characters.character",
-    model: "Character"
+    model: "Character",
+    populate: [{
+      path: "coords.current.map",
+      model: "Map",
+      select: "name"
+    }]
   })
   const characters = user.characters
   if (characters)

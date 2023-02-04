@@ -42,8 +42,8 @@ const Characters = ({ setSlot, setChar }) => {
                     <List.Item>Race: {c.character.race}</List.Item>
                     <List.Item>Class: {c.character.class}</List.Item>
                     <List.Item>Lvl: {c.character.lvl}</List.Item>
-                    <List.Item>Money: {c.character.money.gold}g {c.character.money.silver}s {c.character.money.copper}c</List.Item>
-                    <List.Item>Coords: [{c.character.coords.current.x},{c.character.coords.current.y},{c.character.coords.current.z}]</List.Item>
+                    <List.Item><span className="coins-container">Money: {c.character.money.gold}<img src="img/UI/Coins/Coin_G.png" className="coin"/> {c.character.money.silver}<img src="img/UI/Coins/Coin_S.png" className="coin"/> {c.character.money.copper}<img src="img/UI/Coins/Coin_B.png" className="coin"/></span></List.Item>
+                    <List.Item>Location: {c.character.coords.current.map.name} [{c.character.coords.current.x},{c.character.coords.current.y}]</List.Item>
                   </List>
                 </AldenorBorderBox>
               </div>
