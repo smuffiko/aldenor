@@ -29,6 +29,10 @@ const CharacterSchema = new mongoose.Schema(
       required: true,
       enum: [0,1] // 0 = male, 1 = female
     },
+    hair: {
+      type: Number,
+      required: true
+    },
     skin: {
       type: String,
       enum: [

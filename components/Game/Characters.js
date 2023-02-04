@@ -29,7 +29,10 @@ const Characters = ({ setSlot, setChar }) => {
           { c.available ? c.character!== null ? (
             <>
               <div className="char-panel-top">
-                <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} />
+                <div className="character-preview">
+                  <Image src={`/img/Characters/${c.character.race}/${c.character.gender ? "Female" : "Male"}_Hair_${c.character.hair+1}/${c.character.gender ? "Female" : "Male"}_Hair_${c.character.hair+1}_1.png`} className="hair"/>
+                  <Image centered src={`/img/Characters/${c.character.race}/${c.character.skin}/Export_${c.character.gender ? "female" : "male"}/${c.character.gender ? "female" : "male"}_1.png`} className="basic-char" />              
+                </div>
               </div>
               <div className="char-panel-mid">
                 <AldenorBorderBox box="basic">

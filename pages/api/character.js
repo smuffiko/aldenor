@@ -59,7 +59,7 @@ const handlePostRequest = async (req, res) => {
     return res.status(401).send("No authorization token.")
   }
   // get payload and user id from token
-  const { slot, skin, name, race, gender } = req.body
+  const { slot, skin, name, race, gender, hair } = req.body
   const index = slot-1
   const { userId } = jwt.verify(
     req.headers.authorization,
@@ -87,6 +87,7 @@ const handlePostRequest = async (req, res) => {
       skin,
       race,
       gender,
+      hair,
       "coords.current": {
           x: 4,
           y: 6,

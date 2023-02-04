@@ -20,7 +20,6 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState("")
   const [charPreview, setCharPreview] = React.useState("/img/Characters/Human/Mountaineer/Export_male/male_1.png")
-  const [hair, setHair] = React.useState(character.hair)
 
   React.useEffect(()=>{
     setError("")
@@ -44,9 +43,9 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
 
   const changeHair = changeTo => {
     setCharacter(prevState => ({ ...prevState, hair: (
-      ( (prevState.hair + changeTo) % 3 ) < 0 ?
-      2 :
-      ( (prevState.hair + changeTo) % 3 ) 
+      ( (prevState.hair + changeTo) % 5 ) < 0 ?
+      4 :
+      ( (prevState.hair + changeTo) % 5 ) 
     ) }))
   }
 
@@ -64,8 +63,9 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     setLoading(true)
     setDisabled(true)
 
+    console.log(character.hair)
     const url = `${baseUrl}/api/character`
-    const payload = { slot, skin: SKIN[character.race][character.skin], name: character.name, race: character.race, gender: character.gender }
+    const payload = { slot, skin: SKIN[character.race][character.skin], name: character.name, race: RACES[character.race], gender: character.gender, hair: character.hair }
     const token = cookie.get("token")
     await fetch(url, {
       method: "POST",
@@ -153,9 +153,9 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
             {error}
           </AldenorMessage>
 
-          <div className="create-image">
-            <Image src={`/img/Characters/${RACES[character.race]}/${GENDER[character.gender]}_Hair_${character.hair+1}/${GENDER[character.gender]}_Hair_${character.hair+1}_1.png`} className={`create-image-hair-${RACES[character.race].toLowerCase()}`}/>
-            <Image src={charPreview} className="create-image-basic"/>
+          <div className="create-image character-preview">
+            <Image src={`/img/Characters/${RACES[character.race]}/${GENDER[character.gender]}_Hair_${character.hair+1}/${GENDER[character.gender]}_Hair_${character.hair+1}_1.png`} className="hair"/>
+            <Image src={charPreview} className="basic-char"/>
           </div>
 
           <div className="create-mid-bottom">

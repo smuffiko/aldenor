@@ -87,7 +87,10 @@ const LeftTop = ({ user }) => {
         <div className="game-corner-l-t-wrap">
           <div className="game-corner-l-t-right">
             <div className="game-corner-char">
-              <Image floated="left" src={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`} />          
+              <div className="character-preview">
+                <Image src={`/img/Characters/${character.race}/${character.gender ? "Female" : "Male"}_Hair_${character.hair+1}/${character.gender ? "Female" : "Male"}_Hair_${character.hair+1}_1.png`} className="hair"/>
+                <Image floated="left" src={`/img/Characters/${character.race}/${character.skin}/Export_${character.gender ? "female" : "male"}/${character.gender ? "female" : "male"}_1.png`} className="basic-char" />    
+              </div>      
             </div>
             <div className="game-corner-inv"><AldenorIcon name="pouch" color="yellow"/></div>
           </div>
