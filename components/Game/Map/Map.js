@@ -7,6 +7,8 @@ import Draggable from "react-draggable"
 const Map = ({ character }) => {
   const [map, setMap] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
+  const dragRef = React.useRef(false)
+  const prevPos = React.useRef(null)
 
   React.useEffect(async()=> {
     setLoading(true)
@@ -34,11 +36,25 @@ const Map = ({ character }) => {
     Array.from({ length: map.map.size.x }, (_, x) =>
       <div key={x}>
         {Array.from({ length: map.map.size.y }, (_, y) =>
-          <MapField key={`${x}${y}`} x={x} y={y} map={map} character={character} />	
+          <MapField key={`${x}${y}`} x={x} y={y} map={map} character={character} dragRef={dragRef}/>	
         )}
       </div>
     )
   : null
+
+  const onStart = (e, { x, y }) => {
+    prevPos.current = { x, y }
+  }
+  const onDrag = (e, { x, y }) => {
+    const diffX = x - prevPos.current.x
+    const diffY = y - prevPos.current.y  
+    if (Math.abs(diffX) >= 5 || Math.abs(diffY) >= 5) {
+      dragRef.current = true
+    }
+  }
+  const onStop = () => {
+    setTimeout(() => dragRef.current = false, 10)
+  }
 
   return (
     <>
@@ -48,6 +64,9 @@ const Map = ({ character }) => {
         position={null}
         grid={[1, 1]}
         scale={1}
+        onStart={onStart}
+        onDrag={onDrag}
+        onStop={onStop}
       >
         <div className="map-wrapper" >
           { map && mapData }

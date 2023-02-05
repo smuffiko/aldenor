@@ -2,11 +2,11 @@ import React from "react"
 import { Image } from "semantic-ui-react"
 import AldenorCharacterPreview from "../../_App/AldenorUIComponents/AldenorCharacterPreview"
 
-const MapField = ({ map, x, y, character }) => {
+const MapField = ({ map, x, y, character, dragRef }) => {
   const [field, setField] = React.useState(map.coords.filter(f=>f.coords.x === x && f.coords.y === y))
 
-  const handleClick = ()=>{
-    console.log("clicked",field)
+  const handleClick = ()=> {
+    if(dragRef.current) return // if we are dragging map -> do nothing
   }
 
   return (
