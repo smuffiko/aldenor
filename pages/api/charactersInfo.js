@@ -91,7 +91,6 @@ const handlePostRequest = async (req, res) => {
         ]
       },
     ])
-  console.log("post char")
   res.status(200).send("Ok") // todo
 }
 

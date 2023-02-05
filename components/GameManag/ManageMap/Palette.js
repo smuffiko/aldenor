@@ -2,7 +2,7 @@ import React from "react"
 import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 import PaletteField from "./PaletteField"
-import { Dimmer, Loader, Icon } from "semantic-ui-react"
+import { Dimmer, Loader, Icon, Tab } from "semantic-ui-react"
 import PaletteLayer from "./PaletteLayer"
 
 const Palette = ({}) => {
@@ -11,6 +11,7 @@ const Palette = ({}) => {
   const [selected, setSelected] = React.useState()
   const [layer, setLayer] = React.useState(0)
   const [loading, setLoading] = React.useState(true)
+
   const handleClickSelected = React.useCallback((image) => {
     setSelected(image)
     cookies.set("selected",image, {
@@ -18,6 +19,7 @@ const Palette = ({}) => {
       secure: true
     })
   }, [setSelected])
+
   const handleClickLayer = React.useCallback((value) => {
     setLayer(value)
     cookies.set("layer",value, {
@@ -59,6 +61,36 @@ const Palette = ({}) => {
     }
     getFields()
   },[])
+  
+  const panes = [
+    { menuItem: "Forests", render: () =>
+      <Tab.Pane className="update-map-tab">
+        {fieldsRef.current.forests.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />))}
+      </Tab.Pane>
+    },
+    { menuItem: "Plains", render: () =>
+      <Tab.Pane className="update-map-tab">
+        {fieldsRef.current.plains.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />))}
+      </Tab.Pane>
+    },
+    { menuItem: "Shores", render: () =>
+      <Tab.Pane className="update-map-tab">
+        {fieldsRef.current.shores.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />))}
+      </Tab.Pane>
+    },
+    { menuItem: "Water", render: () =>
+      <Tab.Pane className="update-map-tab">
+        {fieldsRef.current.water.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />))}
+      </Tab.Pane>
+    },
+    { menuItem: "POI", render: () =>
+      <Tab.Pane className="update-map-tab">
+        {fieldsRef.current.poi.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />))}
+      </Tab.Pane>
+    }
+  ]
+
+  console.log(fieldsRef.current)
 
   return (
     <>
@@ -77,18 +109,7 @@ const Palette = ({}) => {
               <div className={`field ${selected==="cl+"? "selected" : ""}`} onClick={()=>handleClickSelected("cl+")}><Icon name="erase" size="large"/></div>
               <div className={`field ${selected==="clall"? "selected" : ""}`} onClick={()=>handleClickSelected("clall")}><Icon name="trash alternate outline" size="large"/></div>
             </div>
-            <div>
-              { fieldsRef.current.forests.map((f,i)=> ( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
-            </div>
-            <div>
-              { fieldsRef.current.plains.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
-            </div>
-            <div>
-              { fieldsRef.current.shores.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
-            </div>
-            <div>
-              { fieldsRef.current.water.map((f,i)=>( <PaletteField key={i} field={f} selected={selected} handleClick={handleClickSelected} />)) }
-            </div>
+            <Tab panes={panes} />
           </div>
         </>)
       }

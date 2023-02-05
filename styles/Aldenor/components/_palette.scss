@@ -1,11 +1,6 @@
 .palette {
-  width: 45vw;
-  position: absolute !important;
-  top: 0;
-  padding-top: 100px;
-  right: 5vw;
   
-  .active {
+  button.active {
     background-color: red !important;
   }
   .selected {

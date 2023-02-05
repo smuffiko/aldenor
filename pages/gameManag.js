@@ -17,46 +17,46 @@ const GameManag = () => {
 
   return (
     <>
-      <div className="manage-bg">
-        <Accordion>
-          { (updatingFiles && updating || !updating ) && <>
-            <Accordion.Title
-              active={activeIndex === 0}
-              index={0}
-              onClick={()=>setActiveIndex(0)}
-            >
-              <Icon name='dropdown' />Files
-            </Accordion.Title>
-            <Accordion.Content active={activeIndex === 0}>
-              <ManageFiles setUpdating={setUpdatingFiles} updating={updatingFiles} /> 
-            </Accordion.Content>
-          </>}
-          { (Boolean(map) && updating || !updating) && <>
-            <Accordion.Title
-              active={activeIndex === 1}
-              index={1}
-              onClick={()=>setActiveIndex(1)}
-            >
-              <Icon name='dropdown' />Map
-            </Accordion.Title>
-            <Accordion.Content active={activeIndex === 1}>
-              <ManageMap map={map} setMap={setMap} />
-            </Accordion.Content>
-          </>}
-          { (Boolean(charactersInfo) && updating || !updating) &&  <>
-            <Accordion.Title
-              active={activeIndex === 2}
-              index={2}
-              onClick={()=>setActiveIndex(2)}
-            >
-              <Icon name='dropdown' />Characters info
-            </Accordion.Title>
-            <Accordion.Content active={activeIndex === 2}>
-              <CharactersInfo />
-            </Accordion.Content>
-          </>}
-        </Accordion>
-      </div>
+    <div className="manage-bg">
+      <Accordion>
+        { (updatingFiles && updating || !updating ) && <>
+          <Accordion.Title
+            active={activeIndex === 0}
+            index={0}
+            onClick={()=>setActiveIndex(0)}
+          >
+            <Icon name='dropdown' />Files
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 0}>
+            <ManageFiles setUpdating={setUpdatingFiles} updating={updatingFiles} /> 
+          </Accordion.Content>
+        </>}
+        { (Boolean(map) && updating || !updating) && <>
+          <Accordion.Title
+            active={activeIndex === 1}
+            index={1}
+            onClick={()=>setActiveIndex(1)}
+          >
+            <Icon name='dropdown' />Map
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 1}>
+            <ManageMap map={map} setMap={setMap} />
+          </Accordion.Content>
+        </>}
+        { (Boolean(charactersInfo) && updating || !updating) &&  <>
+          <Accordion.Title
+            active={activeIndex === 2}
+            index={2}
+            onClick={()=>setActiveIndex(2)}
+          >
+            <Icon name='dropdown' />Characters info
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 2}>
+            <CharactersInfo />
+          </Accordion.Content>
+        </>}
+      </Accordion>
+    </div>
     </>
   )
 }

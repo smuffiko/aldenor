@@ -15,15 +15,17 @@ const PaletteField = ({ field, selected, handleClick }) => {
                 className={`rotate-${field.rotation}${field.flip ? "-flip" : ""}`}
                 src={field.imageSrc}
                 size="big"
+                alt={field.imageSrc}
               />
             </>
           }
           trigger={
             <Image
-            src={field.imageSrc}
+              src={field.imageSrc}
               className={`rotate-${field.rotation}${field.flip ? "-flip" : ""} field ${selected===field._id ? "selected" : ""}`}
               key={field.imageSrc}
               onClick={()=>handleClick(field._id)}
+              alt={field.imageSrc}
             />
           }
         />

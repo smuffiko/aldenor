@@ -138,6 +138,7 @@ MyApp.getInitialProps = async({ ctx })=> {
         }).catch(error => { 
           // 1) Throw out invalid token
           destroyCookie(ctx, 'token')
+          destroyCookie(ctx, 'charId')
           // 2) Redirect to sign in
           redirectUser(ctx, "/signin")
         })
