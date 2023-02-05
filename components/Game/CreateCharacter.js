@@ -136,10 +136,10 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
       <div className="body-content create-character">
         <div className="create-left">
           <div className="create-race">
-            <Button onClick={()=>changeRace(0)} content="Human"/>
-            <Button onClick={()=>changeRace(1)} content="Elf"/>
-            <Button onClick={()=>changeRace(2)} content="Dwarf"/>
-            <Button onClick={()=>changeRace(3)} content="Halfling"/>
+            <Button onClick={()=>changeRace(0)} content=""/>
+            <Button onClick={()=>changeRace(1)} content=""/>
+            <Button onClick={()=>changeRace(2)} content=""/>
+            <Button onClick={()=>changeRace(3)} content=""/>
           </div>
 
           <div className="create-select">

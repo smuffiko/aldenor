@@ -13,25 +13,37 @@
 
   .create-left {
     width: 300px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
     .create-race {
-      width: 200px;
+      width: 100%;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-around;
       align-items: center;
       button {
-        width: 46%;
-        margin: 2%;
+        width: 32px;
+        height: 64px;
       }
     }
     .create-select {
       padding: 16px;
       height: 50%;
       width: 100%;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-around;
@@ -39,11 +51,16 @@
     }
   }
   .create-mid {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: stretch;
     position: relative;
+    width: 256px;
 
     .create-back {
       align-self: flex-start;
@@ -72,6 +89,10 @@
       bottom: 16px;
     }
     .create-mid-bottom {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       display: flex;
       flex-flow: column nowrap;
       justify-content: flex-end;
@@ -122,6 +143,10 @@
   }
   .create-right {
     width: 400px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;

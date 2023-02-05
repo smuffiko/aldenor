@@ -31,6 +31,11 @@ $sundance: #C7B95A;
 $roti: #BEB04E;
 $kelp: #3C3C2D;
 
+// transparent
+$transparent-light: rgba(255, 0, 0, 0.063); 
+$transparent-basic: #6e6e6e30; 
+$transparent-dark: #29292930; 
+
 // colors for messages etc
 $double-colors: (
   "bg": $sorrel-brown-light,
@@ -65,6 +70,11 @@ $yellow-colors: (
   "basic": $roti,
   "dark": $kelp
 ) !default;
+$transparent-colors: (
+  "light": $transparent-light,
+  "basic": $transparent-basic,
+  "dark": $transparent-dark
+) !default;
 
 // colors for border box
 $border-box: (
@@ -72,7 +82,8 @@ $border-box: (
   "red": $red-colors,
   "green": $green-colors,
   "yellow": $yellow-colors,
-  "grey": $grey-colors
+  "grey": $grey-colors,
+  "trans": $transparent-colors
 );
 
 // other colors
