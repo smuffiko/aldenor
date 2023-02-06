@@ -38,8 +38,7 @@ const ManageFiles = ({ setUpdating, updating }) => {
 
   const searchNewFiles = async()=> {
     const charToken = cookie.get("charId")
-    const dir = "img\\Map"
-    await fetch (`${baseUrl}/api/files?dir=${dir}`,{
+    await fetch (`${baseUrl}/api/files`,{
       method: "GET",
       headers: {
         "Content-type": "application/json",

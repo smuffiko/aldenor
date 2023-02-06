@@ -29,17 +29,22 @@ const handleGetRequest = async (req, res) => {
   if (user.role!=="root") {
     res.status(401).send("Not authorized.")
   } else {
-    const { dir } = req.query
-    const files = readDir(`public/${dir}`)
-    const newF = files.filter(f=>f.endsWith(".png")).map(f=>`public\\${dir}\\${f}`)
-
+    const dirs = [
+      "img\\Map",
+      "img\\POI"
+    ]
+    let newFiles = []
+    dirs.map(dir=>{
+      const files = readDir(`public/${dir}`)
+      newFiles = newFiles.concat(files.filter(f=>f.endsWith(".png")).map(f=>`public\\${dir}\\${f}`))
+    })
     // find new images at localhost, add its src to DB
-    newF.map(async file=>{
+    newFiles.map(async file=>{
       let find = await PublicFile.findOne({ src: file })
       if(!find) await new PublicFile({ src: file }).save()
     })
 
     // todo -> check all images in DB, if it is not in localhost -> delete from DB recursively
-    res.status(200).json({ files: newF })
+    res.status(200).json({ files: newFiles })
   }
 }

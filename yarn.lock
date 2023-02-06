@@ -369,6 +369,14 @@
   "resolved" "https://registry.npmjs.org/@tiptap/extension-bold/-/extension-bold-2.0.0-beta.212.tgz"
   "version" "2.0.0-beta.212"
 
+"@tiptap/extension-bubble-menu@^2.0.0-beta.61":
+  "integrity" "sha512-LqwXN66hIhjQL+aVbKHlsu6ryX6Mtnz2eaKrUPDkU/vqu1M7iSlB9kSDu7DQgOJzd9a69UrsH9DiD3LdUtyd/g=="
+  "resolved" "https://registry.npmjs.org/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.0.0-beta.212.tgz"
+  "version" "2.0.0-beta.212"
+  dependencies:
+    "lodash" "^4.17.21"
+    "tippy.js" "^6.3.7"
+
 "@tiptap/extension-bullet-list@^2.0.0-beta.212":
   "integrity" "sha512-owW+SPkeYEB4SKCprp5yt6MRMvB+TOObxauvaiuZ+RPGKX/a6/uXyCfsPJ+Wz85lPn1GYefZwlfANJ6C5HQGkg=="
   "resolved" "https://registry.npmjs.org/@tiptap/extension-bullet-list/-/extension-bullet-list-2.0.0-beta.212.tgz"
@@ -404,7 +412,7 @@
   "resolved" "https://registry.npmjs.org/@tiptap/extension-dropcursor/-/extension-dropcursor-2.0.0-beta.212.tgz"
   "version" "2.0.0-beta.212"
 
-"@tiptap/extension-floating-menu@^2.0.0-beta.212":
+"@tiptap/extension-floating-menu@^2.0.0-beta.56":
   "integrity" "sha512-sMTv9jSDbqg59fUkv0y+Yn2ecSxPnbNXoIl+abbE9XhLgeDhZMzOG75ICK9Am5YSiH7fz+DakpPSgt+3KGycAQ=="
   "resolved" "https://registry.npmjs.org/@tiptap/extension-floating-menu/-/extension-floating-menu-2.0.0-beta.212.tgz"
   "version" "2.0.0-beta.212"
@@ -552,12 +560,14 @@
     "prosemirror-transform" "^1.7.0"
     "prosemirror-view" "^1.28.2"
 
-"@tiptap/react@^2.0.0-beta.114":
-  "integrity" "sha512-g8jSfl0hOAQH/MvqRNfhpdvvVkAx677VHF7eC6CY5xdRwzZsI28mTHe7WG04wd8SJud4z7tFENQJrgeZAFHUfg=="
-  "resolved" "https://registry.npmjs.org/@tiptap/react/-/react-2.0.0-beta.212.tgz"
-  "version" "2.0.0-beta.212"
+"@tiptap/react@2.0.0-beta.114":
+  "integrity" "sha512-9JbRE+16WM6RxbBxzY74SrJtLodvjeRBnEbWxuhxVgGKxMunRj6r8oED87ODJgqLmkpofwE0KFHTPGdEXfdcKA=="
+  "resolved" "https://registry.npmjs.org/@tiptap/react/-/react-2.0.0-beta.114.tgz"
+  "version" "2.0.0-beta.114"
   dependencies:
-    "@tiptap/extension-floating-menu" "^2.0.0-beta.212"
+    "@tiptap/extension-bubble-menu" "^2.0.0-beta.61"
+    "@tiptap/extension-floating-menu" "^2.0.0-beta.56"
+    "prosemirror-view" "1.26.2"
 
 "@tiptap/starter-kit@^2.0.0-beta.190":
   "integrity" "sha512-UMwE+atzUKr6EQtlrQePyNEJ8KrMrHdEaKFd6p7+/TvQ5DMFZN06Wkqkxqzgv58uHVxDhbP5WXypNZpN4I/IsA=="
@@ -2158,6 +2168,15 @@
   "integrity" "sha512-z6RXp2GFH8mk7+LWCGWvdpOIpf5o5UwIB6SiBiTFe6eA8H8qwFDW0EkiIfohlATHoSGXvlHtD+hfpAHdfO5fvQ=="
   "resolved" "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.30.0.tgz"
   "version" "1.30.0"
+  dependencies:
+    "prosemirror-model" "^1.16.0"
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.1.0"
+
+"prosemirror-view@1.26.2":
+  "integrity" "sha512-CGKw+GadkfSBEwRAJTHCEKJ4DlV6/3IhAdjpwGyZHUHtbP7jX4Ol4zmi7xa2c6GOabDlIJLYXJydoNYLX7lNeQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.26.2.tgz"
+  "version" "1.26.2"
   dependencies:
     "prosemirror-model" "^1.16.0"
     "prosemirror-state" "^1.0.0"
