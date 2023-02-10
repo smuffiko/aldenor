@@ -29,11 +29,15 @@
       display: -webkit-flex;
       display: flex;
       flex-flow: row wrap;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      button {
+      gap: 16px;
+      img {
         width: 32px;
         height: 64px;
+        &:hover {
+          cursor: url("/img/UI/Icons/sword.png"), pointer;
+        }
       }
     }
     .create-select {
