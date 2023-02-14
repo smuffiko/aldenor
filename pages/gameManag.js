@@ -3,16 +3,16 @@ import ManageMap from "../components/GameManag/ManageMap/ManageMap"
 import ManageFiles from "../components/GameManag/ManageFiles/ManageFiles"
 import CharactersInfo from "../components/GameManag/ManageCharactersInfo/CharactersInfo"
 import { Accordion, Icon } from "semantic-ui-react"
+import ManagePOI from "../components/GameManag/ManagePOI/ManagePOI"
 
 const GameManag = () => {
   const [updatingFiles, setUpdatingFiles] = React.useState(false)
   const [map, setMap] = React.useState(null)
   const [activeIndex, setActiveIndex] = React.useState(null)
-  const [charactersInfo, setCharactersInfo] = React.useState(null)
-  const [updating, setUpdating] = React.useState(updatingFiles || Boolean(map) || Boolean(charactersInfo))
+  const [updating, setUpdating] = React.useState(updatingFiles || Boolean(map) )
 
   React.useEffect(()=>{
-    setUpdating(updatingFiles || Boolean(map) || Boolean(charactersInfo))
+    setUpdating(updatingFiles || Boolean(map))
   },[updatingFiles, map])
 
   return (
@@ -43,15 +43,27 @@ const GameManag = () => {
             <ManageMap map={map} setMap={setMap} />
           </Accordion.Content>
         </>}
-        { (Boolean(charactersInfo) && updating || !updating) &&  <>
+        { !updating &&  <>
           <Accordion.Title
             active={activeIndex === 2}
             index={2}
             onClick={()=>setActiveIndex(2)}
           >
-            <Icon name='dropdown' />Characters info
+            <Icon name='dropdown' />POI
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 2}>
+            <ManagePOI />
+          </Accordion.Content>
+        </>}
+        { !updating &&  <>
+          <Accordion.Title
+            active={activeIndex === 3}
+            index={3}
+            onClick={()=>setActiveIndex(3)}
+          >
+            <Icon name='dropdown' />Characters info
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 3}>
             <CharactersInfo />
           </Accordion.Content>
         </>}
