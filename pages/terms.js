@@ -1,9 +1,7 @@
 const Terms = () => {
   return (
     <>
-      <div className="bodyContent">
-        Terms
-      </div>
+      terms
     </>
   )
 }

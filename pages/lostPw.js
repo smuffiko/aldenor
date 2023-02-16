@@ -121,80 +121,78 @@ const LostPw = ({ hash }) => {
   
   return (
     <>
-      <div className="bodyContent">
-        <AldenorSegment>
-          <AldenorMessage box="grey" >
-            <Header>Lost password</Header>
-            <p>Recover it here</p>
-          </AldenorMessage>
-          {hash ? (
-            <Form loading={loading} onSubmit={handlePw} success={successPw}>
-              <AldenorMessage box="green" visible={successPw}>
-                <Header><Icon name="check" />Success!</Header>
-                <p>Password was changed! You will be redirected soon!</p>
-              </AldenorMessage>
-              <Popup trigger={
-                <Form.Input
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  label="New password"
-                  required={true}
-                  name="password1"
-                  type="password"
-                  value={passwords.password1}
-                  onChange={handleChangePw}
-                />}
-                content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
-              />
-              <Popup trigger={
-                <Form.Input
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  label="New password again"
-                  required={true}
-                  name="password2"
-                  type="password"
-                  value={passwords.password2}
-                  onChange={handleChangePw}
-                />}
-                content='In case of any mistake please write again your new password.'
-              />
-              <button
-                type="submit"
-                className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-              ><Icon name="mail"/>Recover</button>
-            </Form>
-          ) : (
-            <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
-              <AldenorMessage box="red" visible={Boolean(error)}>
-                <Header><Icon name="x" />Oops!</Header>
-                {error}
-              </AldenorMessage>
-              <AldenorMessage box="green" visible={success}>
-                <Header><Icon name="check" />Success!</Header>
-                <p>Message was sent to email {email}. Check it now and reset your password.</p>
-                {error}
-              </AldenorMessage>
+      <AldenorSegment>
+        <AldenorMessage box="grey" >
+          <Header>Lost password</Header>
+          <p>Recover it here</p>
+        </AldenorMessage>
+        {hash ? (
+          <Form loading={loading} onSubmit={handlePw} success={successPw}>
+            <AldenorMessage box="green" visible={successPw}>
+              <Header><Icon name="check" />Success!</Header>
+              <p>Password was changed! You will be redirected soon!</p>
+            </AldenorMessage>
+            <Popup trigger={
               <Form.Input
                 fluid
-                icon="user"
+                icon="lock"
                 iconPosition="left"
-                label="Login or email"
+                label="New password"
                 required={true}
-                name="loginOrEmail"
-                value={user.loginOrEmail}
-                onChange={handleChange}
-              />
-              <button
-                type="submit"
-                className={!successPw && (disabled || loading ) ? "basic-button-disabled disabled" : "basic-button"}
-              ><Icon name="mail"/>Recover</button>
-            </Form>  
-          )}  
-        </AldenorSegment>
-      </div>
+                name="password1"
+                type="password"
+                value={passwords.password1}
+                onChange={handleChangePw}
+              />}
+              content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
+            />
+            <Popup trigger={
+              <Form.Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                label="New password again"
+                required={true}
+                name="password2"
+                type="password"
+                value={passwords.password2}
+                onChange={handleChangePw}
+              />}
+              content='In case of any mistake please write again your new password.'
+            />
+            <button
+              type="submit"
+              className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
+            ><Icon name="mail"/>Recover</button>
+          </Form>
+        ) : (
+          <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} success={success}>
+            <AldenorMessage box="red" visible={Boolean(error)}>
+              <Header><Icon name="x" />Oops!</Header>
+              {error}
+            </AldenorMessage>
+            <AldenorMessage box="green" visible={success}>
+              <Header><Icon name="check" />Success!</Header>
+              <p>Message was sent to email {email}. Check it now and reset your password.</p>
+              {error}
+            </AldenorMessage>
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              label="Login or email"
+              required={true}
+              name="loginOrEmail"
+              value={user.loginOrEmail}
+              onChange={handleChange}
+            />
+            <button
+              type="submit"
+              className={!successPw && (disabled || loading ) ? "basic-button-disabled disabled" : "basic-button"}
+            ><Icon name="mail"/>Recover</button>
+          </Form>  
+        )}  
+      </AldenorSegment>
     </>
   )
 }

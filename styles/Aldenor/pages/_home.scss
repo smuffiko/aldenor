@@ -1,0 +1,15 @@
+.home-container {
+  display: flex;
+  flex-flow: column ;
+  justify-content: space-between; 
+  gap: 20vh;
+  padding-bottom: 10vh;
+  & .home-segment {
+    display: flex;
+    flex-flow: column;
+    justify-content: center; 
+    align-items: center;
+    min-height: 80vh;
+    text-align: justify;
+  }
+}

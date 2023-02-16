@@ -78,93 +78,91 @@ const SignUp = () => {
 
   return (
     <> 
-      <div className="bodyContent">
-        <AldenorSegment>
-          <AldenorMessage box="grey">
-            <Header>Welcome!</Header>
-            <p>Create new account here</p>
+      <AldenorSegment>
+        <AldenorMessage box="grey">
+          <Header>Welcome!</Header>
+          <p>Create new account here</p>
+        </AldenorMessage>    
+        <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
+          <AldenorMessage box="red" visible={Boolean(error)}>
+            <Header><Icon name="x" />Oops!</Header>
+            <p>{error}</p>
           </AldenorMessage>    
-          <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
-            <AldenorMessage box="red" visible={Boolean(error)}>
-              <Header><Icon name="x" />Oops!</Header>
-              <p>{error}</p>
-            </AldenorMessage>    
-            <AldenorMessage box="green" visible={success}>
-              <Header><Icon name="check" />Success!</Header>
-              <p>Signing up successfull! Don't forget to confirm your email. You will be redirected soon.</p>
-            </AldenorMessage>    
-            <Message success icon >
-              <Icon name="check" />
-              <Message.Content>
-                <Message.Header>Success!</Message.Header>
-                Signing up successfull! Don't forget to confirm your email. You will be redirected soon.
-              </Message.Content>
-            </Message>
-            <Popup trigger={
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                label="Login"
-                required={true}
-                name="login"
-                value={user.login}
-                onChange={handleChange}
-              />}
-              content='Your login name. Only you should know that. Login name must be between 5 and 30 chars long with only english alphabet characters and numbers.'
-            />
-            <Popup trigger={
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                label="Password"
-                required={true}
-                name="password"
-                type="password"
-                value={user.password}
-                onChange={handleChange}
-              />}
-              content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
-            />
-            <Popup trigger={
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                label="Password again"
-                required={true}
-                name="password2"
-                type="password"
-                value={user.password2}
-                onChange={handleChange}
-              />}
-              content='In case of any mistake please write again your new password.'
-            />
-            <Popup trigger={
-              <Form.Input
-                fluid
-                icon="envelope"
-                iconPosition="left"
-                label="Email"
-                required={true}
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-              />}
-              content="Write there your email address. We will send you activation link. Without it you can't play this game."
-            />
-            <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
-            <button
-              type="submit"
-              className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-            ><Icon name="signup"/>Sign up!</button>
-          </Form>  
-          <AldenorMessage box="yellow" >
-            <p><Icon name="help" size="large"/> Do you already have an account? Sign in <Link href="/signin">here</Link> instead..</p>
+          <AldenorMessage box="green" visible={success}>
+            <Header><Icon name="check" />Success!</Header>
+            <p>Signing up successfull! Don't forget to confirm your email. You will be redirected soon.</p>
           </AldenorMessage>    
-        </AldenorSegment>
-      </div>
+          <Message success icon >
+            <Icon name="check" />
+            <Message.Content>
+              <Message.Header>Success!</Message.Header>
+              Signing up successfull! Don't forget to confirm your email. You will be redirected soon.
+            </Message.Content>
+          </Message>
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              label="Login"
+              required={true}
+              name="login"
+              value={user.login}
+              onChange={handleChange}
+            />}
+            content='Your login name. Only you should know that. Login name must be between 5 and 30 chars long with only english alphabet characters and numbers.'
+          />
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              label="Password"
+              required={true}
+              name="password"
+              type="password"
+              value={user.password}
+              onChange={handleChange}
+            />}
+            content='Password needs to be at least 6 chars long. It is your secret. Strong password should contains upper and lower case characters, number and special char. But it is up to you :)'
+          />
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              label="Password again"
+              required={true}
+              name="password2"
+              type="password"
+              value={user.password2}
+              onChange={handleChange}
+            />}
+            content='In case of any mistake please write again your new password.'
+          />
+          <Popup trigger={
+            <Form.Input
+              fluid
+              icon="envelope"
+              iconPosition="left"
+              label="Email"
+              required={true}
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+            />}
+            content="Write there your email address. We will send you activation link. Without it you can't play this game."
+          />
+          <p>By clicking <i>Sign up!</i> button you agree with <Link href="/terms">Terms</Link> and <Link href="/privacy">Privacy</Link>.</p>
+          <button
+            type="submit"
+            className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
+          ><Icon name="signup"/>Sign up!</button>
+        </Form>  
+        <AldenorMessage box="yellow" >
+          <p><Icon name="help" size="large"/> Do you already have an account? Sign in <Link href="/signin">here</Link> instead..</p>
+        </AldenorMessage>    
+      </AldenorSegment>
     </>
   )
 }

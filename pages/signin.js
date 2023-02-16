@@ -57,48 +57,46 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="bodyContent">
-        <AldenorSegment>
-          <AldenorMessage box="grey">
-            <Header>Welcome back!</Header>
-            <p>Sign in here</p>
-          </AldenorMessage>    
-          <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
-            <AldenorMessage box="red" visible={Boolean(error)}>
-              <Header><Icon name="x" />Oops!</Header>
-              {error}
-            </AldenorMessage>
-            <Form.Input
-              fluid
-              icon="user"
-              iconPosition="left"
-              label="Login"
-              required={true}
-              name="login"
-              value={user.login}
-              onChange={handleChange}
-            />
-            <Form.Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              label="Password"
-              required={true}
-              name="password"
-              type="password"
-              value={user.password}
-              onChange={handleChange}
-            />
-            <button
-              type="submit"
-              className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
-            ><Icon name="sign in"/>Sign in!</button>
-          </Form>  
-          <AldenorMessage box="yellow" >
-            <p><Icon name="help" size="large"/> Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link></p>
-          </AldenorMessage>    
-        </AldenorSegment>
-      </div>
+      <AldenorSegment>
+        <AldenorMessage box="grey">
+          <Header>Welcome back!</Header>
+          <p>Sign in here</p>
+        </AldenorMessage>    
+        <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit} >
+          <AldenorMessage box="red" visible={Boolean(error)}>
+            <Header><Icon name="x" />Oops!</Header>
+            {error}
+          </AldenorMessage>
+          <Form.Input
+            fluid
+            icon="user"
+            iconPosition="left"
+            label="Login"
+            required={true}
+            name="login"
+            value={user.login}
+            onChange={handleChange}
+          />
+          <Form.Input
+            fluid
+            icon="lock"
+            iconPosition="left"
+            label="Password"
+            required={true}
+            name="password"
+            type="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+          <button
+            type="submit"
+            className={disabled || loading ? "basic-button-disabled disabled" : "basic-button"}
+          ><Icon name="sign in"/>Sign in!</button>
+        </Form>  
+        <AldenorMessage box="yellow" >
+          <p><Icon name="help" size="large"/> Are you new? Sign up <Link href="/signup">here</Link> instead. Did you lost your password? Recover it <Link href="/lostPw">here</Link></p>
+        </AldenorMessage>    
+      </AldenorSegment>
     </>
   )
 }
