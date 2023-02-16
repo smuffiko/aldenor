@@ -101,7 +101,6 @@ const MenuBar = ({ editor }) => {
           </>
         }
         on='click'
-        pinned
         trigger={<Icon name="heading" bordered />}
       />
     </>
