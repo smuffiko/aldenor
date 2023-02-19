@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   background-color: #20180F;
-  background-image: url("/img/UI/background.png");
+  background-image: $base-bg-image;
   z-index: 10;
   overflow: hidden;
   -ms-overflow-style: none;  /* IE and Edge */
