@@ -90,8 +90,6 @@ const Palette = ({}) => {
     }
   ]
 
-  console.log(fieldsRef.current)
-
   return (
     <>
       {loading && (

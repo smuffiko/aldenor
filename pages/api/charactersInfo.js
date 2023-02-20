@@ -107,7 +107,6 @@ const handlePutRequest = async (req, res) => {
     if(character.role==="root") { // if we are logged with root character
       const { _id, skin, info } = req.body
       if(skin) { // if we updating skin
-        console.log(_id, skin, info)
         await CharactersInfo.findOneAndUpdate({ _id, "skins._id": skin }, { $set: { "skins.$.skinInfo": info }})
         res.status(200).send("Skin info updated")
       } else { // if we updating race

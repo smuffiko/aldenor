@@ -1,7 +1,11 @@
+import CreateNewPoi from "./CreateNewPoi"
+import PoiList from "./PoiList"
+
 const ManagePOI = () => {
   return (
     <>
-      manage poi ˘˘
+      <CreateNewPoi />
+      <PoiList />
     </>
   )
 }

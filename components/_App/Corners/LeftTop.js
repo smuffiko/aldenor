@@ -1,4 +1,5 @@
 import React from "react"
+import Router from "next/router"
 import cookies from "js-cookie"
 import { Icon, Image } from "semantic-ui-react"
 import FillBar from "../../Game/FillBar"

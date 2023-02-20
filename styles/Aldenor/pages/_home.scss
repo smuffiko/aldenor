@@ -1,10 +1,18 @@
 .home-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-flow: column ;
   justify-content: space-between; 
   gap: 20vh;
   padding-bottom: 10vh;
   & .home-segment {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     flex-flow: column;
     justify-content: center; 

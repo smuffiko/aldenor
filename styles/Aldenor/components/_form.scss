@@ -1,7 +1,7 @@
 form {
-  input {
+  input, div.dropdown {
     &:focus {
-      border: 1px solid  map-get($basic-colors,"basic") !important;
+      border: 1px solid map-get($basic-colors,"basic") !important;
     }
     background-color: map-get($basic-colors,"light") !important;
     background-image:
@@ -25,8 +25,9 @@ form {
       bottom -2px right -2px !important;
     background-repeat: no-repeat !important;
     border-radius: 0 !important;
-    border: 1px solid  map-get($basic-colors,"basic") ;
+    border: 1px solid map-get($basic-colors,"basic") !important;
     image-rendering: pixelated;
     font-family: $font-form-input !important;
+    min-height: 38px;
   }
 }

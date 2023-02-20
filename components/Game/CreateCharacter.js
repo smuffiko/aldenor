@@ -92,7 +92,6 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
     setLoading(true)
     setDisabled(true)
 
-    console.log(character.hair)
     const url = `${baseUrl}/api/character`
     const payload = { slot, skin: SKIN[character.race][character.skin], name: character.name, race: RACES[character.race], gender: character.gender, hair: character.hair }
     const token = cookie.get("token")
