@@ -23,7 +23,7 @@
   }
 
   .char-panel {
-    height: calc(100vh - 100px - 100px); /* todo -> height - menu height - footer height */
+    height: calc(100vh - 100px - 100px - 38px); /* todo -> height - menu height - footer height - (padding+border) */
     min-height: 600px;
     .char-panel-container {
       display: -webkit-box;
