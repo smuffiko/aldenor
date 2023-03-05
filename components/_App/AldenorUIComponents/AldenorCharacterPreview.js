@@ -1,4 +1,4 @@
-const AldenorCharacterPreview = ({ basic, hair, size = 64, className, style }) => {
+const AldenorCharacterPreview = ({ basic, hair, size = 64, className = "", style }) => {
   return (
     <>
       <div className={`character-preview ${className}`} style={style}>

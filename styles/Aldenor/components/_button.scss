@@ -26,3 +26,22 @@ button {
   @extend %basic-button;
   background-image: url("#{$base-public-folder}/img/UI/MainBtn/btn_3.png") !important;
 }
+
+.login-button {
+  width: 138px !important;
+  height: 90px !important;
+  font-size: 16px !important;
+  color: #000 !important;
+  background: url("#{$base-public-folder}/img/UI/MainBtn/LoginButton_1.png") !important;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  padding: 16px;
+  &:hover {
+    background: url("#{$base-public-folder}/img/UI/MainBtn/LoginButton_2.png") !important;
+  }
+}

@@ -1,9 +1,13 @@
 import UpdatePoi from "./UpdatePoi"
 
-const PoiList = () => {
+const PoiList = ({ poiList }) => {
+  console.log(poiList, "poilist")
   return (  
     <>
-      POI list
+      --- *** POI list *** ---
+
+      Map - array of maps
+       - POI name array of pois, array of coords, pois fields... CLICK update, CLICK remove POI 
       <UpdatePoi poi={1} />
     </>
   )

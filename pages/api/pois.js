@@ -33,16 +33,24 @@ const handleGetRequest = async (req, res) => {
     res.status(401).send("Not authorized.")
   } else { // we are authorized
     const { map } = req.query
-    // A = poi
-    const pois = await POI.distinct("fields.field") // show all POI fields
-    const fields = await MapField.find({
-      mapId: map,
-      layer: { $gt: 5 },
-      _id: {
-        "$nin": pois  // show all free POI fields at current map
-      }
-    })
-    res.status(200).send(fields)
+    if(map) {
+      const pois = await POI.distinct("fields.field") // show all POI fields
+      const fields = await MapField.find({
+        mapId: map,
+        layer: { $gt: 5 },
+        _id: {
+          "$nin": pois  // show all free POI fields at current map
+        }
+      })
+      res.status(200).send(fields)
+    } else { // find all pois
+      const pois = await POI.find(
+        { },
+        { name: 1 }
+      )
+      console.log(pois)
+      res.status(200).send(pois)
+    }
   }
 }
 const handlePostRequest = async (req, res) => {

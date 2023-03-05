@@ -1,13 +1,29 @@
+.alice-carousel:before {
+  position: absolute;
+  bottom: 0;
+  background-color: red;
+  z-index: 300;
+  content: '';
+  background: linear-gradient(90deg, rgba(32, 24, 15, 1) 0%, rgba(32,24,15,0.8) 40px, rgba(32,24,15,0) 120px,
+    rgba(0,212,255,0),
+    rgba(32,24,15,0) calc(100% - 120px),rgba(32,24,15,0.8) calc(100% - 40px), rgba(32,24,15,1) 100%);
+  width: 100%;
+  height: 90px;
+  pointer-events: none;
+}
 
 .alice-carousel__next-btn, .alice-carousel__prev-btn {
   position: absolute !important;
   top: 0;
   width: 48px !important;
-  height: 100%;
+  height: calc(100% - 90px);
   text-align: left !important;
   box-shadow: 5px 0px 2px -3px rgba(0,0,0,1) inset,
   -1px 0px 1px 0px rgba(0,0,0,1) inset,
   0px 0px 1px 1px rgba(0,0,0,1) inset;
+  border-bottom: 3px solid #000000;
+  border-top: 3px solid #000000;
+  border-left: 3px solid #000000;
   background-color: #655030;
 }
 .alice-carousel__prev-btn {
