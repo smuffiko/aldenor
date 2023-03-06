@@ -23,7 +23,24 @@ export default async function ApiCharactersInfo(req, res) {
 }
 
 const handleGetRequest = async (req, res) => {
-  const charactersInfo = await CharactersInfo.find()
+  const charactersInfo = await CharactersInfo.aggregate([
+    { $addFields: { 
+        sortIndex: { 
+          $switch: {
+            branches: [
+              { case: { $eq: ["$race", "Human"] }, then: 0 },
+              { case: { $eq: ["$race", "Elf"] }, then: 1 },
+              { case: { $eq: ["$race", "Dwarf"] }, then: 2 },
+              { case: { $eq: ["$race", "Halfling"] }, then: 3 }
+            ],
+            default: 4
+          }
+        }
+      }
+    },
+    { $sort: { sortIndex: 1 } },
+    { $project: { sortIndex: 0 } }
+  ])
   if(charactersInfo) 
     return res.status(200).json(charactersInfo)
   return res.status(404).send("No infos in DB")
