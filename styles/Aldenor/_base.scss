@@ -14,7 +14,7 @@
 }
 ::-webkit-scrollbar {
   width: 8px;
-}
+}inset
 ::-webkit-scrollbar-track {
   background-color: #000000;
 }
@@ -39,6 +39,10 @@ img {
 }
 svg {
   position: absolute;
+}
+
+hr {
+  border: 1px dashed $armadillo;
 }
 
 #container {

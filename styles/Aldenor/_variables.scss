@@ -10,6 +10,9 @@ $shingle-fawn: #655030;
 $armadillo: #3C382D;
 $eternity-light: #20180F;
 $eternity: #100C07;
+$judge-gray: #514934;
+$apache: #dbba69;
+$calico: #dec487;
 
 // grey
 $napa: #aea99b;
@@ -86,6 +89,18 @@ $border-box: (
   "trans": $transparent-colors
 );
 
+// colors for buttons
+$aldenor-button-colors: (
+  "normal-outer": $armadillo,
+  "normal-middle": $teak,
+  "normal-inner": $armadillo,
+  "normal-background": $sorrel-brown,
+  "hover-outer": $judge-gray,
+  "hover-middle": $apache,
+  "hover-inner": $judge-gray,
+  "hover-background": $calico
+);
+
 // other colors
 $footer-bg-color: $shingle-fawn;
 $progress-bar-color: #b8f850;
@@ -120,6 +135,8 @@ $unuser-font-family: "Consolas";
 // xs sm nm lg xl 
 $icon-size: 32px;
 $icon-names: (
+  "arrowBack": url("/img/UI/Icons/arrowBack.png"),
+  "arrowForward": url("/img/UI/Icons/arrowBack.png"),
   "crystal": url("/img/UI/Icons/crystal.png"),
   "logout": url("/img/UI/Icons/logout.png"),
   "pouch": url("/img/UI/Icons/pouch.png"),

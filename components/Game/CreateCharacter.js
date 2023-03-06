@@ -1,11 +1,13 @@
 import React, { Fragment } from "react"
-import { Form, Button, Icon, Message, Image, Input, Header } from "semantic-ui-react"
+import { Form, Button, Icon, Message, Image, Input, Header, ButtonGroup } from "semantic-ui-react"
 import cookie from "js-cookie"
 import baseUrl from "../../utils/baseUrl"
 import { RACES, GENDER, SKIN, SKINS } from "../../utils/characters"
 import AldenorBorderBox from "../_App/AldenorUIComponents/AldenorBorderBox"
 import AldenorMessage from "../_App/AldenorUIComponents/AldenorMessage"
 import AldenorCharacterPreview from "../_App/AldenorUIComponents/AldenorCharacterPreview"
+import AldenorIcon from "../_App/AldenorUIComponents/AldenorIcon"
+import AldenorButton from "../_App/AldenorUIComponents/AldenorButton"
 
 const INITIAL_CHARACTER = {
   name: "",
@@ -143,38 +145,50 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
 
           <div className="create-select">
             <div>
-              <Button icon="venus" type="button" onClick={()=>changeGender(1)} />
-              <Button icon="mars" type="button" onClick={()=>changeGender(0)} />
+              <hr/>
+              <span>Gender: {character.gender ? "female" : "male"}</span>
+              <div className="create-buttons">
+                <AldenorButton onClick={()=>changeGender(1)}>
+                  <Icon name="venus"/>
+                </AldenorButton>
+                <AldenorButton onClick={()=>changeGender(0)}>
+                  <Icon name="mars"/>
+                </AldenorButton>
+              </div>
             </div>
             <div>
-              <Button icon onClick={()=>changeHair(-1)} >
-                <Icon name="arrow left"/>
-              </Button>
-              <span>Hair</span>
-              <Button icon type="button" onClick={()=>changeHair(1)} >
-                <Icon name="arrow right"/>
-              </Button>
+              <hr/>
+              <span>Hair style: {character.hair+1}</span>
+              <div className="create-buttons">
+              <AldenorButton onClick={()=>changeHair(-1)}>
+                <AldenorIcon name="arrowBack"/>
+              </AldenorButton>
+              <AldenorButton onClick={()=>changeHair(1)}>
+                <AldenorIcon name="arrowForward"/>
+              </AldenorButton>
+              </div>
             </div>
             <div>
-              <Button icon onClick={()=>changeSkin(-1)} >
-                <Icon name="arrow left"/>
-              </Button>
-                <span>{SKIN[character.race][character.skin]}</span>
-              <Button icon type="button" onClick={()=>changeSkin(1)} >
-                <Icon name="arrow right"/>
-              </Button>
+              <hr/>
+              <span>Skin: {SKIN[character.race][character.skin]}</span>
+              <div className="create-buttons">
+                <AldenorButton onClick={()=>changeSkin(-1)}>
+                  <AldenorIcon name="arrowBack"/>
+                </AldenorButton>
+                <AldenorButton onClick={()=>changeSkin(1)}>
+                  <AldenorIcon name="arrowForward"/>
+                </AldenorButton>
+              </div>
             </div>
           </div>
         </div>
         <div className="create-mid">
-          <Button
-            color='olive'
-            icon='arrow left'
-            label={{ basic: true, color: 'grey', pointing: 'left', content: 'Back' }}
+          <AldenorButton
             onClick={()=>setSlot(null)}
-            type="button"
             className="create-back"
-          />
+          >
+            <AldenorIcon name="arrowBack" />
+          </AldenorButton>
           <AldenorMessage box="red" className="create-error" visible={Boolean(error)}>
             <Header><Icon name="x" />Oops!</Header>
             {error}

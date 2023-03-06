@@ -45,3 +45,53 @@ button {
     background: url("#{$base-public-folder}/img/UI/MainBtn/LoginButton_2.png") !important;
   }
 }
+
+.aldenor-button {
+  min-height: 36px;
+  min-width: 36px;
+  height: 40px;
+  width: 40px;
+  margin: 14px;
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: map-get($aldenor-button-colors,"normal-background");
+  box-shadow: 
+    2px 2px map-get($aldenor-button-colors,"normal-outer"),
+    2px -2px map-get($aldenor-button-colors,"normal-outer"),
+    -2px 2px map-get($aldenor-button-colors,"normal-outer"),
+    -2px -2px map-get($aldenor-button-colors,"normal-outer"),
+
+    4px 4px map-get($aldenor-button-colors,"normal-middle"),
+    4px -4px map-get($aldenor-button-colors,"normal-middle"),
+    -4px 4px map-get($aldenor-button-colors,"normal-middle"),
+    -4px -4px map-get($aldenor-button-colors,"normal-middle"),
+
+    6px 6px map-get($aldenor-button-colors,"normal-inner"),
+    6px -6px map-get($aldenor-button-colors,"normal-inner"),
+    -6px 6px map-get($aldenor-button-colors,"normal-inner"),
+    -6px -6px map-get($aldenor-button-colors,"normal-inner");
+  &:hover {
+    background-color: map-get($aldenor-button-colors,"hover-background");
+    box-shadow: 
+      2px 2px map-get($aldenor-button-colors,"hover-outer"),
+      2px -2px map-get($aldenor-button-colors,"hover-outer"),
+      -2px 2px map-get($aldenor-button-colors,"hover-outer"),
+      -2px -2px map-get($aldenor-button-colors,"hover-outer"),
+  
+      4px 4px map-get($aldenor-button-colors,"hover-middle"),
+      4px -4px map-get($aldenor-button-colors,"hover-middle"),
+      -4px 4px map-get($aldenor-button-colors,"hover-middle"),
+      -4px -4px map-get($aldenor-button-colors,"hover-middle"),
+  
+      6px 6px map-get($aldenor-button-colors,"hover-inner"),
+      6px -6px map-get($aldenor-button-colors,"hover-inner"),
+      -6px 6px map-get($aldenor-button-colors,"hover-inner"),
+      -6px -6px map-get($aldenor-button-colors,"hover-inner");
+  }
+}

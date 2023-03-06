@@ -1,6 +1,6 @@
 const AldenorIcon = ({ name, size = "nm", color = "black" }) => {
   return (
-    <i className={`icon icon-${name}-${size}-${color}`}></i>
+    <i className={`icon icon-${name}-${size}-${color}`} />
   )
 }
  

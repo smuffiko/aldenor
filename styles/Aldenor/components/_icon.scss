@@ -4,6 +4,30 @@
 }
 @each $key, $val in $icon-names {
   @each $color, $value-color in $icon-colors {
+
+    @if $key == arrowForward {
+      .icon.icon-#{$key}-xs-#{$color} {
+        transform: scaleX(-1);
+      }
+      .icon.icon-#{$key}-sm-#{$color} {
+        transform: scaleX(-1);
+      }
+      .icon.icon-#{$key}-nm-#{$color} {
+        transform: scaleX(-1);
+      }
+      .icon.icon-#{$key}-md-#{$color} {
+        transform: scaleX(-1);
+      }
+      .icon.icon-#{$key}-lg-#{$color} {
+        transform: scaleX(-1);
+      }
+      .icon.icon-#{$key}-xl-#{$color} {
+        transform: scaleX(-1);
+      }
+      .icon.icon-#{$key}-xxl-#{$color} {
+        transform: scaleX(-1);
+      }
+    }
     .icon.icon-#{$key}-xs-#{$color} {
       @extend %icon;
       -webkit-mask-image: $val;
