@@ -137,10 +137,10 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
       <div className="body-content create-character">
         <div className="create-left">
           <div className="create-race">
-            <img src="img/Characters/_Banners/Banners_Human.png" onClick={()=>changeRace(0)} />
-            <img src="img/Characters/_Banners/Banners_Elf.png" onClick={()=>changeRace(1)} />
-            <img src="img/Characters/_Banners/Banners_Dwarf.png" onClick={()=>changeRace(2)} />
-            <img src="img/Characters/_Banners/Banners_Halfling.png" onClick={()=>changeRace(3)} />
+            <img src="img/Characters/_Banners/Banners_Human.png" onClick={()=>changeRace(0)} className={character.race == 0 ? "active" : ""}/>
+            <img src="img/Characters/_Banners/Banners_Elf.png" onClick={()=>changeRace(1)} className={character.race == 1 ? "active" : ""} />
+            <img src="img/Characters/_Banners/Banners_Dwarf.png" onClick={()=>changeRace(2)} className={character.race == 2 ? "active" : ""} />
+            <img src="img/Characters/_Banners/Banners_Halfling.png" onClick={()=>changeRace(3)} className={character.race == 3 ? "active" : ""} />
           </div>
 
           <div className="create-select">
@@ -148,10 +148,10 @@ const CreateCharacter = ({ slot, setSlot, setChar }) => {
               <hr/>
               <span>Gender: {character.gender ? "female" : "male"}</span>
               <div className="create-buttons">
-                <AldenorButton onClick={()=>changeGender(1)}>
+                <AldenorButton onClick={()=>changeGender(1)} className={character.gender == 1 ? "active" : ""}>
                   <Icon name="venus"/>
                 </AldenorButton>
-                <AldenorButton onClick={()=>changeGender(0)}>
+                <AldenorButton onClick={()=>changeGender(0)} className={character.gender == 0 ? "active" : ""}>
                   <Icon name="mars"/>
                 </AldenorButton>
               </div>

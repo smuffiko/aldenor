@@ -76,7 +76,7 @@ button {
     6px -6px map-get($aldenor-button-colors,"normal-inner"),
     -6px 6px map-get($aldenor-button-colors,"normal-inner"),
     -6px -6px map-get($aldenor-button-colors,"normal-inner");
-  &:hover {
+  &:hover, &.active {
     background-color: map-get($aldenor-button-colors,"hover-background");
     box-shadow: 
       2px 2px map-get($aldenor-button-colors,"hover-outer"),

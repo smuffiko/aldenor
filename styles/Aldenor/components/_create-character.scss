@@ -10,6 +10,10 @@
   height: calc(100vh - 200px);
   min-height: 600px;
   padding: 16px;
+  box-shadow: 5px 5px 2px black,
+    -5px 5px 2px black,
+    5px -5px 2px black,
+    -5px -5px 2px black;
 
   .create-left {
     width: 300px;
@@ -21,6 +25,7 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
     .create-race {
       width: 100%;
       display: -webkit-box;
@@ -35,6 +40,48 @@
       img {
         width: 64px;
         height: 128px;
+      }
+      & .active {
+        animation-name: shadow-animation;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+      }
+      @keyframes shadow-animation {
+        // X offset, Y offset.
+        // top left: -2 -2
+        // top right: 2 -2
+        // bottom left: -2 2
+        // bottom right: 2 2
+        0% {
+          filter: drop-shadow(1px 1px 2px #FF6600) // bottom right
+          drop-shadow(-1px 1px 2px #FFCC00) // bottom left
+          drop-shadow(-1px -1px 2px #FFFF00) // top left
+          drop-shadow(1px -1px 2px #FFCC00); // top right
+        }
+        25% {
+          filter: drop-shadow(-1px 1px  2px #FF6600) // bottom left
+          drop-shadow(-1px -1px 2px #FFCC00) // top left
+          drop-shadow(1px -1px 2px #FFFF00) // top right
+          drop-shadow(1px 1px 2px #FFCC00); // bottom right
+        }
+        50% {
+          filter: drop-shadow(-1px -1px 2px #FF6600) // top left
+          drop-shadow(1px -1px 2px #FFCC00) // top right
+          drop-shadow(1px 1px 2px #FFFF00) // bottom right
+          drop-shadow(-1px 1px 2px #FFCC00); // bottom left
+        }
+        75% {
+          filter: drop-shadow(1px -1px 2px #FF6600) // top right
+          drop-shadow(1px 1px 2px #FFCC00) // bottom right
+          drop-shadow(-1px 1px 2px #FFFF00) // bottom left
+          drop-shadow(-1px -1px 2px #FFCC00); // top left
+        }
+        100% {
+          filter: drop-shadow(1px 1px 2px #FF6600) // bottom right
+          drop-shadow(-1px 1px 2px #FFCC00) // bottom left
+          drop-shadow(-1px -1px 2px #FFFF00) // top left
+          drop-shadow(1px -1px 2px #FFCC00); // top right
+        }
       }
     }
     .create-select {
