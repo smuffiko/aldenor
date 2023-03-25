@@ -36,7 +36,7 @@ const ManagePOI = () => {
   return (
     <>
       <CreateNewPoi getPoiList={getPoiList} />
-      <PoiList poiList={poiList} />
+      <PoiList poiList={poiList} getPoiList={getPoiList} />
     </>
   )
 }

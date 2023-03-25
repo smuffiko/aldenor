@@ -3,6 +3,7 @@ import MapField from "../../models/MapField"
 import Character from "../../models/Character"
 import Map from "../../models/Map"
 import jwt from "jsonwebtoken"
+import { onlyInLeft } from "../../utils/customFunctions"
 
 connectDB()
 
@@ -93,13 +94,26 @@ const handlePutRequest = async (req, res) => {
   const character = await Character.findOne({ _id: charId })
   if (character) {
     if(character.role==="root") { // if we are logged with root character
+      const isSameField = (a, b) => a.field == b.field && a.coords.x == b.coords.x && a.coords.y == b.coords.y
+
       const { map } = req.body
-      const newFields = await MapField.deleteMany({ mapId: map.map._id }).then(async ()=>{
-        const newFields = await MapField.insertMany(map.coords)
-        return newFields
+      const dbFields = await MapField.find({ mapId: map.map._id}) // find all DB fields
+      const del = onlyInLeft(dbFields, map.coords, isSameField) // find all fields in DB which is not in map.coords (delete this)
+      const add = onlyInLeft(map.coords, dbFields, isSameField) // find all fields which as not in DB but in map.coords (add this)
+      const delId = del.map(d=> d._id)  // find IDs of fields to delete
+
+      await MapField.deleteMany({ _id: { $in: delId }})  // delete fields
+        .then(async ()=>{                                // then add fields
+          await MapField.insertMany(add)   
+        .then(async()=>{                                 // then find fields and send to client
+          const newFields = await MapField.find({ mapId: map.map._id })
+          const newMap = { ...map, coords: newFields }
+          res.status(200).json(newMap)            
+        })
+      }).catch(e=>{
+        res.status(500).send("Can't fetch data")
       })
-      const newMap = { ...map, coords: newFields }
-      res.status(200).send(newMap)
+
     } else { // if root is not logged
       res.status(401).send("Unauthorized.")
     }

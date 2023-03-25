@@ -14,6 +14,9 @@ export default async function ApiPois(req, res) {
     case "POST":
       await handlePostRequest(req, res)
       break
+    case "DELETE":
+      await handleDeleteRequest(req, res)
+      break
     default:
       res.status(405).send(`Method ${req.method} not allowed!`)
       break
@@ -44,11 +47,46 @@ const handleGetRequest = async (req, res) => {
       })
       res.status(200).send(fields)
     } else { // find all pois
-      const pois = await POI.find(
-        { },
-        { name: 1 }
-      )
-      console.log(pois)
+      const pois = await POI.aggregate([
+        {
+          $lookup: {    // search all fields from MapFields and join to POIs (pass its data like coords etc)
+            from: "mapfields",
+            localField: "fields.field",
+            foreignField: "_id",
+            as: "fields"
+          }
+        },
+        {
+          $lookup: {    // get infos form map (like name mostly)
+            from: "maps",
+            localField: "fields.mapId",
+            foreignField: "_id",
+            as: "map"
+          }
+        },
+        {
+          $group: {  // group by _id, fields, name, map (+ toLower sort)
+            _id: "$_id",
+            fields: { "$first": "$fields" },
+            name: { "$first": "$name" },
+            nameToLower: { "$first": { $toLower: "$name" } },
+            map: { "$first": { "$arrayElemAt": ["$map.name", 0] } },
+            mapToLower: { "$first": { $toLower: { "$arrayElemAt": ["$map.name", 0] } } }
+          }
+        },
+        {
+          $sort: {  // sort by map, then by name
+            mapToLower: 1,
+            nameToLower: 1
+          }
+        },
+        {
+          $project: { // show all except toLower 
+            mapToLower: 0,
+            nameToLower: 0
+          }
+        }
+      ])
       res.status(200).send(pois)
     }
   }
@@ -74,5 +112,26 @@ const handlePostRequest = async (req, res) => {
     }).save()
 
     res.status(200).send("Poi saved")
+  }
+}
+
+
+const handleDeleteRequest = async (req, res) => {
+  if (!("authorization" in req.headers)) {
+    return res.status(401).send("No authorization token.")
+  }
+  const { charId } = jwt.verify(
+    req.headers.authorization,
+    process.env.JWT_SECRET
+  )
+  const user = await Character.findOne({ _id: charId })
+  if (user.role!=="root") {
+    res.status(401).send("Not authorized.")
+  } else { // we are authorized
+    const { _id } = req.query
+    
+    await POI.deleteOne({ _id })
+
+    res.status(200).send("Poi deleted")
   }
 }

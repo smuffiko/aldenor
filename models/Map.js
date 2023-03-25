@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const { String, ObjectId } = mongoose.Schema.Types
+const { String, Number } = mongoose.Schema.Types
 
 const MapSchema = new mongoose.Schema(
   {
@@ -19,7 +19,7 @@ const MapSchema = new mongoose.Schema(
         required: true,
         default: 50
       }
-    } 
+    }
   }
 )
 

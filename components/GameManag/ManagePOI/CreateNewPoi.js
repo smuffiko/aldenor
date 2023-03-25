@@ -3,7 +3,7 @@ import { Button, Dropdown, Form } from "semantic-ui-react"
 import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 
-const CreateNewPoi = () => {
+const CreateNewPoi = ({ getPoiList }) => {
   // { key: 'x', text: 'y', value: 'z' }
   const [maps, setMaps] = React.useState([])
   const [fields, setFields] = React.useState([])
@@ -110,7 +110,9 @@ const CreateNewPoi = () => {
       return await response.text()      
     }).then(() => {
       setCurrentFields([])
+      setName("")
       getFields()
+      getPoiList()
     }).catch(error => {
       console.log(error.message) // todo
     })

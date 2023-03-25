@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const { String, Boolean, Number, ObjectId } = mongoose.Schema.Types
+const { Number, ObjectId } = mongoose.Schema.Types
 
 const MapFieldSchema = new mongoose.Schema(
   {
