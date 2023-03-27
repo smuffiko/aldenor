@@ -70,6 +70,7 @@ const handleGetRequest = async (req, res) => {
             fields: { "$first": "$fields" },
             name: { "$first": "$name" },
             nameToLower: { "$first": { $toLower: "$name" } },
+            mapId: { "$first": { "$arrayElemAt": ["$map._id", 0] } },
             map: { "$first": { "$arrayElemAt": ["$map.name", 0] } },
             mapToLower: { "$first": { $toLower: { "$arrayElemAt": ["$map.name", 0] } } }
           }

@@ -3,13 +3,17 @@ import baseUrl from "../../../utils/baseUrl"
 import CreateNewPoi from "./CreateNewPoi"
 import PoiList from "./PoiList"
 import cookies from "js-cookie"
+import UpdatePoi from "./UpdatePoi"
 
 const ManagePOI = () => {
   const [poiList, setPoiList] = React.useState([])
+  const [updatePoi, setUpdatePoi] = React.useState(false)
 
   React.useEffect(()=>{
     getPoiList()
   },[])
+
+
 
   const getPoiList = async ()=>{
     const url = `${baseUrl}/api/pois`
@@ -35,8 +39,16 @@ const ManagePOI = () => {
 
   return (
     <>
-      <CreateNewPoi getPoiList={getPoiList} />
-      <PoiList poiList={poiList} getPoiList={getPoiList} />
+      { updatePoi ? (
+        <>
+          <UpdatePoi poi={updatePoi} setUpdatePoi={setUpdatePoi} />
+        </>
+      ):(
+        <>
+          <CreateNewPoi getPoiList={getPoiList} />
+          <PoiList poiList={poiList} getPoiList={getPoiList} setUpdatePoi={setUpdatePoi}/>
+        </>
+      )}
     </>
   )
 }

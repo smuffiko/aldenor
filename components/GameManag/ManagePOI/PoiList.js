@@ -1,10 +1,9 @@
 import React from "react"
-import UpdatePoi from "./UpdatePoi"
 import { Button, Modal } from "semantic-ui-react"
 import baseUrl from "../../../utils/baseUrl"
 import cookies from "js-cookie"
 
-const PoiList = ({ poiList, getPoiList }) => {
+const PoiList = ({ poiList, getPoiList, setUpdatePoi }) => {
   const [open, setOpen] = React.useState(null)
 
   const closeModal = async() => {
@@ -64,11 +63,11 @@ const PoiList = ({ poiList, getPoiList }) => {
               </td>
               <td>
                 {poi.fields.map((field,j)=>
-                  <span key={j}>[{field.coords.x},{field.coords.y}]</span>
+                  <span key={j}>[{field.coords.x},{field.coords.y}, {field.layer}]</span>
                 )}
               </td>
               <td>
-                <Button icon="pencil" circular color="orange" size="small"/>
+                <Button icon="pencil" circular color="orange" size="small" onClick={()=>setUpdatePoi(poi)}/>
                 
                 <Modal
                   onClose={() => closeModal()}
@@ -103,9 +102,7 @@ const PoiList = ({ poiList, getPoiList }) => {
             </tr>
           )}
         </tbody>
-      </table>
-
-      <UpdatePoi poi={1} />
+      </table>  
     </>
   )
 }

@@ -136,7 +136,7 @@ const CreateNewPoi = ({ getPoiList }) => {
         </Form.Field>
         <Form.Field>
           <label>Fields</label>
-          <Dropdown multiple selection options={fields} onChange={handleChangeField}value={currentFields} />
+          <Dropdown multiple selection options={fields} onChange={handleChangeField} value={currentFields} />
         </Form.Field>
         <Form.Field>
           <label>Jobs</label>
