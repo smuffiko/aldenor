@@ -13,6 +13,9 @@ const ManagePOI = () => {
     getPoiList()
   },[])
 
+  React.useEffect(()=>{
+    getPoiList()
+  },[updatePoi])
 
 
   const getPoiList = async ()=>{

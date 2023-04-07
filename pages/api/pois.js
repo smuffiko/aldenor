@@ -14,6 +14,9 @@ export default async function ApiPois(req, res) {
     case "POST":
       await handlePostRequest(req, res)
       break
+    case "PUT":
+      await handlePutRequest(req, res)
+      break
     case "DELETE":
       await handleDeleteRequest(req, res)
       break
@@ -92,6 +95,7 @@ const handleGetRequest = async (req, res) => {
     }
   }
 }
+
 const handlePostRequest = async (req, res) => {
   if (!("authorization" in req.headers)) {
     return res.status(401).send("No authorization token.")
@@ -116,6 +120,63 @@ const handlePostRequest = async (req, res) => {
   }
 }
 
+
+const handlePutRequest = async (req, res) => {
+  if (!("authorization" in req.headers)) {
+    return res.status(401).send("No authorization token.")
+  }
+  const { charId } = jwt.verify(
+    req.headers.authorization,
+    process.env.JWT_SECRET
+  )
+  const user = await Character.findOne({ _id: charId })
+  if (user.role!=="root") {
+    res.status(401).send("Not authorized.")
+  } else { // we are authorized
+    const { fields, name, jobs, _id } = req.body
+    const poi = await POI.findOneAndUpdate({_id},{
+      $set: {
+        name: name,
+        jobs: jobs,
+        fields: fields
+      }
+    }, {
+      returnDocument: "after"
+    })
+    const updatedPoi = await POI.aggregate([
+      {
+        $match: { _id: poi._id }
+      },
+      {
+        $lookup: {
+          from: "mapfields",
+          localField: "fields.field",
+          foreignField: "_id",
+          as: "fields"
+        }
+      },
+      {
+        $lookup: {
+          from: "maps",
+          localField: "fields.mapId",
+          foreignField: "_id",
+          as: "map"
+        }
+      },
+      {
+        $project: {
+          _id: "$_id",
+          fields: "$fields",
+          name: "$name",
+          mapId: { "$arrayElemAt": ["$map._id", 0] },
+          map: { "$arrayElemAt": ["$map.name", 0] },
+        }
+      }
+    ])
+      
+    res.status(200).json({poi: updatedPoi[0] })
+  }
+}
 
 const handleDeleteRequest = async (req, res) => {
   if (!("authorization" in req.headers)) {
