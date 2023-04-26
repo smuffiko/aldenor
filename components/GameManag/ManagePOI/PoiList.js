@@ -63,12 +63,11 @@ const PoiList = ({ poiList, getPoiList, setUpdatePoi }) => {
               </td>
               <td>
                 {poi.fields.map((field,j)=>
-                  <span key={j}>[{field.coords.x},{field.coords.y}, {field.layer}]</span>
+                  <span key={j}>[{field.coords.x}, {field.coords.y}, {field.layer}]</span>
                 )}
               </td>
               <td>
                 <Button icon="pencil" circular color="orange" size="small" onClick={()=>setUpdatePoi(poi)}/>
-                
                 <Modal
                   onClose={() => closeModal()}
                   onOpen={() => setOpen(poi._id)}
